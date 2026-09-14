@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3.6 - Registro Web con Encuesta Opcional</title>
+</head>
+<body>
+
+    <h1>Formulario de Registro Web</h1>
+
+    <form action="#" method="post">
+        <p>
+            <label for="nombre">Primer Nombre:</label><br>
+            <input type="text" id="nombre" name="nombre" required>
+        </p>
+
+        <p>
+            <label for="apellido">Apellido:</label><br>
+            <input type="text" id="apellido" name="apellido" required>
+        </p>
+
+        <p>
+            <label for="correo">Correo Electrónico:</label><br>
+            <input type="email" id="correo" name="correo" required>
+        </p>
+
+        <!-- Encuesta Opcional en elemento details -->
+        <details>
+            <summary>Encuesta opcional para estudiantes</summary>
+            <p>
+                <label for="ano_universidad">¿En qué año de la universidad te encuentras?</label><br>
+                <select id="ano_universidad" name="ano_universidad">
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="1">Primer año</option>
+                    <option value="2">Segundo año</option>
+                    <option value="3">Tercer año</option>
+                    <option value="4">Cuarto año</option>
+                    <option value="5">Quinto año o superior</option>
+                </select>
+            </p>
+        </details>
+
+        <br>
+        <p>
+            <input type="submit" value="Registrarse">
+        </p>
+    </form>
+
+</body>
+</html>

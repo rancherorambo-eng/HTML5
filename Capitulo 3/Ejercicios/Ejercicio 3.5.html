@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3.5</title>
+</head>
+<body>
+
+    <h1>Ejercicio 3.5: Elementos Prácticos de HTML5</h1>
+
+    <!-- Inciso a -->
+    <h2>a) Elemento meter</h2>
+    <p>Calificación de alimentos: 1 <meter min="1" max="10" value="7"></meter> 10 (Promedio: 7 de 10)</p>
+
+    <!-- Inciso b -->
+    <h2>b) Elemento details y summary</h2>
+    <details>
+        <summary>Resultados de la encuesta</summary>
+        <p>Esta encuesta recopiló las opiniones de los estudiantes sobre el servicio y la calidad de los alimentos en la cafetería del campus.</p>
+    </details>
+
+    <!-- Inciso c -->
+    <h2>c) Campo de texto con enfoque automático (autofocus)</h2>
+    <form>
+        <label for="primerNombre">Primer nombre:</label>
+        <input type="text" id="primerNombre" name="primerNombre" autofocus>
+    </form>
+
+    <!-- Inciso d -->
+    <h2>d) Campo con placeholder (sin etiqueta label)</h2>
+    <form>
+        <input type="text" id="primerNombrePH" name="primerNombrePH" placeholder="Ingrese su primer nombre">
+    </form>
+
+    <!-- Inciso e -->
+    <h2>e) Lista con datalist para autocompletar estados</h2>
+    <form>
+        <label for="estado">Seleccione o escriba un Estado:</label>
+        <input type="text" id="estado" name="estado" list="lista-estados">
+        <datalist id="lista-estados">
+            <option value="Jalisco">
+            <option value="Nuevo León">
+            <option value="Puebla">
+            <option value="Veracruz">
+            <option value="Yucatán">
+        </datalist>
+    </form>
+
+    <!-- Inciso f -->
+    <h2>f) Control deslizante (input range) de 1 a 100</h2>
+    <form>
+        <label for="rango">Seleccione un número (1 al 100):</label>
+        <input type="range" id="rango" name="rango" min="1" max="100" value="50">
+    </form>
+
+    <!-- Inciso g -->
+    <h2>g) Etiqueta de apertura de formulario sin autocomplete</h2>
+    <pre><code>&lt;form action="procesar.php" method="post" autocomplete="off"&gt;</code></pre>
+
+    <!-- Inciso h -->
+    <h2>h) Resaltado con elemento mark</h2>
+    <p>
+        Se pidi&oacute; a los estudiantes que calificaran los alimentos en la cafeter&iacute;a 
+        <mark>En una escala del 1 al 10. El resultado promedio fue 7.</mark>
+    </p>
+
+</body>
+</html>
