@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- Fig. 2.11: lista.html -->
+<!-- Listas anidadas y listas ordenadas. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Listas</title>
+   </head>
+
+   <body>
+      <h1>Las Mejores Características de Internet</h1>
+
+      <!-- crea una lista desordenada -->
+      <ul>
+         <li>Puedes conocer gente nueva de países alrededor 
+            del mundo.</li>
+         <li>
+            Tienes acceso a nuevos medios a medida que se hacen públicos:
+
+            <!-- esto inicia una lista desordenada anidada, que usa una -->
+            <!-- viñeta diferente. La lista termina cuando cierras -->
+            <!-- la etiqueta <ul>. -->
+            <ul>
+               <li>Juegos nuevos</li>
+               <li>Aplicaciones nuevas
+
+                  <!-- lista ordenada anidada -->
+                  <ol>
+                     <li>Para negocios</li>
+                     <li>Para diversión</li>
+                  </ol>
+               </li> <!-- termina el li de "aplicaciones nuevas" de la línea 27 -->
+
+               <li>Noticias las 24 horas</li>
+               <li>Motores de búsqueda</li>
+               <li>Compras</li>
+               <li>Programación
+
+                  <!-- otra lista ordenada anidada -->
+                  <ol>
+                     <li>XML</li>
+                     <li>Java</li>
+                     <li>HTML5</li>
+                     <li>JavaScript</li>
+                     <li>Nuevos lenguajes</li>
+                  </ol>
+               </li> <!-- termina el li de "programación" de la línea 38 -->
+            </ul> <!-- termina la lista anidada de la línea 24 -->
+         </li> 
+
+         <li>Enlaces</li>
+         <li>Mantenerte en contacto con viejos amigos</li>
+         <li>¡Es la tecnología del futuro!</li>
+      </ul> <!-- termina la lista desordenada de la línea 15 -->
+   </body>
+</html>
+
+

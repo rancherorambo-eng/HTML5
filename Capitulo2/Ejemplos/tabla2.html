@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<!-- Fig. 2.13: tabla2.html -->
+<!-- Tabla compleja en HTML5. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Tablas</title>
+   </head>
+
+   <body>
+      <h1>Ejemplo de Tabla: Combinando Filas y Columnas</h1>
+ 
+      <table border = "1">
+         <caption>Un ejemplo de tabla más compleja</caption>
+
+         <thead>
+            <!-- rowspan y colspan combinan la cantidad -->
+            <!-- indicada de celdas vertical u horizontalmente -->
+            <tr>
+               <!-- combina dos filas -->
+               <th rowspan = "2">
+                  <img src = "camello.png" width = "205" 
+                     height = "167" alt = "Imagen de un camello de una joroba">
+               </th>
+
+               <!-- combina cuatro columnas -->
+               <th colspan = "4">
+                  <strong>Comparación de camélidos</strong><br>
+                  Aproximado a junio de 2011
+               </th>
+            </tr>
+            <tr>
+               <th># de jorobas</th>
+               <th>Región de origen</th>
+               <th>¿Escupe?</th>
+               <th>¿Produce lana?</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <th>Camellos (bactriano)</th>
+               <td>2</td>
+               <td>África/Asia</td>
+               <td>Sí</td>
+               <td>Sí</td>
+            </tr>
+            <tr>
+               <th>Llamas</th>
+               <td>1</td>
+               <td>Montañas de los Andes</td>
+               <td>Sí</td>
+               <td>Sí</td>
+            </tr>
+         </tbody>
+      </table>
+   </body>
+</html>
+
+

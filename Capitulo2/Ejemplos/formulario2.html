@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<!-- Fig. 2.15: formulario2.html -->
+<!-- Formulario usando una variedad de componentes. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Más Formularios</title>
+   </head>
+
+   <body>
+      <h1>Formulario de Comentarios</h1>
+      <p>Por favor completa este formulario para ayudarnos 
+         a mejorar nuestro sitio.</p>
+
+      <form method = "post" action = "http://www.deitel.com">
+
+         <input type = "hidden" name = "recipient"
+            value = "deitel@deitel.com">
+         <input type = "hidden" name = "subject" 
+            value = "Formulario de Comentarios">
+         <input type = "hidden" name = "redirect" 
+            value = "principal.html"> 
+
+         <p><label>Nombre: 
+               <input name = "name" type = "text" size = "25">
+            </label></p>
+ 
+         <!-- <textarea> crea un cuadro de texto multilínea -->
+         <p><label>Comentarios:<br>
+            <textarea name = "comments"
+               rows = "4" cols = "36">Escribe tus comentarios aquí.</textarea>
+         </label></p>
+
+         <!-- <input type = "password"> inserta un -->
+         <!-- cuadro de texto cuya visualización se enmascara -->
+         <!-- con caracteres de asterisco -->
+         <p><label>Correo electrónico: 
+            <input name = "email" type = "password"  size = "25">
+         </label></p>              
+
+         <p>
+            <strong>Lo que te gustó:</strong><br>
+
+            <label>Diseño del sitio
+               <input name = "thingsliked" type = "checkbox" 
+                  value = "Design"></label>
+            <label>Enlaces
+               <input name = "thingsliked" type = "checkbox" 
+                  value = "Links"></label>
+            <label>Facilidad de uso
+               <input name = "thingsliked" type = "checkbox" 
+                  value = "Ease"></label> 
+            <label>Imágenes 
+               <input name = "thingsliked" type = "checkbox" 
+                  value = "Images"></label>
+            <label>Código fuente
+               <input name = "thingsliked" type = "checkbox" 
+                  value = "Code"></label>
+         </p>
+
+         <!-- <input type = "radio"> crea un botón de -->
+         <!-- opción. La diferencia entre los botones de opción -->
+         <!-- y las casillas de verificación es que solo un botón -->
+         <!-- de opción de un grupo puede estar seleccionado. -->
+         <p>
+            <strong>¿Cómo llegaste a nuestro sitio?:</strong><br>
+
+            <label>Motor de búsqueda
+               <input name = "howtosite" type = "radio"
+                  value = "search engine" checked></label>
+            <label>Enlaces desde otro sitio
+               <input name = "howtosite" type = "radio" 
+                  value = "link"></label> 
+            <label>Sitio web de Deitel.com
+               <input name = "howtosite" type = "radio" 
+                  value = "deitel.com"></label>
+            <label>Referencia en un libro
+               <input name = "howtosite" type = "radio" 
+                  value = "book"></label>
+            <label>Otro
+               <input name = "howtosite" type = "radio" 
+                  value = "other"></label>
+         </p>
+
+         <p>
+            <label>Califica nuestro sitio: 
+
+                <!-- la etiqueta <select> presenta una lista -->
+                <!-- desplegable con opciones indicadas por las -->
+                <!-- etiquetas <option> -->
+               <select name = "rating">
+                  <option selected>Increíble</option>
+                  <option>10</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                  <option>1</option>
+                  <option>Pésimo</option>
+               </select>
+            </label>
+         </p>
+
+         <p>
+            <input type = "submit" value = "Enviar">
+            <input type = "reset" value = "Borrar">
+         </p>   
+      </form>
+   </body>
+</html>
+
+

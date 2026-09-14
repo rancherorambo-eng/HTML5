@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<!-- Fig. 2.14: formulario.html -->
+<!-- Formulario con un campo de texto y campos ocultos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Formularios</title>
+   </head>
+
+   <body>
+      <h1>Formulario de Comentarios</h1>
+
+      <p>Por favor completa este formulario para ayudarnos 
+         a mejorar nuestro sitio.</p>
+
+      <!-- esta etiqueta inicia el formulario, indica el -->
+      <!-- método de envío de la información y la -->
+      <!-- ubicación del script que procesa el formulario -->
+      <form method = "post" action = "http://www.deitel.com">
+         <!-- las entradas ocultas contienen información -->
+         <!-- no visual que también será enviada -->
+         <input type = "hidden" name = "recipient"
+            value = "deitel@deitel.com">
+         <input type = "hidden" name = "subject" 
+            value = "Formulario de Comentarios">
+         <input type = "hidden" name = "redirect" 
+            value = "principal.html"> 
+
+         <!-- <input type = "text"> inserta un campo de texto -->
+         <p><label>Nombre:
+               <input name = "name" type = "text" size = "25"
+                  maxlength = "30">
+            </label></p>
+  
+         <p>
+            <!-- los tipos "submit" y "reset" insertan -->
+            <!-- botones para enviar y limpiar el -->
+            <!-- contenido del formulario, respectivamente -->
+            <input type = "submit" value = "Enviar">
+            <input type = "reset" value = "Borrar">
+         </p>   
+      </form>
+   </body>
+</html>
+
+
