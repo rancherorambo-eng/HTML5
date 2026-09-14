@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones a los Ejercicios - Cap. 2</title>
+</head>
+<body>
+
+    <h1>Desarrollo de Ejercicios: HTML5 (Capítulo 2)</h1>
+    <hr>
+
+    <!-- Ejercicio 2.4 -->
+    <h2>Ejercicio 2.4: Manipulación de Imágenes</h2>
+    <p>Partiendo de una imagen base con dimensiones estándar de <code>width="200"</code> y <code>height="150"</code>, se aplican los siguientes ajustes de escala:</p>
+    
+    <h3>a) Escalado al doble (100% de aumento) &rarr; Ancho: 400px, Alto: 300px</h3>
+    <img src="../Ejemplos/cpphtp.png" width="400" height="300" alt="Portada del libro C++ ampliada al doble">
+
+    <h3>b) Escalado al 150% (50% de aumento) &rarr; Ancho: 300px, Alto: 225px</h3>
+    <img src="../Ejemplos/cpphtp.png" width="300" height="225" alt="Portada del libro ampliada un 50 por ciento">
+
+    <h3>c) Distorsión con proporción 2:1 (Ancho: 400px, Alto: 200px)</h3>
+    <img src="../Ejemplos/cpphtp.png" width="400" height="200" alt="Portada del libro deformada a relación de aspecto 2 a 1">
+
+    <hr>
+
+    <!-- Ejercicio 2.5 -->
+    <h2>Ejercicio 2.5: Rutas y Enlaces</h2>
+    <ul>
+        <li><strong>a)</strong> Enlace hacia el documento index.html ubicado en la carpeta 'archivos': <a href="archivos/index.html">Abrir index de archivos</a></li>
+        <li><strong>b)</strong> Enlace hacia el documento index.html dentro de la subcarpeta 'texto' (en 'archivos'): <a href="archivos/texto/index.html">Abrir index de texto</a></li>
+        <li><strong>c)</strong> Enlace hacia el documento index.html ubicado en la carpeta paralela 'otro': <a href="../otro/index.html">Abrir index externo</a></li>
+        <li><strong>d)</strong> Enlace de correo electrónico dirigido a la presidencia: <a href="mailto:president@whitehouse.gov">Contactar al presidente</a></li>
+        <li><strong>e)</strong> Enlace al protocolo FTP para consultar el archivo README: <a href="ftp://ftp.cdrom.com/pub/README">Descargar README por FTP</a></li>
+    </ul>
+
+    <hr>
+
+    <!-- Ejercicio 2.10 -->
+    <h2>Ejercicio 2.10: Identificación de Elementos y Atributos</h2>
+    <ul>
+        <li><strong>a) html:</strong> <em>Elemento</em> (es el contenedor raíz que engloba toda la página Web).</li>
+        <li><strong>b) width:</strong> <em>Atributo</em> (se utiliza para fijar la anchura de recursos como imágenes o celdas).</li>
+        <li><strong>c) href:</strong> <em>Atributo</em> (indica la ruta o URL de destino en un hipervínculo).</li>
+        <li><strong>d) br:</strong> <em>Elemento</em> (genera un salto de línea y no requiere etiqueta de cierre).</li>
+        <li><strong>e) h3:</strong> <em>Elemento</em> (define un título o encabezado de tercer nivel en la jerarquía).</li>
+        <li><strong>f) a:</strong> <em>Elemento</em> (la etiqueta ancla, indispensable para construir enlaces interactivos).</li>
+        <li><strong>g) src:</strong> <em>Atributo</em> (establece la fuente o ruta de origen para cargar contenido multimedia).</li>
+    </ul>
+
+    <hr>
+
+    <!-- Ejercicio 2.11 -->
+    <h2>Ejercicio 2.11: Análisis de Afirmaciones (Verdadero / Falso)</h2>
+    <ol type="a">
+        <li><strong>Falso.</strong> La especificación de HTML5 es flexible y permite procesar etiquetas en mayúsculas. Sin embargo, el estándar de la industria es escribirlas siempre en minúsculas por legibilidad.</li>
+        <li><strong>Verdadero.</strong> Es perfectamente válido guardar los archivos web usando indistintamente la extensión <code>.htm</code> o <code>.html</code>.</li>
+        <li><strong>Falso.</strong> Para renderizar el símbolo "menor que" (&lt;), la entidad correcta es <code>&amp;lt;</code>. La sintaxis <code>&amp;less;</code> no es reconocida por el navegador.</li>
+        <li><strong>Verdadero.</strong> Las etiquetas de ítem (<code>&lt;li&gt;</code>) forzosamente deben ir agrupadas dentro de contenedores de listas ordenadas (<code>&lt;ol&gt;</code>) o desordenadas (<code>&lt;ul&gt;</code>).</li>
+    </ol>
+
+    <hr>
+
+    <!-- Ejercicio 2.12 -->
+    <h2>Ejercicio 2.12: Completar los Conceptos</h2>
+    <ol type="a">
+        <li>Para insertar notas o comentarios en el código, el bloque debe abrir con <code>&lt;!--</code> y finalizar con <strong><code>--&gt;</code></strong>.</li>
+        <li>Los valores que se le asignan a los atributos pueden delimitarse utilizando <strong>comillas dobles (" ") o comillas simples (' ')</strong>.</li>
+        <li>El código especial (entidad de carácter) para mostrar el símbolo de ampersand (<code>&amp;</code>) es <strong><code>&amp;amp;</code></strong>.</li>
+        <li>Para destacar un texto dándole un formato de negrita, la etiqueta semántica recomendada es <strong><code>&lt;strong&gt;</code></strong> (o la clásica <code>&lt;b&gt;</code>).</li>
+    </ol>
+
+    <hr>
+
+    <!-- Ejercicio 2.13 -->
+    <h2>Ejercicio 2.13: Clasificación Adicional</h2>
+    <ul>
+        <li><strong>a) width:</strong> <em>Atributo</em> (controla la expansión horizontal de un elemento).</li>
+        <li><strong>b) td:</strong> <em>Elemento</em> (define una celda de datos estándar dentro de una fila de tabla).</li>
+        <li><strong>c) th:</strong> <em>Elemento</em> (define una celda de encabezado para titular columnas o filas).</li>
+        <li><strong>d) name:</strong> <em>Atributo</em> (se usa para asignar un identificador a controles y variables de formulario).</li>
+        <li><strong>e) select:</strong> <em>Elemento</em> (permite construir menús o listas desplegables).</li>
+        <li><strong>f) type:</strong> <em>Atributo</em> (determina el comportamiento, validación y apariencia de un campo de entrada <code>&lt;input&gt;</code>).</li>
+    </ul>
+
+</body>
+</html>
