@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<!-- Fig 4.6: advanced.html -->
+<!-- Herencia en las hojas de estilos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Más estilos</title>
+      <style type = "text/css">
+         body     { font-family: arial, helvetica, sans-serif; }
+         a.nodec  { text-decoration: none; }
+         a:hover  { text-decoration: underline; }
+         li em    { font-weight: bold; }
+         h1, em   { text-decoration: underline; }
+         ul       { margin-left: 20px; }
+         ul ul    { font-size: .8em; }
+      </style>
+   </head>
+   <body>
+      <h1>Lista de compras para el lunes:</h1>
+
+      <ul>
+         <li>Leche</li>
+         <li>Pan
+            <ul>
+               <li>Pan blanco</li>
+               <li>Pan de centeno</li>
+               <li>Pan integral</li>
+            </ul>
+         </li>
+         <li>Zanahorias</li>
+         <li>Yogur</li>
+         <li>Pizza <em>con champiñones</em></li>
+      </ul>
+
+      <p><em>Ve a la</em>
+         <a class = "nodec" href = "http://www.deitel.com">
+            tienda de comestibles</a>
+      </p>
+   </body>
+</html>

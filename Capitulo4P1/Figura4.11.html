@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<!-- Fig. 4.11: background.html -->
+<!-- Agregar imágenes de fondo e indentación -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Imágenes de fondo</title>
+      <style type = "text/css">
+         body  { background-image: url(logo.png);
+                 background-position: bottom right;
+                 background-repeat: no-repeat;
+                 background-attachment: fixed;
+                 background-color: LightGrey }
+         p     { font-size: 18pt;
+                 color: DarkBlue;
+                 text-indent: 1em;
+                 font-family: arial, sans-serif; }
+         .dark { font-weight: bold; }
+        
+      </style>
+   </head>
+   <body>
+      <p>
+         Este ejemplo utiliza los estilos background-image, 
+         background-position y background-attachment
+         para colocar el logotipo de <span class = "dark">Deitel 
+         & Associates, Inc.</span> en la 
+         esquina inferior derecha de la página. Observa cómo el logotipo 
+         permanece en la posición correcta cuando cambias el tamaño de la 
+         ventana del navegador. El color de fondo rellena las áreas donde
+         no hay una imagen.
+      </p>
+   </body>
+</html>
