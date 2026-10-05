@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.14: meltingimages.html -->
+<!-- Fundido de imágenes en CSS3. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Fundido de imágenes</title>
+      <style type = "text/css">
+         #cover 
+         {
+            position: relative;
+            margin: 0 auto;	
+         }
+         #cover img 
+         {
+            position: absolute;
+            left: 0;
+            -webkit-transition: opacity 4s ease-in-out;
+            transition: opacity 4s ease-in-out;
+         }
+         #cover img.top:hover 
+            { opacity:0; }
+	   </style> 
+   </head>
+   <body>
+      <div id= "cover">
+         <img class = "bottom" src = "../Imagenes/jhtp.png" alt = "Portada de Java, 9.ª edición">
+         <img class = "top" src = "../Imagenes/jhtp8.png" alt = "Portada de Java, 8.ª edición">
+      </div>
+   </body>
+</html>
+

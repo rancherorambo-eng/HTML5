@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<!-- Fig. 6.18: mediaqueries.html -->
+<!-- Consultas de medios en CSS3. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Consultas de medios</title>
+      <style type = "text/css">
+      p
+      { margin: 0.9em 0em; }
+      /* estilos para teléfonos inteligentes con pantallas de 480 px o menos */
+      @media handheld and (max-width: 480px), 
+         screen and (max-device-width: 480px), 
+         screen and (max-width: 480px) 
+      {
+         div {
+            -webkit-column-count: 1; 
+            column-count: 1; }
+      }
+      /* estilos para dispositivos con pantallas de 481 px a 1024 px */
+      @media only screen and (min-width: 481px) and 
+         (max-width: 1024px)
+      {
+         div {
+            -webkit-column-count: 2; 
+            column-count: 2;
+            -webkit-column-gap: 30px; 
+            column-gap: 30px;
+            -webkit-column-rule: 1px outset black; 
+            column-rule: 1px outset black; }
+      }
+      /* estilos para dispositivos con pantallas de 1025 px o más */
+      @media only screen and (min-width: 1025px)
+      {
+         div {
+            -webkit-column-count: 3; 
+            column-count: 3;
+            -webkit-column-gap: 30px; 
+            column-gap: 30px;
+            -webkit-column-rule: 1px outset black; 
+            column-rule: 1px outset black; }
+      }
+      </style>
+   </head>
+   <body>
+      <header>
+         <h1>Computadoras, hardware y software</h1>
+      </header>
+      <div>
+         <p>Una computadora es un dispositivo que puede realizar cálculos y tomar
+            decisiones lógicas mucho más rápido que los seres humanos.
+            Muchas de las computadoras personales actuales pueden realizar miles de millones
+            de cálculos en un segundo&mdash;más de lo que una persona puede realizar
+            en toda una vida. ¡Las supercomputadoras ya realizan miles
+            de billones (cuatrillones) de instrucciones por segundo! Para ponerlo
+            en perspectiva, una computadora capaz de ejecutar un cuatrillón de
+            instrucciones por segundo puede realizar en un segundo más de 100,000
+            cálculos por cada persona del planeta. Y&mdash;¡estos
+            "límites superiores" están creciendo rápidamente!</p>
+         <p>Las computadoras procesan datos bajo el control de conjuntos de
+            instrucciones llamados programas informáticos. Estos programas guían
+            a la computadora mediante conjuntos ordenados de acciones especificadas por
+            personas llamadas programadores. Los programas que se ejecutan en una
+            computadora se conocen como software. En este libro aprenderás la
+            metodología de programación clave actual que aumenta la productividad
+            de los programadores y, por lo tanto, reduce los costos de desarrollo
+            de software&mdash;la programación orientada a objetos.</p> 
+         <p>Una computadora consta de diversos dispositivos conocidos como hardware
+            (por ejemplo, el teclado, la pantalla, el mouse, los discos duros, la memoria, los DVD
+            y las unidades de procesamiento). Los costos de la computación están disminuyendo
+            drásticamente debido a los rápidos avances en las tecnologías de hardware y
+            software. Las computadoras que hace décadas podían ocupar habitaciones grandes
+            y costar millones de dólares ahora están integradas en chips de silicio más pequeños
+            que una uña y cuestan quizá unos cuantos dólares cada uno. Irónicamente, el silicio es uno
+            de los materiales más abundantes&mdash;es un componente de la
+            arena común. La tecnología de los chips de silicio ha hecho que la computación sea tan económica
+            que más de mil millones de computadoras de propósito general están en uso
+            en todo el mundo, y se espera que esta cifra se duplique en los próximos
+            años.</p> 
+         <p>Los chips de computadora (microprocesadores) controlan innumerables dispositivos.
+            Estos sistemas embebidos incluyen frenos antibloqueo en automóviles,
+            sistemas de navegación, electrodomésticos inteligentes, sistemas de seguridad
+            doméstica, teléfonos celulares y smartphones, robots, intersecciones de tráfico
+            inteligentes, sistemas para evitar colisiones, controles de videojuegos y mucho más.
+            La gran mayoría de los microprocesadores producidos cada año están integrados
+            en dispositivos distintos de las computadoras de propósito general.</p>
+         <footer>
+            <em>&copy; 2012 Pearson Education, Inc. Todos los derechos reservados.</em>
+         </footer>
+      </div>
+   </body>
+</html>
+

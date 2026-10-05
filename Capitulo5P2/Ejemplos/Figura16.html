@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.16: fblm.html -->
+<!-- Modelo de diseño de cajas flexibles. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Modelo de diseño de cajas flexibles</title>
+      <link href = 'https://fonts.googleapis.com/css?family=Rosario' 
+         rel = 'stylesheet' type = 'text/css'>
+      <style type = "text/css">
+         .flexbox 
+         {
+            width: 600px;
+            height: 420px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+         }
+         .flexbox > div 
+         {
+            -webkit-transition: 1s ease-out;
+            transition: 1s ease-out;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            border: 2px solid black;
+            width: 120px;
+            margin: 10px -10px 10px 0px;
+            padding: 20px 20px 20px 20px;
+            box-shadow: 10px 10px 10px dimgrey;
+         }
+         .flexbox > div:nth-child(1){ background-color: lightgrey; }
+         .flexbox > div:nth-child(2){ background-color: lightgrey; }
+         .flexbox > div:nth-child(3){ background-color: lightgrey; }
+         .flexbox > div:nth-child(4){ background-color: lightgrey; }
+
+         .flexbox > div:hover { 
+            width: 200px; color: white; font-weight: bold; }
+         .flexbox > div:nth-child(1):hover { background-color: royalblue; }
+         .flexbox > div:nth-child(2):hover { background-color: crimson; }
+         .flexbox > div:nth-child(3):hover { background-color: crimson; }
+         .flexbox > div:nth-child(4):hover { background-color: darkgreen; }
+         p { height: 250px; overflow: hidden; font-family: "Rosario" }
+      </style>
+   </head>
+   <body>
+      <div class = "flexbox">
+      <div><img src = "../Imagenes/GPP.png" alt = "Icono de buenas prácticas de programación">
+         <p>Las buenas prácticas de programación destacan técnicas que
+         te ayudarán a crear programas más claros, comprensibles
+         y fáciles de mantener.</p></div>
+      <div><img src = "../Imagenes/EPT.png" alt = "Icono de consejos para prevenir errores">
+         <p>Los consejos para prevenir errores contienen sugerencias para detectar
+         y eliminar errores de tus programas; muchos describen aspectos de
+         la programación que evitan que los errores aparezcan desde el principio.</p></div>
+      <div><img src = "../Imagenes/CPE.png" alt = "Icono de errores comunes de programación">
+         <p>Los errores comunes de programación señalan los errores que los estudiantes
+         suelen cometer con frecuencia. Estos errores comunes reducen
+         la probabilidad de que cometas las mismas equivocaciones.</p></div>
+      <div><img src = "../Imagenes/SEO.png" 
+         alt = "Icono de observaciones de ingeniería de software"><p>Las observaciones de ingeniería de software destacan aspectos arquitectónicos
+         y de diseño que afectan la construcción de sistemas de software,
+         especialmente de sistemas a gran escala.</p></div>
+      </div>
+   </body>
+</html>
+
