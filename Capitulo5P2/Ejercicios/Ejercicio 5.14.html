@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 5.14</title>
+    <style>
+        .galeria {
+            display: flex;
+            gap: 18px;
+        }
+        .galeria img {
+            width: 145px;
+            height: 145px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .galeria img:hover {
+            transform: scale(1.15); /* Incremento del 20% */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="galeria">
+        <img src="../Imagenes/imagen1.png" alt="Imagen 1">
+        <img src="../Imagenes/imagen2.png" alt="Imagen 2">
+        <img src="../Imagenes/imagen3.png" alt="Imagen 3">
+        <img src="../Imagenes/imagen4.png" alt="Imagen 4">
+    </div>
+
+</body>
+</html>

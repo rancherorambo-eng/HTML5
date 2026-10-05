@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.11 -->
+<!-- Fusionar cinco imágenes mediante CSS3. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 5.11 - Fusionar Imágenes</title>
+      <style type = "text/css">
+         #cover 
+         {
+            position: relative;
+            width: 380px;
+            height: 480px;
+            margin: 0 auto;   
+         }
+         #cover img 
+         {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Propiedades requeridas por el ejercicio 5.11 */
+            transition-property: opacity;
+            transition-duration: 2.5s;
+            transition-timing-function: linear;
+            -webkit-transition-property: opacity;
+            -webkit-transition-duration: 2.5s;
+            -webkit-transition-timing-function: linear;
+         }
+
+         /* Animación en secuencia para pasar por las 5 imágenes al colocar el cursor encima */
+         #cover:hover .img5 { animation: fusion 12.5s infinite linear; }
+         #cover:hover .img4 { animation: fusion 12.5s infinite linear 2.5s; }
+         #cover:hover .img3 { animation: fusion 12.5s infinite linear 5s; }
+         #cover:hover .img2 { animation: fusion 12.5s infinite linear 7.5s; }
+
+         @keyframes fusion {
+            0%   { opacity: 1; }
+            20%  { opacity: 0; }
+            80%  { opacity: 0; }
+            100% { opacity: 1; }
+         }
+      </style> 
+   </head>
+   <body>
+      <div id = "cover">
+         <!-- Cinco imágenes apiladas de la base (img1) a la superficie (img5) -->
+         <img class = "img1" src = "../Imagenes/imagen1.png" alt = "Imagen 1">
+         <img class = "img2" src = "../Imagenes/imagen2.png" alt = "Imagen 2">
+         <img class = "img3" src = "../Imagenes/imagen3.png" alt = "Imagen 3">
+         <img class = "img4" src = "../Imagenes/imagen4.png" alt = "Imagen 4">
+         <img class = "img5" src = "../Imagenes/imagen5.png" alt = "Imagen 5">
+      </div>
+   </body>
+</html>

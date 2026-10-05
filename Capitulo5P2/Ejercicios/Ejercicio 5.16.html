@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5.16</title>
+    <style>
+        .mural {
+            column-count: 3;
+            column-gap: 25px;
+            column-rule: 2px solid #bbb;
+        }
+
+        /* Ajuste para dispositivos móviles (pantallas <= 480px) */
+        @media (max-width: 500px) {
+            .mural {
+                column-count: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mural">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+        <p>Curabitur sit amet quam id libero tincidunt facilisis. Etiam leo neque, suscipit nec, convallis non, sodales sed, justo.</p>
+        <p>Aenean ligula felis, molestie id, placerat a, semper facilisis, magna. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.16 Modificada: Ejercicio 5.13.html -->
+<!-- Modulo de diseño de Caja Flexible Vertical. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 5.13 - Caja Flexible Vertical</title>
+      <link href = 'http://fonts.googleapis.com/css?family=Rosario' 
+         rel = 'stylesheet' type = 'text/css'>
+      <style type = "text/css">
+         .flexbox 
+         {
+            width: 440px;
+            height: auto;
+            display: -webkit-box;
+            display: flex;
+            /* Se cambia la orientación de horizontal a vertical */
+            -webkit-box-orient: vertical;
+            box-orient: vertical;
+            flex-direction: column;
+         }
+         .flexbox > div 
+         {
+            -webkit-transition: 1s ease-out;
+            transition: 1s ease-out;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            border: 2px solid black;
+            width: 390px;
+            height: 85px;
+            margin: 0px 12px 12px 12px;
+            padding: 15px 20px;
+            box-shadow: 8px 9px 12px #777;
+            overflow: hidden;
+         }
+         .flexbox > div:nth-child(1){ background-color: lightgrey; }
+         .flexbox > div:nth-child(2){ background-color: lightgrey; }
+         .flexbox > div:nth-child(3){ background-color: lightgrey; }
+         .flexbox > div:nth-child(4){ background-color: lightgrey; }
+
+         /* Al pasar el ratón, se expande la altura (height) verticalmente */
+         .flexbox > div:hover { 
+            height: 170px; 
+            color: white; 
+            font-weight: bold; 
+         }
+         .flexbox > div:nth-child(1):hover { background-color: #3f6fd8; }
+         .flexbox > div:nth-child(2):hover { background-color: #d94f5c; }
+         .flexbox > div:nth-child(3):hover { background-color: #d94f5c; }
+         .flexbox > div:nth-child(4):hover { background-color: #2f7d4f; }
+         
+         .flexbox > div img {
+            float: left;
+            margin-right: 15px;
+         }
+         p { height: auto; font-family: "Rosario"; margin: 0; }
+      </style>
+   </head>
+   <body>
+      <div class = "flexbox">
+         <div>
+            <img src = "../Imagenes/GPP.png" alt = "Icono de buena pr&aacute;ctica de programaci&oacute;n">
+            <p>Las buenas pr&aacute;cticas de programaci&oacute;n indican las t&eacute;cnicas que 
+               le ayudar&aacute;n a producir programas m&aacute;s claros, 
+               comprensibles y f&aacute;ciles de mantener.</p>
+         </div>
+         <div>
+            <img src = "../Imagenes/EPT.png" alt = "Icono de tip para prevenir errores">
+            <p>Los tips para prevenir errores contienen sugerencias para exponer errores 
+               y eliminarlos de sus programas; muchos describen aspectos de 
+               programaci&oacute;n que evitan que los errores entren siquiera 
+               a los programas.</p>
+         </div>
+         <div>
+            <img src = "../Imagenes/CPE.png" alt = "Icono de error com&uacute;n de programaci&oacute;n">
+            <p>Los errores comunes de programaci&oacute;n se&ntilde;alan los errores que cometen 
+               los estudiantes con frecuencia. Estos errores comunes de programaci&oacute;n reducen 
+               la probabilidad de que usted cometa los mismos errores.</p>
+         </div>
+         <div>
+            <img src = "../Imagenes/SEO.png" alt = "Icono de observaci&oacute;n de ingenier&iacute;a de software">
+            <p>Las observaciones de ingenier&iacute;a de software resaltan los asuntos de arquitectura y dise&ntilde;o 
+               que afectan en la construcci&oacute;n de sistemas de software, 
+               en especial los sistemas de gran escala.</p>
+         </div>
+      </div>
+   </body>
+</html>

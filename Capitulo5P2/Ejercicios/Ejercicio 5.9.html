@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 5.9</title>
+    <style>
+        .caja-movil {
+            width: 60px;
+            height: 60px;
+            background-color: #e85d75;
+            position: relative;
+            animation: recorridoCaja 5s infinite alternate;
+        }
+
+        @keyframes recorridoCaja {
+            0%   { top: 0px; left: 0px; }
+            25%  { top: 0px; left: 140px; }
+            50%  { top: 140px; left: 140px; }
+            75%  { top: 140px; left: 0px; }
+            100% { top: 0px; left: 0px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="caja-movil"></div>
+
+</body>
+</html>
