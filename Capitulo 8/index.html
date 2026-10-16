@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Índice - Capítulo 8</title>
+  <style>
+    *:focus {
+      outline: none !important;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #C8C2AA;
+      background-size: 4px 4px;
+      background-image: 
+        linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,.07) 4px),
+        linear-gradient(transparent, transparent 3px, rgba(0,0,0,.07) 4px);
+      color: #4D493E;
+      font-family: "Consolas", "Courier New", monospace;
+      font-weight: 300;
+      margin: 0;
+      min-height: 100vh;
+      box-shadow: inset 0 0 150px rgba(77, 73, 62, .4), inset 0 0 150px rgba(77, 73, 62, .3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      letter-spacing: .1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* BORDES DECORATIVOS SUPERIOR E INFERIOR */
+    .pattern {
+      border-top: 2px solid #4D493E;
+      width: 100%;
+    }
+
+    .pattern-inner {
+      height: 30px;
+      background-size: 80px 30px;
+      background-repeat: repeat-x;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30' viewBox='0 0 80 30'%3E%3Crect x='30' y='0' width='12' height='5' fill='%234D493E'/%3E%3Ccircle cx='20' cy='12' r='1.8' fill='%234D493E'/%3E%3Ccircle cx='28' cy='12' r='1.8' fill='%234D493E'/%3E%3Ccircle cx='24' cy='19' r='1.8' fill='%234D493E'/%3E%3C/svg%3E");
+    }
+
+    header {
+      padding: 1.5rem 0 1rem 0;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: .3rem;
+      text-shadow: .2rem .2rem 0 rgba(77, 73, 62, .3);
+      font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    h1 small {
+      font-weight: 500;
+      text-transform: none;
+      text-shadow: none;
+      letter-spacing: .1rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    h1 small::before {
+      content: "– ";
+    }
+
+    h2 {
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: .2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(77, 73, 62, .4);
+      padding-bottom: 0.3rem;
+      display: inline-block;
+    }
+
+    main {
+      flex: 1;
+      padding: 1rem 0 2rem 0;
+    }
+
+    .section-block {
+      margin-bottom: 2rem;
+    }
+
+    /* INDICADOR LATERAL BARRADO DE SECCIÓN */
+    .content {
+      width: 100%;
+      padding-left: 1.5rem;
+      background-image: linear-gradient(90deg, 
+        rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 10px, 
+        transparent 10px, transparent 15px,
+        rgba(77, 73, 62, .4) 15px, rgba(77, 73, 62, .4) 18px, 
+        transparent 18px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* BOTONES ESTILO NIER AUTOMATA */
+    .nier-btn {
+      cursor: pointer;
+      font: inherit;
+      padding: .5rem 1rem;
+      background-color: rgba(77, 73, 62, .25);
+      color: #4D493E;
+      position: relative;
+      border: 1px solid transparent;
+      border-left: none;
+      border-right: none;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: color .2s, border-color .2s;
+    }
+
+    .nier-btn span {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Llenado animado de izquierda a derecha */
+    .nier-btn::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 0; 
+      top: 2px; 
+      bottom: 2px;
+      width: 0;
+      background-color: #4D493E;
+      transition: width .2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Línea inferior emergente en hover */
+    .nier-btn::after {
+      content: "";
+      position: absolute;
+      background: #4D493E;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .nier-btn:hover, 
+    .nier-btn:focus {
+      background-color: transparent;
+      color: #C8C2AA;
+      border-color: #4D493E;
+    }
+
+    .nier-btn:hover::before,
+    .nier-btn:focus::before {
+      width: 100%;
+    }
+
+    .nier-btn:hover::after,
+    .nier-btn:focus::after {
+      opacity: 1;
+    }
+
+    /* Botón especial de regreso */
+    .back-btn {
+      margin-bottom: 1.5rem;
+      background-color: rgba(77, 73, 62, .15);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabecera con patrón NieR -->
+  <header>
+    <div class="pattern">
+      <div class="container">
+        <div class="pattern-inner"></div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <h1>
+        <span>[CAPÍTULO_08]</span>
+        <small>JavaScript: Estructuras de Control II</small>
+      </h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      
+      <!-- Botón para regresar al inicio -->
+      <a href="../index.html" class="nier-btn back-btn"><span>&lt;&lt; REGRESAR AL MENÚ PRINCIPAL</span></a>
+
+      <!-- Sección de Ejemplos -->
+      <div class="section-block">
+        <h2>Ejemplos</h2>
+        <div class="content">
+          <a href="Ejemplos/Ejemplo 1 Contador While.html" target="_blank" class="nier-btn"><span>01 // Ejemplo 1: Contador While</span></a>
+          <a href="Ejemplos/Ejemplo 2 Contador For.html" target="_blank" class="nier-btn"><span>02 // Ejemplo 2: Contador For</span></a>
+          <a href="Ejemplos/Ejemplo 3 Suma.html" target="_blank" class="nier-btn"><span>03 // Ejemplo 3: Suma</span></a>
+          <a href="Ejemplos/Ejemplo 4 Interes.html" target="_blank" class="nier-btn"><span>04 // Ejemplo 4: Interés</span></a>
+          <a href="Ejemplos/Ejemplo 5 Prueba Switch.html" target="_blank" class="nier-btn"><span>05 // Ejemplo 5: Prueba Switch</span></a>
+          <a href="Ejemplos/Ejemplo 6 PruebaDoWhile.html" target="_blank" class="nier-btn"><span>06 // Ejemplo 6: Prueba DoWhile</span></a>
+          <a href="Ejemplos/Ejemplo 7 Prueba Break.html" target="_blank" class="nier-btn"><span>07 // Ejemplo 7: Prueba Break</span></a>
+          <a href="Ejemplos/Ejemplo 8 PruebaContinue.html" target="_blank" class="nier-btn"><span>08 // Ejemplo 8: Prueba Continue</span></a>
+        </div>
+      </div>
+
+      <!-- Sección de Ejercicios -->
+      <div class="section-block">
+        <h2>Ejercicios</h2>
+        <div class="content">
+          <a href="Ejercicios/Ejercicio 8.4.html" target="_blank" class="nier-btn"><span>[EX_8.4] // Ejercicio 8.4</span></a>
+          <a href="Ejercicios/Ejercicio 8.5.html" target="_blank" class="nier-btn"><span>[EX_8.5] // Ejercicio 8.5</span></a>
+          <a href="Ejercicios/Ejercicio 8.6.html" target="_blank" class="nier-btn"><span>[EX_8.6] // Ejercicio 8.6</span></a>
+          <a href="Ejercicios/Ejercicio 8.7.html" target="_blank" class="nier-btn"><span>[EX_8.7] // Ejercicio 8.7</span></a>
+          <a href="Ejercicios/Ejercicio 8.8.html" target="_blank" class="nier-btn"><span>[EX_8.8] // Ejercicio 8.8</span></a>
+          <a href="Ejercicios/Ejercicio 8.9.html" target="_blank" class="nier-btn"><span>[EX_8.9] // Ejercicio 8.9</span></a>
+          <a href="Ejercicios/Ejercicio 8.10.html" target="_blank" class="nier-btn"><span>[EX_8.10] // Ejercicio 8.10</span></a>
+          <a href="Ejercicios/Ejercicio 8.11.html" target="_blank" class="nier-btn"><span>[EX_8.11] // Ejercicio 8.11</span></a>
+          <a href="Ejercicios/Ejercicio 8.12.html" target="_blank" class="nier-btn"><span>[EX_8.12] // Ejercicio 8.12</span></a>
+          <a href="Ejercicios/Ejercicio 8.13.html" target="_blank" class="nier-btn"><span>[EX_8.13] // Ejercicio 8.13</span></a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Borde inferior con patrón NieR -->
+  <footer class="pattern">
+    <div class="container">
+      <div class="pattern-inner"></div>
+    </div>
+  </footer>
+
+</body>
+</html>
