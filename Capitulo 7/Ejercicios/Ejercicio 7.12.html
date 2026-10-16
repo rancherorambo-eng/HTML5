@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.12: ejercicio7_12.html -->
+<!-- Verificación de límite de crédito para clientes. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Calculadora de Límite de Crédito</title>
+      <script>
+
+         var numeroCuenta; // número de cuenta del cliente
+         var saldoInicial; // saldo al inicio del mes
+         var cargos; // total de artículos cargados
+         var creditos; // total de créditos aplicados
+         var limiteCredito; // límite de crédito permitido
+         var nuevoSaldo; // saldo calculado
+
+         // Solicitar datos del cliente
+         numeroCuenta = window.prompt( "Introduzca el número de cuenta (-1 para salir):", "0" );
+
+         while ( numeroCuenta != "-1" )
+         {
+            saldoInicial = parseFloat( window.prompt( "Introduzca el saldo inicial:", "0" ) );
+            cargos = parseFloat( window.prompt( "Introduzca el total de cargos del mes:", "0" ) );
+            creditos = parseFloat( window.prompt( "Introduzca el total de créditos del mes:", "0" ) );
+            limiteCredito = parseFloat( window.prompt( "Introduzca el límite de crédito:", "0" ) );
+
+            // Calcular nuevo saldo
+            nuevoSaldo = saldoInicial + cargos - creditos;
+
+            document.writeln( "<h2>Cuenta: " + numeroCuenta + "</h2>" );
+            document.writeln( "<p>El nuevo saldo es: $" + nuevoSaldo.toFixed(2) + "</p>" );
+
+            // Determinar si excede el límite
+            if ( nuevoSaldo > limiteCredito )
+            {
+               document.writeln( "<p style='color: red;'>Se excedió el límite de su crédito</p>" );
+            }
+
+            document.writeln( "<hr>" );
+
+            numeroCuenta = window.prompt( "Introduzca el número de cuenta (-1 para salir):", "0" );
+         } // fin de while
+
+      </script>
+   </head><body></body>
+</html>

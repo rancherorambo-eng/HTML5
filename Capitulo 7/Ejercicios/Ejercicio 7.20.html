@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.20: ejercicio7_20.html -->
+<!-- Verificación de números palíndromos de 5 dígitos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Verificador de Palíndromos</title>
+      <script>
+
+         var entrada;
+         var numero;
+         var esValido = false;
+
+         var digito1, digito2, digito4, digito5;
+
+         // Solicitar número de 5 dígitos
+         while ( !esValido )
+         {
+            entrada = window.prompt( "Introduzca un número entero de 5 dígitos:", "0" );
+            numero = parseInt( entrada );
+
+            // Validar que sea un entero de exactamente 5 dígitos (entre 10000 y 99999)
+            if ( numero >= 10000 && numero <= 99999 )
+            {
+               esValido = true;
+            }
+            else
+            {
+               alert( "Error: El número debe tener exactamente 5 dígitos." );
+            }
+         } // fin de while
+
+         // Descomposición usando operaciones de división y residuo
+         digito1 = Math.floor( numero / 10000 );
+         digito2 = Math.floor( ( numero % 10000 ) / 1000 );
+         digito4 = Math.floor( ( numero % 100 ) / 10 );
+         digito5 = numero % 10;
+
+         document.writeln( "<h1>Resultado del Análisis de Palíndromo</h1>" );
+
+         // Comprobar la simetría: dígito1 == dígito5 Y dígito2 == dígito4
+         if ( digito1 === digito5 && digito2 === digito4 )
+         {
+            document.writeln( "<p>El número " + numero + " <strong>SÍ es un palíndromo</strong>.</p>" );
+         }
+         else
+         {
+            document.writeln( "<p>El número " + numero + " <strong>NO es un palíndromo</strong>.</p>" );
+         }
+
+      </script>
+   </head><body></body>
+</html>

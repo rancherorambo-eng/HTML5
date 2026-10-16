@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.14: ejercicio7_14.html -->
+<!-- Cálculo del sueldo bruto considerando horas extra. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Calculadora de Sueldo Bruto</title>
+      <script>
+
+         var contadorEmpleados = 1;
+         var horasTrabajadas;
+         var tarifaHora;
+         var sueldoBruto;
+
+         document.writeln( "<h1>Nómina de Empleados</h1>" );
+
+         while ( contadorEmpleados <= 3 )
+         {
+            horasTrabajadas = parseFloat( window.prompt( "Empleado " + contadorEmpleados + " - Introduzca las horas trabajadas:", "0" ) );
+            tarifaHora = parseFloat( window.prompt( "Empleado " + contadorEmpleados + " - Introduzca la tarifa por hora:", "0" ) );
+
+            // Si se trabajan 40 horas o menos: cuota normal
+            if ( horasTrabajadas <= 40 )
+            {
+               sueldoBruto = horasTrabajadas * tarifaHora;
+            }
+            // Si excede 40 horas: cuota y media por las horas extra
+            else
+            {
+               sueldoBruto = ( 40 * tarifaHora ) + ( ( horasTrabajadas - 40 ) * ( tarifaHora * 1.5 ) );
+            }
+
+            document.writeln( "<p>Sueldo bruto del Empleado " + contadorEmpleados + ": $" + sueldoBruto.toFixed(2) + "</p>" );
+
+            contadorEmpleados++;
+         } // fin de while
+
+      </script>
+   </head><body></body>
+</html>

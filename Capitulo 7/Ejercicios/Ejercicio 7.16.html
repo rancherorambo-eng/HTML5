@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.16: ejercicio7_16.html -->
+<!-- Impresión de una tabla de valores mediante un ciclo y CSS. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Solución 7.16</title>
+      <style type = "text/css">
+         table {
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+         }
+         table, th, td {
+            border: 1px solid black;
+         }
+         th, td {
+            padding: 4px 12px;
+            text-align: center; /* Centrar los datos en cada columna */
+         }
+      </style>
+      <script>
+
+         var n = 1;
+
+         document.writeln( "<table>" );
+         document.writeln( "<thead><tr><th>N</th><th>10*N</th><th>100*N</th><th>1000*N</th></tr></thead>" );
+         document.writeln( "<tbody>" );
+
+         while ( n <= 6 )
+         {
+            document.writeln( "<tr>" +
+               "<td>" + n + "</td>" +
+               "<td>" + ( n * 10 ) + "</td>" +
+               "<td>" + ( n * 100 ) + "</td>" +
+               "<td>" + ( n * 1000 ) + "</td>" +
+               "</tr>" );
+            n++;
+         } // fin de while
+
+         document.writeln( "</tbody></table>" );
+
+      </script>
+   </head><body></body>
+</html>

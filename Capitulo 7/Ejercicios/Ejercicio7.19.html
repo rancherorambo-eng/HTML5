@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 7.19: ejercicio7_19.html -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Problema del else suelto</title>
+      <script>
+
+         function probar(x, y) {
+            document.writeln( "<h3>Prueba con x = " + x + ", y = " + y + "</h3>" );
+
+            document.writeln( "<h4>Inciso a)</h4>" );
+            if ( x < 10 )
+               if ( y > 10 )
+                  document.writeln( "<p>*****</p>" );
+               else
+                  document.writeln( "<p>#####</p>" );
+            document.writeln( "<p>$$$$$</p>" );
+
+            document.writeln( "<h4>Inciso b)</h4>" );
+            if ( x < 10 )
+            {
+               if ( y > 10 )
+                  document.writeln( "<p>*****</p>" );
+            }
+            else
+            {
+               document.writeln( "<p>#####</p>" );
+               document.writeln( "<p>$$$$$</p>" );
+            }
+            document.writeln( "<hr>" );
+         }
+
+         // Caso 1: x = 9, y = 11
+         probar(9, 11);
+
+         // Caso 2: x = 11, y = 9
+         probar(11, 9);
+
+      </script>
+   </head><body></body>
+</html>

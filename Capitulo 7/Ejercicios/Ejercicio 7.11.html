@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.11: ejercicio7_11.html -->
+<!-- Cálculo del rendimiento de combustible en kilómetros por litro. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Calculadora de Kilometraje</title>
+      <script>
+
+         var kilometros; // kilómetros conducidos en el viaje
+         var litros; // litros de gasolina usados
+         var kpl; // kilómetros por litro en el viaje actual
+         var totalKilometros = 0; // suma total de kilómetros
+         var totalLitros = 0; // suma total de litros
+         var totalKpl; // promedio total de kilómetros por litro
+
+         // Solicitar primeros datos
+         kilometros = window.prompt( "Introduzca los kilómetros conducidos (-1 para salir):", "0" );
+         kilometros = parseFloat( kilometros );
+
+         while ( kilometros != -1 )
+         {
+            litros = window.prompt( "Introduzca los litros utilizados:", "0" );
+            litros = parseFloat( litros );
+
+            // Acumular totales
+            totalKilometros += kilometros;
+            totalLitros += litros;
+
+            // Calcular rendimiento del viaje actual
+            if ( litros != 0 )
+            {
+               kpl = kilometros / litros;
+               document.writeln( "<p>Kilómetros por litro obtenidos en este viaje: " + kpl.toFixed(2) + "</p>" );
+            }
+
+            // Calcular y mostrar rendimiento total acumulado
+            if ( totalLitros != 0 )
+            {
+               totalKpl = totalKilometros / totalLitros;
+               document.writeln( "<p>Total de kilómetros por litro acumulados: " + totalKpl.toFixed(2) + "</p><hr>" );
+            }
+
+            // Solicitar siguiente entrada
+            kilometros = window.prompt( "Introduzca los kilómetros conducidos (-1 para salir):", "0" );
+            kilometros = parseFloat( kilometros );
+         } // fin de while
+
+      </script>
+   </head><body></body>
+</html>

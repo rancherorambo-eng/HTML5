@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.23: ejercicio7_23.html -->
+<!-- Descifrado de un entero cifrado de cuatro dígitos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Descifrado de Datos</title>
+      <script>
+
+         var entrada;
+         var numero;
+         var d1, d2, d3, d4;
+         var temp;
+         var numeroOriginal;
+
+         // Solicitar número cifrado de 4 dígitos
+         entrada = window.prompt( "Introduzca el entero cifrado de cuatro dígitos:", "0189" );
+         numero = parseInt( entrada );
+
+         // Extraer los 4 dígitos
+         d1 = Math.floor( numero / 1000 );
+         d2 = Math.floor( ( numero % 1000 ) / 100 );
+         d3 = Math.floor( ( numero % 100 ) / 10 );
+         d4 = numero % 10;
+
+         // Revertir intercambios: primero con tercero, segundo con cuarto
+         temp = d1;
+         d1 = d3;
+         d3 = temp;
+
+         temp = d2;
+         d2 = d4;
+         d4 = temp;
+
+         // Revertir la operación módulo: (dígito + 3) % 10 invierte (dígito + 7) % 10
+         d1 = ( d1 + 3 ) % 10;
+         d2 = ( d2 + 3 ) % 10;
+         d3 = ( d3 + 3 ) % 10;
+         d4 = ( d4 + 3 ) % 10;
+
+         // Formar la cadena con el número original descifrado
+         numeroOriginal = "" + d1 + d2 + d3 + d4;
+
+         document.writeln( "<h1>Resultado del Descifrado</h1>" );
+         document.writeln( "<p>Número cifrado: <strong>" + entrada + "</strong></p>" );
+         document.writeln( "<p>Número original descifrado: <strong>" + numeroOriginal + "</strong></p>" );
+
+      </script>
+   </head><body></body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 7.9: ejercicio7_9_completo.html -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 7.9 - Corrección de Errores</title>
+      <script>
+
+         document.writeln( "<h2>Inciso a)</h2>" );
+         // Corrección: Se remueve el ';' después de 'if' y se arreglan las comillas del writeln
+         var edad = 65; 
+
+         if ( edad >= 65 )
+            document.writeln( "<p>Edad es mayor o igual que 65</p>" );
+         else
+            document.writeln( "<p>Edad es menor que 65</p>" );
+
+
+         document.writeln( "<h2>Inciso b)</h2>" );
+         // Corrección: Se inicializa la variable 'total' en 0 antes de usar 'total += x'
+         var x = 1, total = 0; 
+
+         while ( x <= 10 )
+         {
+            total += x;
+            ++x;
+         }
+
+         document.writeln( "<p>El total es: " + total + "</p>" );
+
+
+         document.writeln( "<h2>Inciso c)</h2>" );
+         // Corrección: Se agregan llaves { } al cuerpo del 'while' para evitar un ciclo infinito
+         var x2 = 1;
+         var total2 = 0;
+
+         while ( x2 <= 100 )
+         {
+            total2 += x2;
+            ++x2;
+         }
+
+         document.writeln( "<p>El total acumulado (1 a 100) es: " + total2 + "</p>" );
+
+
+         document.writeln( "<h2>Inciso d)</h2>" );
+         // Corrección: Se reemplaza '++y' por '--y' para prevenir un ciclo infinito
+         var y = 5;
+
+         while ( y > 0 )
+         {
+            document.writeln( "<p>" + y + "</p>" );
+            --y;
+         }
+
+      </script>
+   </head><body></body>
+</html>

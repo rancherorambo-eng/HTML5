@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<!-- Fig. 7.13: ejercicio7_13.html -->
+<!-- Cálculo de comisiones y sueldo de vendedores. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Calculadora de Ganancias de Vendedores</title>
+      <script>
+
+         var articulo; // número de artículo ingresado
+         var ventasTotales = 0; // acumulador de ventas
+         var ingresos; // sueldo base + comisión
+
+         // Precios fijos según tabla del libro
+         var precio1 = 239.99;
+         var precio2 = 129.75;
+         var precio3 = 99.95;
+         var precio4 = 350.89;
+
+         articulo = parseInt( window.prompt( "Introduzca el número de artículo vendido (1-4, o 0 para finalizar):", "0" ) );
+
+         while ( articulo !== 0 )
+         {
+            if ( articulo === 1 )
+               ventasTotales += precio1;
+            else if ( articulo === 2 )
+               ventasTotales += precio2;
+            else if ( articulo === 3 )
+               ventasTotales += precio3;
+            else if ( articulo === 4 )
+               ventasTotales += precio4;
+            else
+               alert( "Artículo no válido. Introduzca un número del 1 al 4." );
+
+            articulo = parseInt( window.prompt( "Introduzca el número de artículo vendido (1-4, o 0 para finalizar):", "0" ) );
+         } // fin de while
+
+         // Cálculo del ingreso: $200 base + 9% de las ventas brutas
+         ingresos = 200 + ( 0.09 * ventasTotales );
+
+         document.writeln( "<h1>Resumen de Ventas</h1>" );
+         document.writeln( "<p>Ventas brutas totales: $" + ventasTotales.toFixed(2) + "</p>" );
+         document.writeln( "<h3>Los ingresos del vendedor son: $" + ingresos.toFixed(2) + "</h3>" );
+
+      </script>
+   </head><body></body>
+</html>
