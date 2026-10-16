@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.12: PruebaContinue.html -->
+<!-- Uso de la instrucción continue en una instrucción for. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>
+         Uso de la Instrucción continue en una Instrucción for
+      </title>
+
+      <script>
+
+         for ( var cuenta = 1; cuenta <= 10; ++cuenta )
+         {
+            if ( cuenta == 5 )
+               continue; // omitir el código restante del ciclo solo si cuenta == 5
+
+            document.writeln( cuenta + " " );
+         } // fin de for
+
+         document.writeln( "<p>Se usó continue para omitir la impresión del 5</p>" );
+
+      </script>   
+
+   </head><body></body>
+</html>

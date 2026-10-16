@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.7: PruebaSwitch.html -->
+<!-- Uso de la instrucción de selección múltiple switch. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Cambio entre Formatos de Listas HTML5</title>
+      <script>
+
+         var eleccion; // elección del usuario
+         var etiquetaInicio; // etiqueta de inicio de la lista
+         var etiquetaFin; // etiqueta de fin de la lista
+         var entradaValida = true; // true si la entrada es válida, false en caso contrario
+         var tipoLista; // tipo de lista como una cadena
+
+         eleccion = window.prompt( "Seleccione un estilo de lista:\n" + 
+             "1 (numerada), 2 (con letras), 3 (con números romanos)", "1" );
+             
+         switch ( eleccion )
+         {
+            case "1":
+               etiquetaInicio = "<ol>";
+               etiquetaFin = "</ol>";
+               tipoLista = "<h1>Lista Numerada</h1>";
+               break;
+            case "2":
+               etiquetaInicio = "<ol style = 'list-style-type: upper-alpha'>";
+               etiquetaFin = "</ol>";
+               tipoLista = "<h1>Lista con Letras</h1>";
+               break;
+            case "3":
+               etiquetaInicio = "<ol style = 'list-style-type: upper-roman'>";
+               etiquetaFin = "</ol>";
+               tipoLista = "<h1>Lista con Números Romanos</h1>";
+               break;
+            default:
+               entradaValida = false;          
+               break;
+         } // fin de switch
+      
+         if ( entradaValida === true )
+         {
+            document.writeln( tipoLista + etiquetaInicio );
+   
+            for ( var i = 1; i <= 3; ++i )
+               document.writeln( "<li>Elemento de lista " + i + "</li>" );
+    
+            document.writeln( etiquetaFin );
+         } // fin de if
+         else
+            document.writeln( "Elección no válida: " + eleccion );
+
+      </script>
+   </head><body></body>
+</html>
