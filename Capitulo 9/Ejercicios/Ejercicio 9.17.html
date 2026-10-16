@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.17: ejercicio9_17.html -->
+<!-- Conversión de temperaturas entre Fahrenheit y Celsius mediante funciones. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.17 - Conversión de Temperaturas</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 450px;
+            border: 1px solid #ddd;
+         }
+         .campo {
+            margin-bottom: 12px;
+         }
+         label {
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: bold;
+         }
+         input[type="number"] {
+            width: 150px;
+            padding: 5px;
+         }
+         .botones {
+            margin-top: 10px;
+         }
+         input[type="button"] {
+            padding: 6px 12px;
+            margin-right: 5px;
+            cursor: pointer;
+         }
+         #resultado {
+            margin-top: 15px;
+            font-size: 1.1em;
+         }
+      </style>
+      <script>
+
+         // a) Función Celsius: convierte de Fahrenheit a Celsius
+         function Celsius( fahrenheit )
+         {
+            return 5.0 / 9.0 * ( fahrenheit - 32 );
+         } // fin de la función Celsius
+
+         // b) Función fahrenheit: convierte de Celsius a Fahrenheit
+         function fahrenheit( celsius )
+         {
+            return 9.0 / 5.0 * celsius + 32;
+         } // fin de la función fahrenheit
+
+         // Convierte de Fahrenheit a Celsius y muestra el resultado
+         function convertirACelsius()
+         {
+            var campoTemp = document.getElementById( "temperatura" );
+            var tempValor = parseFloat( campoTemp.value );
+            var divResultado = document.getElementById( "resultado" );
+
+            if ( !isNaN( tempValor ) )
+            {
+               var c = Celsius( tempValor );
+               divResultado.innerHTML = tempValor + " °F equivale a <strong>" + 
+                  c.toFixed(2) + " °C</strong>";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, introduzca un valor numérico válido.</span>";
+            }
+         } // fin de la función convertirACelsius
+
+         // Convierte de Celsius a Fahrenheit y muestra el resultado
+         function convertirAFahrenheit()
+         {
+            var campoTemp = document.getElementById( "temperatura" );
+            var tempValor = parseFloat( campoTemp.value );
+            var divResultado = document.getElementById( "resultado" );
+
+            if ( !isNaN( tempValor ) )
+            {
+               var f = fahrenheit( tempValor );
+               divResultado.innerHTML = tempValor + " °C equivale a <strong>" + 
+                  f.toFixed(2) + " °F</strong>";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, introduzca un valor numérico válido.</span>";
+            }
+         } // fin de la función convertirAFahrenheit
+
+         // registrar escuchas de eventos para los dos botones
+         function iniciar()
+         {
+            var botonACelsius = document.getElementById( "botonACelsius" );
+            var botonAFahrenheit = document.getElementById( "botonAFahrenheit" );
+
+            botonACelsius.addEventListener( "click", convertirACelsius, false );
+            botonAFahrenheit.addEventListener( "click", convertirAFahrenheit, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Conversión de Temperaturas</h1>
+
+      <form action = "#">
+         <div class = "campo">
+            <label for = "temperatura">Temperatura a convertir:</label><br>
+            <input id = "temperatura" type = "number" step = "any" placeholder = "Ej. 32">
+         </div>
+         <div class = "botones">
+            <input id = "botonACelsius" type = "button" value = "Convertir a Celsius">
+            <input id = "botonAFahrenheit" type = "button" value = "Convertir a Fahrenheit">
+         </div>
+      </form>
+
+      <div id = "resultado"></div>
+
+   </body>
+</html>

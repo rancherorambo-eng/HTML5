@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.12: ejercicio9_12.html -->
+<!-- Selección e impresión de números al azar de conjuntos específicos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.12 - Conjuntos Aleatorios</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+         }
+         table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+         }
+         th {
+            background-color: #2c3e50;
+            color: white;
+         }
+         code {
+            font-family: monospace;
+            font-weight: bold;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+         }
+         td.resultado {
+            text-align: center;
+            font-weight: bold;
+         }
+         input[type="button"] {
+            padding: 8px 15px;
+            font-size: 1em;
+         }
+      </style>
+      <script>
+
+         // función para generar y mostrar los valores al azar
+         function generarNumeros()
+         {
+            var cuerpoTabla = document.getElementById( "cuerpoTabla" );
+
+            var incisos = [
+               {
+                  inciso: "a",
+                  conjunto: "2, 4, 6, 8, 10",
+                  instruccion: "2 * Math.floor( 1 + Math.random() * 5 )",
+                  valor: 2 * Math.floor( 1 + Math.random() * 5 )
+               },
+               {
+                  inciso: "b",
+                  conjunto: "3, 5, 7, 9, 11",
+                  instruccion: "1 + 2 * Math.floor( 1 + Math.random() * 5 )",
+                  valor: 1 + 2 * Math.floor( 1 + Math.random() * 5 )
+               },
+               {
+                  inciso: "c",
+                  conjunto: "6, 10, 14, 18, 22",
+                  instruccion: "6 + 4 * Math.floor( Math.random() * 5 )",
+                  valor: 6 + 4 * Math.floor( Math.random() * 5 )
+               }
+            ];
+
+            var contenido = "";
+
+            for ( var i = 0; i < incisos.length; ++i )
+            {
+               var item = incisos[ i ];
+               contenido += "<tr>" +
+                  "<td><strong>" + item.inciso + ")</strong> {" + item.conjunto + "}</td>" +
+                  "<td><code>document.writeln( " + item.instruccion + " );</code></td>" +
+                  "<td class='resultado'>" + item.valor + "</td>" +
+                  "</tr>";
+            }
+
+            cuerpoTabla.innerHTML = contenido;
+         } // fin de la función generarNumeros
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonGenerar = document.getElementById( "botonGenerar" );
+            botonGenerar.addEventListener( "click", generarNumeros, false );
+            generarNumeros(); // primera ejecución automática
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Ejercicio 9.12 - Selección Aleatoria de Conjuntos</h1>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Inciso / Conjunto</th>
+               <th>Instrucción Única en JavaScript</th>
+               <th>Valor Generado (Muestra)</th>
+            </tr>
+         </thead>
+         <tbody id = "cuerpoTabla">
+            <!-- Filas generadas dinámicamente -->
+         </tbody>
+      </table>
+
+      <form action = "#">
+         <input id = "botonGenerar" type = "button" value = "Generar Nuevos Números">
+      </form>
+
+   </body>
+</html>

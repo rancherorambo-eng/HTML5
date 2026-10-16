@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.8: ejercicio9_8.html -->
+<!-- Cálculo de cargos de estacionamiento e historial de ventas totales. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Cargos de Estacionamiento</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         table {
+            border-collapse: collapse;
+            width: 450px;
+            margin-top: 15px;
+         }
+         table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+         }
+         th {
+            background-color: #2c3e50;
+            color: white;
+         }
+      </style>
+      <script>
+
+         var totalRecibos = 0.0; // total acumulado de las ventas
+         var contadorClientes = 0; // contador de clientes procesados
+
+         // función para calcular los cargos de estacionamiento según las horas
+         function calcularCargos( horas )
+         {
+            var cargo = 2.00; // cuota mínima por hasta 3 horas
+
+            if ( horas > 3.0 )
+            {
+               // $0.50 adicionales por cada hora o fracción que exceda las 3 horas
+               cargo += Math.ceil( horas - 3.0 ) * 0.50;
+            }
+
+            // el cargo máximo por un periodo de 24 horas es de $10.00
+            if ( cargo > 10.00 )
+            {
+               cargo = 10.00;
+            }
+
+            return cargo;
+         } // fin de la función calcularCargos
+
+         // procesar la entrada de un cliente
+         function procesarCliente()
+         {
+            var campoHoras = document.getElementById( "campoHoras" );
+            var horas = parseFloat( campoHoras.value );
+
+            if ( !isNaN( horas ) && horas > 0 && horas <= 24 )
+            {
+               var cargoActual = calcularCargos( horas );
+               totalRecibos += cargoActual;
+               ++contadorClientes;
+
+               // agregar fila a la tabla de resultados
+               var cuerpoTabla = document.getElementById( "cuerpoTabla" );
+               var nuevaFila = "<tr><td>" + contadorClientes + "</td><td>" + 
+                  horas.toFixed(1) + " hrs</td><td>$" + cargoActual.toFixed(2) + "</td></tr>";
+               
+               cuerpoTabla.innerHTML += nuevaFila;
+
+               // actualizar el total general en pantalla
+               document.getElementById( "totalAcumulado" ).innerHTML = 
+                  "<strong>Total acumulado de recibos de ayer: $" + totalRecibos.toFixed(2) + "</strong>";
+
+               // limpiar el campo de entrada
+               campoHoras.value = "";
+            }
+            else
+            {
+               alert( "Por favor, introduzca un número válido de horas entre 0.1 y 24." );
+            }
+         } // fin de la función procesarCliente
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonProcesar = document.getElementById( "botonProcesar" );
+            botonProcesar.addEventListener( "click", procesarCliente, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+      <h1>Gestión de Cargos de Estacionamiento</h1>
+
+      <form action = "#">
+         <label for = "campoHoras">Horas estacionadas (máximo 24):</label><br>
+         <input id = "campoHoras" type = "number" step = "0.1" min = "0.1" max = "24" placeholder = "Ej. 4.5">
+         <input id = "botonProcesar" type = "button" value = "Calcular Cargo">
+      </form>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Cliente</th>
+               <th>Horas</th>
+               <th>Cargo</th>
+            </tr>
+         </thead>
+         <tbody id = "cuerpoTabla">
+            <!-- Las filas se agregan dinámicamente -->
+         </tbody>
+      </table>
+
+      <p id = "totalAcumulado"><strong>Total acumulado de recibos de ayer: $0.00</strong></p>
+   </body>
+</html>

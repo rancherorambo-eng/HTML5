@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.27: ejercicio9_27.html -->
+<!-- Proyecto CAI: Selección de nivel de grado y tipo de problema aritmético. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.27 - Proyecto CAI Avanzado</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         .contenedor {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 520px;
+            border: 1px solid #ddd;
+         }
+         .panel-configuracion {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+         }
+         .campo-config {
+            margin-bottom: 10px;
+         }
+         label {
+            font-weight: bold;
+            display: inline-block;
+            width: 180px;
+         }
+         select, input[type="number"] {
+            padding: 5px;
+            font-size: 0.95em;
+         }
+         #pregunta {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+         }
+         input[type="button"] {
+            padding: 6px 14px;
+            font-size: 1em;
+            margin-left: 8px;
+            cursor: pointer;
+         }
+         #mensaje {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+         }
+         #contador {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #555;
+         }
+         .correcto { color: #27ae60; }
+         .incorrecto { color: #c0392b; }
+         .alerta { color: #d35400; }
+      </style>
+      <script>
+
+         var numero1;
+         var numero2;
+         var respuestaCorrecta;
+         var tipoOperacionActual; // 1: Suma, 2: Resta, 3: Multiplicación, 4: División
+
+         var respuestasCorrectas = 0;
+         var respuestasIncorrectas = 0;
+         var totalPreguntas = 0;
+         var primerIntento = true;
+
+         // reinicia todas las variables para comenzar un nuevo cuestionario
+         function reiniciarCuestionario()
+         {
+            respuestasCorrectas = 0;
+            respuestasIncorrectas = 0;
+            totalPreguntas = 0;
+            
+            document.getElementById( "botonEnviar" ).disabled = false;
+            document.getElementById( "respuesta" ).disabled = false;
+            document.getElementById( "nivelGrado" ).disabled = false;
+            document.getElementById( "tipoOperacion" ).disabled = false;
+            document.getElementById( "mensaje" ).innerHTML = "";
+            
+            crearPregunta();
+         } // fin de la función reiniciarCuestionario
+
+         // genera una nueva pregunta según el nivel de grado y el tipo de operación elegidos
+         function crearPregunta()
+         {
+            if ( totalPreguntas >= 10 )
+            {
+               evaluarRendimiento();
+               return;
+            }
+
+            primerIntento = true;
+
+            // Bloquear selectores durante el intento del cuestionario
+            document.getElementById( "nivelGrado" ).disabled = true;
+            document.getElementById( "tipoOperacion" ).disabled = true;
+
+            var nivel = parseInt( document.getElementById( "nivelGrado" ).value );
+            var opcionOperacion = parseInt( document.getElementById( "tipoOperacion" ).value );
+
+            // Calcular el límite superior de números en base al nivel de grado (inciso a)
+            var limiteMaximo = Math.pow( 10, nivel ) - 1;
+            var limiteMinimo = nivel === 1 ? 0 : Math.pow( 10, nivel - 1 );
+
+            // Determinar tipo de operación (inciso b)
+            if ( opcionOperacion === 5 )
+            {
+               tipoOperacionActual = Math.floor( 1 + Math.random() * 4 ); // elige entre 1 y 4 al azar
+            }
+            else
+            {
+               tipoOperacionActual = opcionOperacion;
+            }
+
+            // Generar operandos y calcular la respuesta según el tipo de operación
+            var simbolo = "";
+
+            switch ( tipoOperacionActual )
+            {
+               case 1: // Suma
+                  numero1 = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  numero2 = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  respuestaCorrecta = numero1 + numero2;
+                  simbolo = "más";
+                  break;
+
+               case 2: // Resta
+                  numero1 = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  numero2 = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  // Asegurar que el resultado sea no negativo para estudiantes de primaria
+                  if ( numero1 < numero2 )
+                  {
+                     var temp = numero1;
+                     numero1 = numero2;
+                     numero2 = temp;
+                  }
+                  respuestaCorrecta = numero1 - numero2;
+                  simbolo = "menos";
+                  break;
+
+               case 3: // Multiplicación
+                  numero1 = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  numero2 = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  respuestaCorrecta = numero1 * numero2;
+                  simbolo = "por";
+                  break;
+
+               case 4: // División
+                  numero2 = Math.floor( 1 + Math.random() * limiteMaximo ); // evitar divisor 0
+                  respuestaCorrecta = Math.floor( limiteMinimo + Math.random() * ( limiteMaximo - limiteMinimo + 1 ) );
+                  numero1 = numero2 * respuestaCorrecta; // garantiza división entera exacta
+                  simbolo = "entre";
+                  break;
+            } // fin de switch
+
+            document.getElementById( "pregunta" ).innerHTML = 
+               "Pregunta " + ( totalPreguntas + 1 ) + " de 10: ¿Cuánto es " + numero1 + " " + simbolo + " " + numero2 + "?";
+            document.getElementById( "respuesta" ).value = "";
+            document.getElementById( "respuesta" ).focus();
+            actualizarContador();
+         } // fin de la función crearPregunta
+
+         // actualiza la vista con el progreso
+         function actualizarContador()
+         {
+            document.getElementById( "contador" ).innerHTML = 
+               "Progreso: " + totalPreguntas + " / 10 preguntas respondidas.";
+         } // fin de la función actualizarContador
+
+         // evalúa el resultado global tras las 10 preguntas
+         function evaluarRendimiento()
+         {
+            var porcentaje = ( respuestasCorrectas / 10 ) * 100;
+            var divMensaje = document.getElementById( "mensaje" );
+            var divPregunta = document.getElementById( "pregunta" );
+
+            document.getElementById( "botonEnviar" ).disabled = true;
+            document.getElementById( "respuesta" ).disabled = true;
+
+            divPregunta.innerHTML = "<strong>Cuestionario Finalizado</strong>";
+
+            if ( porcentaje < 75 )
+            {
+               divMensaje.className = "alerta";
+               divMensaje.innerHTML = "Porcentaje de aciertos: " + porcentaje.toFixed(0) + "%. " +
+                  "Por favor, pida ayuda adicional a su instructor.<br><br>" +
+                  "<input type='button' value='Reiniciar para otro estudiante' onclick='reiniciarCuestionario()'>";
+            }
+            else
+            {
+               divMensaje.className = "correcto";
+               divMensaje.innerHTML = "¡Felicitaciones! Porcentaje de aciertos: " + porcentaje.toFixed(0) + "%. " +
+                  "¡Está listo para pasar al siguiente nivel!<br><br>" +
+                  "<input type='button' value='Iniciar nuevo cuestionario' onclick='reiniciarCuestionario()'>";
+            }
+         } // fin de la función evaluarRendimiento
+
+         // obtiene mensaje correcto aleatorio
+         function obtenerRespuestaCorrectaAleatoria()
+         {
+            var opcion = Math.floor( 1 + Math.random() * 4 );
+            switch ( opcion )
+            {
+               case 1: return "¡Muy bien!";
+               case 2: return "¡Excelente!";
+               case 3: return "¡Buen trabajo!";
+               case 4: return "¡Siga así!";
+            }
+         } // fin de la función obtenerRespuestaCorrectaAleatoria
+
+         // obtiene mensaje incorrecto aleatorio
+         function obtenerRespuestaIncorrectaAleatoria()
+         {
+            var opcion = Math.floor( 1 + Math.random() * 4 );
+            switch ( opcion )
+            {
+               case 1: return "No. Intente de nuevo.";
+               case 2: return "Equivocado. Trate una vez más.";
+               case 3: return "No se dé por vencido.";
+               case 4: return "No. Siga intentando.";
+            }
+         } // fin de la función obtenerRespuestaIncorrectaAleatoria
+
+         // verifica la respuesta introducida por el estudiante
+         function comprobarRespuesta()
+         {
+            var campoRespuesta = document.getElementById( "respuesta" );
+            var respuestaUsuario = parseInt( campoRespuesta.value );
+            var divMensaje = document.getElementById( "mensaje" );
+
+            if ( !isNaN( respuestaUsuario ) )
+            {
+               if ( respuestaUsuario === respuestaCorrecta )
+               {
+                  if ( primerIntento )
+                  {
+                     ++respuestasCorrectas;
+                  }
+
+                  ++totalPreguntas;
+                  divMensaje.className = "correcto";
+                  divMensaje.innerHTML = obtenerRespuestaCorrectaAleatoria();
+                  crearPregunta();
+               }
+               else
+               {
+                  if ( primerIntento )
+                  {
+                     ++respuestasIncorrectas;
+                     primerIntento = false;
+                  }
+
+                  divMensaje.className = "incorrecto";
+                  divMensaje.innerHTML = obtenerRespuestaIncorrectaAleatoria();
+                  campoRespuesta.focus();
+                  campoRespuesta.select();
+               }
+            }
+            else
+            {
+               divMensaje.className = "incorrecto";
+               divMensaje.innerHTML = "Por favor, escriba un número.";
+            }
+         } // fin de la función comprobarRespuesta
+
+         // registrar escuchas de eventos e iniciar la sesión
+         function iniciar()
+         {
+            var botonEnviar = document.getElementById( "botonEnviar" );
+            botonEnviar.addEventListener( "click", comprobarRespuesta, false );
+
+            var campoRespuesta = document.getElementById( "respuesta" );
+            campoRespuesta.addEventListener( "keypress", function( e ) {
+               if ( e.key === "Enter" )
+               {
+                  e.preventDefault();
+                  comprobarRespuesta();
+               }
+            }, false );
+
+            var nivelGrado = document.getElementById( "nivelGrado" );
+            var tipoOperacion = document.getElementById( "tipoOperacion" );
+
+            nivelGrado.addEventListener( "change", crearPregunta, false );
+            tipoOperacion.addEventListener( "change", crearPregunta, false );
+
+            reiniciarCuestionario();
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Proyecto CAI - Instrucción Asistida por Computadora</h1>
+
+      <div class = "contenedor">
+         <div class = "panel-configuracion">
+            <div class = "campo-config">
+               <label for = "nivelGrado">Nivel de grado (dígitos):</label>
+               <select id = "nivelGrado">
+                  <option value = "1">Nivel 1 (1 dígito)</option>
+                  <option value = "2">Nivel 2 (2 dígitos)</option>
+                  <option value = "3">Nivel 3 (3 dígitos)</option>
+               </select>
+            </div>
+            <div class = "campo-config">
+               <label for = "tipoOperacion">Tipo de problema:</label>
+               <select id = "tipoOperacion">
+                  <option value = "1">1: Solo suma</option>
+                  <option value = "2">2: Solo resta</option>
+                  <option value = "3" selected>3: Solo multiplicación</option>
+                  <option value = "4">4: Solo división</option>
+                  <option value = "5">5: Operaciones mezcladas</option>
+               </select>
+            </div>
+         </div>
+
+         <div id = "pregunta">Cargando pregunta...</div>
+
+         <form action = "#">
+            <input id = "respuesta" type = "number" placeholder = "Respuesta">
+            <input id = "botonEnviar" type = "button" value = "Verificar">
+         </form>
+
+         <div id = "contador"></div>
+         <div id = "mensaje"></div>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.25: ejercicio9_25.html -->
+<!-- Juego de adivinar un número entre 1 y 1000 con retroalimentación orientativa. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.25 - Adivine el Número</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         .contenedor {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 480px;
+            border: 1px solid #ddd;
+         }
+         label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+         }
+         input[type="number"] {
+            width: 120px;
+            padding: 6px;
+            font-size: 1em;
+         }
+         input[type="button"] {
+            padding: 6px 14px;
+            font-size: 1em;
+            margin-left: 8px;
+            cursor: pointer;
+         }
+         #mensaje {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+         }
+         .alto { color: #d35400; }
+         .bajo { color: #2980b9; }
+         .correcto { color: #27ae60; }
+      </style>
+      <script>
+
+         var numeroSecreto; // número aleatorio a adivinar
+
+         // inicializa un nuevo juego generando un entero aleatorio entre 1 y 1000
+         function iniciarJuego()
+         {
+            numeroSecreto = Math.floor( 1 + Math.random() * 1000 );
+            
+            document.getElementById( "intento" ).value = "";
+            document.getElementById( "intento" ).disabled = false;
+            document.getElementById( "botonEnviar" ).disabled = false;
+            document.getElementById( "mensaje" ).innerHTML = "Adivine un número entre 1 y 1000.";
+            document.getElementById( "mensaje" ).className = "";
+            document.getElementById( "intento" ).focus();
+         } // fin de la función iniciarJuego
+
+         // procesar y verificar el intento del usuario
+         function comprobarIntento()
+         {
+            var campoIntento = document.getElementById( "intento" );
+            var intentoUsuario = parseInt( campoIntento.value );
+            var divMensaje = document.getElementById( "mensaje" );
+
+            if ( !isNaN( intentoUsuario ) && intentoUsuario >= 1 && intentoUsuario <= 1000 )
+            {
+               if ( intentoUsuario === numeroSecreto )
+               {
+                  divMensaje.className = "correcto";
+                  divMensaje.innerHTML = "¡Felicidades. ¡Adivinó el número!<br><br>" +
+                     "<input type='button' value='Jugar de nuevo' onclick='iniciarJuego()'>";
+                  
+                  campoIntento.value = "";
+                  campoIntento.disabled = true;
+                  document.getElementById( "botonEnviar" ).disabled = true;
+               }
+               else if ( intentoUsuario > numeroSecreto )
+               {
+                  divMensaje.className = "alto";
+                  divMensaje.innerHTML = "Demasiado alto. Intente de nuevo.";
+                  campoIntento.value = "";
+                  campoIntento.focus();
+               }
+               else
+               {
+                  divMensaje.className = "bajo";
+                  divMensaje.innerHTML = "Demasiado bajo. Intente de nuevo.";
+                  campoIntento.value = "";
+                  campoIntento.focus();
+               }
+            }
+            else
+            {
+               alert( "Por favor, introduzca un número entero válido entre 1 y 1000." );
+               campoIntento.focus();
+            }
+         } // fin de la función comprobarIntento
+
+         // registrar escuchas de eventos e iniciar el juego
+         function iniciar()
+         {
+            var botonEnviar = document.getElementById( "botonEnviar" );
+            botonEnviar.addEventListener( "click", comprobarIntento, false );
+
+            var campoIntento = document.getElementById( "intento" );
+            campoIntento.addEventListener( "keypress", function( e ) {
+               if ( e.key === "Enter" )
+               {
+                  e.preventDefault();
+                  comprobarIntento();
+               }
+            }, false );
+
+            iniciarJuego();
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Adivine el Número</h1>
+
+      <div class = "contenedor">
+         <form action = "#">
+            <label for = "intento">Adivine un número entre 1 y 1000:</label>
+            <input id = "intento" type = "number" min = "1" max = "1000" placeholder = "1 - 1000">
+            <input id = "botonEnviar" type = "button" value = "Enviar">
+         </form>
+
+         <div id = "mensaje">Adivine un número entre 1 y 1000.</div>
+      </div>
+
+   </body>
+</html>

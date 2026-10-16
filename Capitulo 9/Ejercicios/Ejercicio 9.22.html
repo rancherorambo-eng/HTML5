@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.22: ejercicio9_22.html -->
+<!-- Programa educativo interactivo para practicar multiplicaciones de un solo dígito. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.22 - Aprendiendo a Multiplicar</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         .contenedor {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 450px;
+            border: 1px solid #ddd;
+         }
+         #pregunta {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+         }
+         input[type="number"] {
+            width: 100px;
+            padding: 6px;
+            font-size: 1em;
+         }
+         input[type="button"] {
+            padding: 6px 14px;
+            font-size: 1em;
+            margin-left: 8px;
+            cursor: pointer;
+         }
+         #mensaje {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+         }
+         .correcto {
+            color: #27ae60;
+         }
+         .incorrecto {
+            color: #c0392b;
+         }
+      </style>
+      <script>
+
+         var numero1; // primer entero de un dígito
+         var numero2; // segundo entero de un dígito
+         var respuestaCorrecta; // producto correcto de numero1 y numero2
+
+         // genera una nueva pregunta con dos enteros positivos de un dígito
+         function crearPregunta()
+         {
+            numero1 = Math.floor( Math.random() * 10 );
+            numero2 = Math.floor( Math.random() * 10 );
+            respuestaCorrecta = numero1 * numero2;
+
+            document.getElementById( "pregunta" ).innerHTML = 
+               "¿Cuánto es " + numero1 + " por " + numero2 + "?";
+            document.getElementById( "respuesta" ).value = "";
+            document.getElementById( "respuesta" ).focus();
+         } // fin de la función crearPregunta
+
+         // verifica la respuesta del estudiante
+         function comprobarRespuesta()
+         {
+            var campoRespuesta = document.getElementById( "respuesta" );
+            var respuestaUsuario = parseInt( campoRespuesta.value );
+            var divMensaje = document.getElementById( "mensaje" );
+
+            if ( !isNaN( respuestaUsuario ) )
+            {
+               if ( respuestaUsuario === respuestaCorrecta )
+               {
+                  divMensaje.className = "correcto";
+                  divMensaje.innerHTML = "¡Muy bien!";
+                  crearPregunta(); // genera una nueva pregunta al responder correctamente
+               }
+               else
+               {
+                  divMensaje.className = "incorrecto";
+                  divMensaje.innerHTML = "No. Intente de nuevo.";
+                  campoRespuesta.focus();
+                  campoRespuesta.select();
+               }
+            }
+            else
+            {
+               divMensaje.className = "incorrecto";
+               divMensaje.innerHTML = "Por favor, escriba un número.";
+            }
+         } // fin de la función comprobarRespuesta
+
+         // registrar escuchas de eventos e iniciar el juego
+         function iniciar()
+         {
+            var botonEnviar = document.getElementById( "botonEnviar" );
+            botonEnviar.addEventListener( "click", comprobarRespuesta, false );
+
+            // permitir enviar la respuesta presionando la tecla Enter
+            var campoRespuesta = document.getElementById( "respuesta" );
+            campoRespuesta.addEventListener( "keypress", function( e ) {
+               if ( e.key === "Enter" )
+               {
+                  e.preventDefault();
+                  comprobarRespuesta();
+               }
+            }, false );
+
+            crearPregunta(); // primera pregunta al cargar la página
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Aprendiendo a Multiplicar</h1>
+
+      <div class = "contenedor">
+         <div id = "pregunta">Cargando pregunta...</div>
+
+         <form action = "#">
+            <input id = "respuesta" type = "number" placeholder = "Respuesta">
+            <input id = "botonEnviar" type = "button" value = "Verificar">
+         </form>
+
+         <div id = "mensaje"></div>
+      </div>
+
+   </body>
+</html>

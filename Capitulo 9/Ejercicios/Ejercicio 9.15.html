@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.15: ejercicio9_15.html -->
+<!-- Determinación de números pares mediante la función esPar y un ciclo controlado por centinela. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.15 - Función esPar</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         table {
+            border-collapse: collapse;
+            width: 350px;
+            margin-top: 15px;
+         }
+         table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+         }
+         th {
+            background-color: #2c3e50;
+            color: white;
+         }
+      </style>
+      <script>
+
+         // función que determina si un entero es par usando el operador módulo
+         function esPar( numero )
+         {
+            return numero % 2 === 0;
+         } // fin de la función esPar
+
+         // procesar números mediante diálogo prompt y ciclo controlado por centinela
+         function procesarNumeros()
+         {
+            var entrada;
+            var numero;
+            var resultadosHTML = "";
+            var centinela = -1; // valor centinela para terminar el ciclo
+
+            // entrada inicial mediante prompt
+            entrada = window.prompt( "Escriba un número entero (" + centinela + " para salir):", "0" );
+
+            // ciclo controlado por centinela
+            while ( entrada !== null )
+            {
+               numero = parseInt( entrada );
+
+               // verificar si el usuario ingresó el valor centinela
+               if ( numero === centinela )
+               {
+                  break;
+               }
+
+               if ( !isNaN( numero ) )
+               {
+                  var resultadoBool = esPar( numero );
+                  var estadoText = resultadoBool ? "Par (true)" : "Impar (false)";
+
+                  resultadosHTML += "<tr><td>" + numero + "</td><td>" + estadoText + "</td></tr>";
+               }
+
+               // solicitar el siguiente número
+               entrada = window.prompt( "Escriba el siguiente número entero (" + centinela + " para salir):", "0" );
+            } // fin del ciclo while
+
+            document.getElementById( "cuerpoTabla" ).innerHTML = resultadosHTML;
+         } // fin de la función procesarNumeros
+
+         window.addEventListener( "load", procesarNumeros, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Prueba de Números Pares e Impares</h1>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Número</th>
+               <th>Resultado (esPar)</th>
+            </tr>
+         </thead>
+         <tbody id = "cuerpoTabla">
+            <!-- Los resultados se generan dinámicamente -->
+         </tbody>
+      </table>
+
+   </body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.28: ejercicio9_28.html -->
+<!-- Modificación del juego de Craps para incluir apuestas y conversación aleatoria. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.28 - Juego de Craps con Apuestas</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         .panel {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 550px;
+            border: 1px solid #ddd;
+         }
+         .seccion-apuesta {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+         }
+         label {
+            font-weight: bold;
+         }
+         input[type="number"] {
+            width: 120px;
+            padding: 5px;
+            font-size: 1em;
+         }
+         input[type="button"] {
+            padding: 6px 14px;
+            font-size: 1em;
+            cursor: pointer;
+         }
+         .dados-container {
+            margin: 15px 0;
+         }
+         .dados-container img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            vertical-align: middle;
+         }
+         #estadoJuego {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 10px;
+         }
+         #mensajeConversacion {
+            font-style: italic;
+            color: #8e44ad;
+            margin-top: 10px;
+         }
+         .ganador { color: #27ae60; }
+         .perdedor { color: #c0392b; }
+         .bancarrota { color: #d35400; font-size: 1.3em; font-weight: bold; }
+      </style>
+      <script>
+
+         // Constantes de estado del juego
+         var EN_PROGRESO = 0;
+         var GANO = 1;
+         var PERDIO = 2;
+
+         // Variables de estado del juego
+         var estadoJuego = EN_PROGRESO;
+         var punto = 0;
+         var saldoBanco = 1000; // saldo inicial de 1000 dólares
+         var apuestaActual = 0;
+
+         // Función para seleccionar aleatoriamente un mensaje conversacional
+         function mostrarConversacion()
+         {
+            var opcion = Math.floor( 1 + Math.random() * 3 );
+            var mensaje = "";
+
+            switch ( opcion )
+            {
+               case 1:
+                  mensaje = "¿Así que se va a quedar en bancarrota?";
+                  break;
+               case 2:
+                  mensaje = "¡Vamos, arriésguese!";
+                  break;
+               case 3:
+                  mensaje = "¡Está teniendo éxito! ¡Ahora es momento de cambiar sus fichas!";
+                  break;
+            } // fin de switch
+
+            document.getElementById( "mensajeConversacion" ).innerHTML = mensaje;
+         } // fin de la función mostrarConversacion
+
+         // Función para simular el tiro de dos dados
+         function tirarDados()
+         {
+            var dado1 = Math.floor( 1 + Math.random() * 6 );
+            var dado2 = Math.floor( 1 + Math.random() * 6 );
+            var suma = dado1 + dado2;
+
+            // Actualizar imágenes de los dados
+            document.getElementById( "imgDado1" ).src = "../Imagenes/dado" + dado1 + ".png";
+            document.getElementById( "imgDado2" ).src = "../Imagenes/dado" + dado2 + ".png";
+
+            document.getElementById( "resultadoTiro" ).innerHTML = 
+               "El tiro fue: " + dado1 + " + " + dado2 + " = <strong>" + suma + "</strong>";
+
+            return suma;
+         } // fin de la función tirarDados
+
+         // Validar e iniciar la ronda con una nueva apuesta
+         function establecerApuesta()
+         {
+            var campoApuesta = document.getElementById( "campoApuesta" );
+            var apuesta = parseFloat( campoApuesta.value );
+
+            if ( !isNaN( apuesta ) && apuesta > 0 && apuesta <= saldoBanco )
+            {
+               apuestaActual = apuesta;
+               estadoJuego = EN_PROGRESO;
+               punto = 0;
+
+               // Bloquear campo de apuesta durante la ronda activa
+               campoApuesta.disabled = true;
+               document.getElementById( "botonApuestas" ).disabled = true;
+               document.getElementById( "botonTirar" ).disabled = false;
+
+               document.getElementById( "estadoJuego" ).className = "";
+               document.getElementById( "estadoJuego" ).innerHTML = "¡Apuesta de $" + apuestaActual.toFixed(2) + " aceptada! Haga clic en Tirar dados.";
+               
+               mostrarConversacion(); // Generar mensaje conversacional aleatorio
+            }
+            else
+            {
+               alert( "Apuesta inválida. Ingrese un monto mayor a $0 y menor o igual que su saldo actual ($" + saldoBanco.toFixed(2) + ")." );
+               campoApuesta.focus();
+            }
+         } // fin de la función establecerApuesta
+
+         // Lógica del tiro de dados en Craps
+         function jugar()
+         {
+            var sumaDados = tirarDados();
+
+            // Primer tiro de la ronda
+            if ( punto === 0 )
+            {
+               switch ( sumaDados )
+               {
+                  case 7:
+                  case 11:
+                     estadoJuego = GANO;
+                     break;
+
+                  case 2:
+                  case 3:
+                  case 12:
+                     estadoJuego = PERDIO;
+                     break;
+
+                  default:
+                     estadoJuego = EN_PROGRESO;
+                     punto = sumaDados;
+                     document.getElementById( "puntoActual" ).innerHTML = "El punto es: <strong>" + punto + "</strong>";
+                     break;
+               } // fin de switch
+            }
+            else // Tiros posteriores
+            {
+               if ( sumaDados === punto )
+               {
+                  estadoJuego = GANO;
+               }
+               else if ( sumaDados === 7 )
+               {
+                  estadoJuego = PERDIO;
+               }
+            }
+
+            mostrarResultadoRonda();
+         } // fin de la función jugar
+
+         // Actualiza saldos e interfaz según el resultado de la ronda
+         function mostrarResultadoRonda()
+         {
+            var divEstado = document.getElementById( "estadoJuego" );
+
+            if ( estadoJuego === GANO )
+            {
+               saldoBanco += apuestaActual;
+               divEstado.className = "ganador";
+               divEstado.innerHTML = "¡Ganó! Obtiene $" + apuestaActual.toFixed(2) + ".";
+               finalizarRonda();
+            }
+            else if ( estadoJuego === PERDIO )
+            {
+               saldoBanco -= apuestaActual;
+               divEstado.className = "perdedor";
+               divEstado.innerHTML = "¡Perdió! Pierde $" + apuestaActual.toFixed(2) + ".";
+               finalizarRonda();
+            }
+            else
+            {
+               mostrarConversacion();
+            }
+
+            document.getElementById( "saldoPantalla" ).innerHTML = "$" + saldoBanco.toFixed(2);
+
+            // Verificar condición de bancarrota
+            if ( saldoBanco <= 0 )
+            {
+               divEstado.className = "bancarrota";
+               divEstado.innerHTML = "¡Lo siento. Está en bancarrota!";
+               document.getElementById( "botonApuestas" ).disabled = true;
+               document.getElementById( "botonTirar" ).disabled = true;
+            }
+         } // fin de la función mostrarResultadoRonda
+
+         // Reestablece controles para la siguiente ronda
+         function finalizarRonda()
+         {
+            document.getElementById( "campoApuesta" ).disabled = false;
+            document.getElementById( "botonApuestas" ).disabled = false;
+            document.getElementById( "botonTirar" ).disabled = true;
+            document.getElementById( "puntoActual" ).innerHTML = "";
+            document.getElementById( "campoApuesta" ).value = "";
+            document.getElementById( "campoApuesta" ).focus();
+         } // fin de la función finalizarRonda
+
+         // Registrar escuchas de eventos e inicializar la vista
+         function iniciar()
+         {
+            var botonApuestas = document.getElementById( "botonApuestas" );
+            var botonTirar = document.getElementById( "botonTirar" );
+
+            botonApuestas.addEventListener( "click", establecerApuesta, false );
+            botonTirar.addEventListener( "click", jugar, false );
+
+            document.getElementById( "saldoPantalla" ).innerHTML = "$" + saldoBanco.toFixed(2);
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Juego de Craps con Apuestas</h1>
+
+      <div class = "panel">
+         <p><strong>Saldo en el Banco:</strong> <span id = "saldoPantalla">$1000.00</span></p>
+
+         <div class = "seccion-apuesta">
+            <form action = "#">
+               <label for = "campoApuesta">Introduzca su apuesta:</label>
+               <input id = "campoApuesta" type = "number" min = "1" placeholder = "Monto">
+               <input id = "botonApuestas" type = "button" value = "Establecer Apuesta">
+            </form>
+         </div>
+
+         <div class = "dados-container">
+            <img id = "imgDado1" src = "../Imagenes/blanco.png" alt = "Dado 1">
+            <img id = "imgDado2" src = "../Imagenes/blanco.png" alt = "Dado 2">
+            <input id = "botonTirar" type = "button" value = "Tirar dados" disabled>
+         </div>
+
+         <div id = "resultadoTiro"></div>
+         <div id = "puntoActual"></div>
+         <div id = "estadoJuego">Introduzca una apuesta para comenzar.</div>
+         <div id = "mensajeConversacion"></div>
+      </div>
+
+   </body>
+</html>

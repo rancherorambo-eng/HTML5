@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.29: ejercicio9_29.html -->
+<!-- Cálculo de la potencia de un número mediante una función recursiva. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.29 - Potencia Recursiva</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            border: 1px solid #ddd;
+         }
+         .campo {
+            margin-bottom: 12px;
+         }
+         label {
+            display: inline-block;
+            width: 140px;
+         }
+         input[type="number"] {
+            width: 120px;
+            padding: 4px;
+         }
+         input[type="button"] {
+            padding: 6px 12px;
+            margin-top: 10px;
+         }
+         #resultado {
+            margin-top: 15px;
+            font-size: 1.1em;
+         }
+      </style>
+      <script>
+
+         // función recursiva para calcular base^exponente
+         function potencia( base, exponente )
+         {
+            // caso base: cualquier número elevado a la 1 es igual a sí mismo
+            if ( exponente === 1 )
+            {
+               return base;
+            }
+            else // paso de recursividad: base * base^(exponente - 1)
+            {
+               return base * potencia( base, exponente - 1 );
+            }
+         } // fin de la función potencia
+
+         // procesar la entrada de usuario
+         function calcularPotencia()
+         {
+            var campoBase = document.getElementById( "base" );
+            var campoExponente = document.getElementById( "exponente" );
+
+            var base = parseInt( campoBase.value );
+            var exponente = parseInt( campoExponente.value );
+
+            var divResultado = document.getElementById( "resultado" );
+
+            // validar que el exponente sea un entero mayor o igual a 1
+            if ( !isNaN( base ) && !isNaN( exponente ) && exponente >= 1 )
+            {
+               var resultadoCalculado = potencia( base, exponente );
+               divResultado.innerHTML = "El resultado de <strong>" + base + "<sup>" + 
+                  exponente + "</sup></strong> es: <strong>" + resultadoCalculado + "</strong>";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, introduzca valores válidos. El exponente debe ser mayor o igual a 1.</span>";
+            }
+         } // fin de la función calcularPotencia
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonCalcular = document.getElementById( "botonCalcular" );
+            botonCalcular.addEventListener( "click", calcularPotencia, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Cálculo de Potencia Recursiva</h1>
+
+      <form action = "#">
+         <div class = "campo">
+            <label for = "base">Base:</label>
+            <input id = "base" type = "number" placeholder = "Ej. 3">
+         </div>
+         <div class = "campo">
+            <label for = "exponente">Exponente (&ge; 1):</label>
+            <input id = "exponente" type = "number" min = "1" placeholder = "Ej. 4">
+         </div>
+         <input id = "botonCalcular" type = "button" value = "Calcular Potencia">
+      </form>
+
+      <div id = "resultado"></div>
+
+   </body>
+</html>

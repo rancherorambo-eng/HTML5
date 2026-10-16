@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.9: ejercicio9_9.html -->
+<!-- Cálculo de la distancia entre dos puntos mediante la función distancia. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.9 - Distancia Entre Dos Puntos</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            border: 1px solid #ccc;
+         }
+         .campo {
+            margin-bottom: 10px;
+         }
+         label {
+            display: inline-block;
+            width: 130px;
+         }
+         input[type="number"] {
+            width: 100px;
+         }
+         input[type="button"] {
+            margin-top: 10px;
+            padding: 5px 15px;
+         }
+         #resultado {
+            margin-top: 15px;
+            font-size: 1.1em;
+         }
+      </style>
+      <script>
+
+         // función que calcula la distancia euclidiana entre dos puntos (x1, y1) y (x2, y2)
+         function distancia( x1, y1, x2, y2 )
+         {
+            return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
+         } // fin de la función distancia
+
+         // procesar la entrada de coordenadas del usuario
+         function calcularDistancia()
+         {
+            var x1 = parseFloat( document.getElementById( "x1" ).value );
+            var y1 = parseFloat( document.getElementById( "y1" ).value );
+            var x2 = parseFloat( document.getElementById( "x2" ).value );
+            var y2 = parseFloat( document.getElementById( "y2" ).value );
+
+            var divResultado = document.getElementById( "resultado" );
+
+            // validar que todas las entradas sean números de punto flotante válidos
+            if ( !isNaN( x1 ) && !isNaN( y1 ) && !isNaN( x2 ) && !isNaN( y2 ) )
+            {
+               var d = distancia( x1, y1, x2, y2 );
+               divResultado.innerHTML = "La distancia entre (" + x1 + ", " + y1 + 
+                  ") y (" + x2 + ", " + y2 + ") es: <strong>" + d.toFixed(4) + "</strong>";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, ingrese valores numéricos válidos en todas las coordenadas.</span>";
+            }
+         } // fin de la función calcularDistancia
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonCalcular = document.getElementById( "botonCalcular" );
+            botonCalcular.addEventListener( "click", calcularDistancia, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Cálculo de la Distancia Entre Dos Puntos</h1>
+
+      <form action = "#">
+         <div class = "campo">
+            <label for = "x1">Punto 1 (x1):</label>
+            <input id = "x1" type = "number" step = "any" placeholder = "Ej. 1.5">
+         </div>
+         <div class = "campo">
+            <label for = "y1">Punto 1 (y1):</label>
+            <input id = "y1" type = "number" step = "any" placeholder = "Ej. 2.0">
+         </div>
+         <div class = "campo">
+            <label for = "x2">Punto 2 (x2):</label>
+            <input id = "x2" type = "number" step = "any" placeholder = "Ej. 4.5">
+         </div>
+         <div class = "campo">
+            <label for = "y2">Punto 2 (y2):</label>
+            <input id = "y2" type = "number" step = "any" placeholder = "Ej. 6.0">
+         </div>
+         <input id = "botonCalcular" type = "button" value = "Calcular Distancia">
+      </form>
+
+      <div id = "resultado"></div>
+
+   </body>
+</html>

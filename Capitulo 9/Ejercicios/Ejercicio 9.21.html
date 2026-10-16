@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.21: ejercicio9_21.html -->
+<!-- Simulación de lanzamiento de monedas con conteo de cara y cruz. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.21 - Lanzamiento de Monedas</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         table {
+            border-collapse: collapse;
+            width: 300px;
+            margin-top: 15px;
+         }
+         table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+         }
+         th {
+            background-color: #2c3e50;
+            color: white;
+         }
+         input[type="button"] {
+            padding: 8px 16px;
+            font-size: 1em;
+            cursor: pointer;
+         }
+         #ultimoResultado {
+            margin-top: 10px;
+            font-size: 1.2em;
+         }
+      </style>
+      <script>
+
+         var contadorCara = 0; // cuenta la cantidad de caras producidas
+         var contadorCruz = 0; // cuenta la cantidad de cruces producidas
+
+         // función que simula el lanzamiento de la moneda (devuelve true para cara, false para cruz)
+         function arrojar()
+         {
+            return Math.random() < 0.5;
+         } // fin de la función arrojar
+
+         // simular el tiro y actualizar los contadores
+         function lanzarMoneda()
+         {
+            var esCara = arrojar();
+            var textoResultado = "";
+
+            if ( esCara )
+            {
+               ++contadorCara;
+               textoResultado = "Cara";
+            }
+            else
+            {
+               ++contadorCruz;
+               textoResultado = "Cruz";
+            }
+
+            // actualizar la interfaz gráfica
+            document.getElementById( "ultimoResultado" ).innerHTML = 
+               "Resultado del tiro: <strong>" + textoResultado + "</strong>";
+            document.getElementById( "numCara" ).innerHTML = contadorCara;
+            document.getElementById( "numCruz" ).innerHTML = contadorCruz;
+            document.getElementById( "numTotal" ).innerHTML = contadorCara + contadorCruz;
+         } // fin de la función lanzarMoneda
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonLanzar = document.getElementById( "botonLanzar" );
+            botonLanzar.addEventListener( "click", lanzarMoneda, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Simulación de Lanzamiento de Moneda</h1>
+
+      <form action = "#">
+         <input id = "botonLanzar" type = "button" value = "Lanzar">
+      </form>
+
+      <p id = "ultimoResultado">Haga clic en Lanzar para comenzar.</p>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Lado de la Moneda</th>
+               <th>Frecuencia</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>Cara (true)</td>
+               <td id = "numCara">0</td>
+            </tr>
+            <tr>
+               <td>Cruz (false)</td>
+               <td id = "numCruz">0</td>
+            </tr>
+            <tr>
+               <td><strong>Total</strong></td>
+               <td id = "numTotal">0</td>
+            </tr>
+         </tbody>
+      </table>
+
+   </body>
+</html>

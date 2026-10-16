@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.11: ejercicio9_11.html -->
+<!-- Generación de enteros aleatorios en diversos rangos especificados. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.11 - Rangos de Enteros Aleatorios</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 650px;
+         }
+         table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+         }
+         th {
+            background-color: #2c3e50;
+            color: white;
+         }
+         code {
+            font-family: monospace;
+            font-weight: bold;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+         }
+         td.ejemplo {
+            text-align: center;
+            font-weight: bold;
+         }
+      </style>
+      <script>
+
+         function probarRangos()
+         {
+            var cuerpoTabla = document.getElementById( "cuerpoTabla" );
+
+            var expresiones = [
+               { inciso: "a", rango: "1 &le; n &le; 2", codigo: "Math.floor( 1 + Math.random() * 2 )", min: 1, max: 2 },
+               { inciso: "b", rango: "1 &le; n &le; 100", codigo: "Math.floor( 1 + Math.random() * 100 )", min: 1, max: 100 },
+               { inciso: "c", rango: "0 &le; n &le; 9", codigo: "Math.floor( Math.random() * 10 )", min: 0, max: 9 },
+               { inciso: "d", rango: "1000 &le; n &le; 1112", codigo: "Math.floor( 1000 + Math.random() * 113 )", min: 1000, max: 1112 },
+               { inciso: "e", rango: "-1 &le; n &le; 1", codigo: "Math.floor( -1 + Math.random() * 3 )", min: -1, max: 1 },
+               { inciso: "f", rango: "-3 &le; n &le; 11", codigo: "Math.floor( -3 + Math.random() * 15 )", min: -3, max: 11 }
+            ];
+
+            var contenido = "";
+
+            for ( var i = 0; i < expresiones.length; ++i )
+            {
+               var e = expresiones[ i ];
+               // Calcular un valor de muestra usando eval para ejecutar la expresión de código
+               var ejemploGenerado = eval( e.codigo );
+
+               contenido += "<tr>" +
+                  "<td><strong>" + e.inciso + ")</strong> " + e.rango + "</td>" +
+                  "<td><code>n = " + e.codigo + ";</code></td>" +
+                  "<td class='ejemplo'>" + ejemploGenerado + "</td>" +
+                  "</tr>";
+            }
+
+            cuerpoTabla.innerHTML = contenido;
+         }
+
+         window.addEventListener( "load", probarRangos, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Ejercicio 9.11 - Instrucciones de Enteros Aleatorios</h1>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Inciso / Rango</th>
+               <th>Instrucción JavaScript</th>
+               <th>Valor Generado (Muestra)</th>
+            </tr>
+         </thead>
+         <tbody id = "cuerpoTabla">
+            <!-- Filas generadas dinámicamente -->
+         </tbody>
+      </table>
+
+   </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.18: ejercicio9_18.html -->
+<!-- Determinación del menor de tres números de punto flotante mediante la función minimo3. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.18 - Mínimo de Tres Números</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            border: 1px solid #ddd;
+         }
+         .campo {
+            margin-bottom: 12px;
+         }
+         label {
+            display: inline-block;
+            width: 140px;
+         }
+         input[type="number"] {
+            width: 120px;
+            padding: 4px;
+         }
+         input[type="button"] {
+            padding: 6px 12px;
+            margin-top: 10px;
+         }
+         #resultado {
+            margin-top: 15px;
+            font-size: 1.1em;
+         }
+      </style>
+      <script>
+
+         // función que devuelve el menor de tres números de punto flotante usando Math.min
+         function minimo3( x, y, z )
+         {
+            return Math.min( x, Math.min( y, z ) );
+         } // fin de la función minimo3
+
+         // procesar la entrada de los tres valores introducidos por el usuario
+         function calcularMinimo()
+         {
+            var valor1 = parseFloat( document.getElementById( "numero1" ).value );
+            var valor2 = parseFloat( document.getElementById( "numero2" ).value );
+            var valor3 = parseFloat( document.getElementById( "numero3" ).value );
+
+            var divResultado = document.getElementById( "resultado" );
+
+            // validar que las tres entradas sean números de punto flotante válidos
+            if ( !isNaN( valor1 ) && !isNaN( valor2 ) && !isNaN( valor3 ) )
+            {
+               var minimo = minimo3( valor1, valor2, valor3 );
+               divResultado.innerHTML = "El número más pequeño entre " + valor1 + 
+                  ", " + valor2 + " y " + valor3 + " es: <strong>" + minimo + "</strong>";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, introduzca valores numéricos válidos en los tres campos.</span>";
+            }
+         } // fin de la función calcularMinimo
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonCalcular = document.getElementById( "botonCalcular" );
+            botonCalcular.addEventListener( "click", calcularMinimo, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Mínimo de Tres Números</h1>
+
+      <form action = "#">
+         <div class = "campo">
+            <label for = "numero1">Primer número:</label>
+            <input id = "numero1" type = "number" step = "any" placeholder = "Ej. 12.5">
+         </div>
+         <div class = "campo">
+            <label for = "numero2">Segundo número:</label>
+            <input id = "numero2" type = "number" step = "any" placeholder = "Ej. 8.3">
+         </div>
+         <div class = "campo">
+            <label for = "numero3">Tercer número:</label>
+            <input id = "numero3" type = "number" step = "any" placeholder = "Ej. 15.1">
+         </div>
+         <input id = "botonCalcular" type = "button" value = "Obtener Mínimo">
+      </form>
+
+      <div id = "resultado"></div>
+
+   </body>
+</html>

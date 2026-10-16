@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.19: ejercicio9_19.html -->
+<!-- Determinación de números primos y optimización mediante el límite de la raíz cuadrada. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.19 - Números Primos</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+            line-height: 1.5;
+         }
+         .contenedor {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+         }
+         .bloque {
+            flex: 1;
+            min-width: 300px;
+         }
+         textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 0.9em;
+            padding: 8px;
+         }
+         button {
+            padding: 8px 16px;
+            font-size: 1em;
+            margin-bottom: 10px;
+            cursor: pointer;
+         }
+         .explicacion {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c3e50;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 4px;
+         }
+         .tiempo {
+            font-weight: bold;
+            color: #27ae60;
+         }
+      </style>
+      <script>
+
+         // a) Función que determina si un número es primo probando divisores hasta n / 2
+         function esPrimoDivDos( n )
+         {
+            if ( n <= 1 )
+               return false;
+
+            var limite = Math.floor( n / 2 );
+            for ( var i = 2; i <= limite; ++i )
+            {
+               if ( n % i === 0 )
+                  return false;
+            }
+            return true;
+         } // fin de la función esPrimoDivDos
+
+         // c) Función optimizada que determina si un número es primo probando divisores hasta Math.sqrt(n)
+         function esPrimoRaiz( n )
+         {
+            if ( n <= 1 )
+               return false;
+
+            var limite = Math.floor( Math.sqrt( n ) );
+            for ( var i = 2; i <= limite; ++i )
+            {
+               if ( n % i === 0 )
+                  return false;
+            }
+            return true;
+         } // fin de la función esPrimoRaiz
+
+         // b) y c) Ejecución y comparación de rendimiento
+         function procesarPrimos()
+         {
+            var areaResultado = document.getElementById( "primosEncontrados" );
+            var divEstadisticas = document.getElementById( "estadisticas" );
+
+            // Medición del método 1: Límite n / 2
+            var inicio1 = performance.now();
+            var contadorPrimos = 0;
+            for ( var i = 1; i <= 10000; ++i )
+            {
+               if ( esPrimoDivDos( i ) )
+                  ++contadorPrimos;
+            }
+            var fin1 = performance.now();
+            var tiempoDivDos = ( fin1 - inicio1 ).toFixed(2);
+
+            // Medición del método 2: Límite Math.sqrt(n) y generación de salida para la vista
+            var inicio2 = performance.now();
+            var listaPrimos = [];
+            for ( var j = 1; j <= 10000; ++j )
+            {
+               if ( esPrimoRaiz( j ) )
+                  listaPrimos.push( j );
+            }
+            var fin2 = performance.now();
+            var tiempoRaiz = ( fin2 - inicio2 ).toFixed(2);
+
+            // Mostrar primos en el elemento <textarea>
+            areaResultado.value = listaPrimos.join( ", " );
+
+            // Mostrar estadísticas de rendimiento y respuestas
+            divEstadisticas.innerHTML = 
+               "<p><strong>Total de primos encontrados entre 1 y 10,000:</strong> " + listaPrimos.length + "</p>" +
+               "<p><strong>Pruebas requeridas (inciso b):</strong> En realidad se deben probar los 10,000 números (o 9,999 desde 2 hasta 10,000) descartando pares mayores a 2.</p>" +
+               "<p><strong>Tiempo de ejecución con límite n / 2:</strong> " + tiempoDivDos + " ms</p>" +
+               "<p><strong>Tiempo de ejecución con límite Math.sqrt(n):</strong> <span class='tiempo'>" + tiempoRaiz + " ms</span></p>";
+         } // fin de la función procesarPrimos
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonCalcular = document.getElementById( "botonCalcular" );
+            botonCalcular.addEventListener( "click", procesarPrimos, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Ejercicio 9.19 - Determinación de Números Primos</h1>
+
+      <button id = "botonCalcular">Calcular Primos (1 a 10,000)</button>
+
+      <div class = "contenedor">
+         <div class = "bloque">
+            <label for = "primosEncontrados"><strong>Listado de números primos:</strong></label><br>
+            <textarea id = "primosEncontrados" readonly placeholder = "Haga clic en el botón para calcular..."></textarea>
+         </div>
+      </div>
+
+      <div id = "estadisticas"></div>
+
+      <div class = "explicacion">
+         <h3>¿Por qué sólo necesitamos probar hasta la raíz cuadrada $\sqrt{n}$?</h3>
+         <p>Si un número $n$ es compuesto, se puede expresar como el producto de dos factores $a \cdot b = n$. Si ambos factores fueran mayores que $\sqrt{n}$, entonces $a \cdot b > \sqrt{n} \cdot \sqrt{n} = n$, lo cual es una contradicción. Por lo tanto, al menos uno de los factores debe ser menor o igual a $\sqrt{n}$. Si no se encuentra ningún divisor menor o igual a $\sqrt{n}$, el número es necesariamente primo.</p>
+         <p><strong>Mejora en el rendimiento:</strong> Para $n = 10,000$, evaluar hasta $n/2$ requiere probar hasta $5,000$ divisores en el peor de los casos, mientras que la raíz cuadrada sólo requiere probar hasta $\sqrt{10000} = 100$ divisores, reduciendo los cálculos drásticamente.</p>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.10: ejercicio9_10.html -->
+<!-- Respuestas a preguntas sobre generación de números aleatorios y simulación. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.10 - Conceptos de Aleatoriedad</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+         }
+         section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+         }
+         h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.1em;
+         }
+         p {
+            margin-bottom: 0;
+         }
+      </style>
+   </head>
+   <body>
+
+      <h1>Ejercicio 9.10 - Preguntas Teóricas</h1>
+
+      <section>
+         <h2>a) ¿Qué significa elegir números "al azar"?</h2>
+         <p>Significa seleccionar valores de un conjunto de datos donde todos los resultados posibles tienen la misma probabilidad de ser elegidos, y cada elección es completamente independiente de las elecciones anteriores.</p>
+      </section>
+
+      <section>
+         <h2>b) ¿Por qué es útil la función Math.random para simular juegos de probabilidad?</h2>
+         <p>Porque genera un número de punto flotante seudoaleatorio en el rango de <code>0.0</code> (incluido) a <code>1.0</code> (excluido) con una distribución uniforme, lo que permite modelar eventos estocásticos o de azar (como lanzar dados, girar una ruleta o repartir cartas).</p>
+      </section>
+
+      <section>
+         <h2>c) ¿Por qué es a menudo necesario escalar y/o desplazar los valores producidos por Math.random?</h2>
+         <p>Porque <code>Math.random()</code> solo produce valores en el rango <code>[0, 1)</code>. Se **escala** (multiplicando por el número de valores posibles en el rango) y se **desplaza** (sumando el valor mínimo del rango deseado) para transformar esos decimales en enteros dentro del intervalo específico que requiere la aplicación (por ejemplo, de 1 a 6 para un dado).</p>
+      </section>
+
+      <section>
+         <h2>d) ¿Por qué es la simulación computarizada de situaciones reales una técnica útil?</h2>
+         <p>Porque permite evaluar, predecir y analizar el comportamiento de sistemas complejos o peligrosos del mundo real de manera segura, rápida y económica, sin la necesidad de realizar experimentos físicos costosos, riesgosos o imprácticos.</p>
+      </section>
+
+   </body>
+</html>

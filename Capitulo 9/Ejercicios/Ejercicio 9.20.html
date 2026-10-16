@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.20: ejercicio9_20.html -->
+<!-- Determinación de puntos de calidad según el promedio obtenido mediante la función puntosCalidad. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.20 - Puntos de Calidad</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            border: 1px solid #ddd;
+         }
+         .campo {
+            margin-bottom: 12px;
+         }
+         label {
+            display: inline-block;
+            width: 160px;
+         }
+         input[type="number"] {
+            width: 100px;
+            padding: 4px;
+         }
+         input[type="button"] {
+            padding: 6px 12px;
+            margin-top: 10px;
+         }
+         #resultado {
+            margin-top: 15px;
+            font-size: 1.1em;
+         }
+      </style>
+      <script>
+
+         // función que devuelve los puntos de calidad en función del promedio
+         function puntosCalidad( promedio )
+         {
+            if ( promedio >= 90 && promedio <= 100 )
+               return 4;
+            else if ( promedio >= 80 && promedio <= 89 )
+               return 3;
+            else if ( promedio >= 70 && promedio <= 79 )
+               return 2;
+            else if ( promedio >= 60 && promedio <= 69 )
+               return 1;
+            else
+               return 0;
+         } // fin de la función puntosCalidad
+
+         // procesar la entrada introducida por el usuario
+         function evaluarPromedio()
+         {
+            var campoPromedio = document.getElementById( "promedio" );
+            var promedio = parseFloat( campoPromedio.value );
+            var divResultado = document.getElementById( "resultado" );
+
+            if ( !isNaN( promedio ) && promedio >= 0 && promedio <= 100 )
+            {
+               var puntos = puntosCalidad( promedio );
+               divResultado.innerHTML = "El promedio <strong>" + promedio + 
+                  "</strong> corresponde a <strong>" + puntos + "</strong> puntos de calidad.";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, introduzca un promedio válido entre 0 y 100.</span>";
+            }
+         } // fin de la función evaluarPromedio
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonEvaluar = document.getElementById( "botonEvaluar" );
+            botonEvaluar.addEventListener( "click", evaluarPromedio, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Cálculo de Puntos de Calidad</h1>
+
+      <form action = "#">
+         <div class = "campo">
+            <label for = "promedio">Promedio (0 - 100):</label>
+            <input id = "promedio" type = "number" step = "any" min = "0" max = "100" placeholder = "Ej. 85.5">
+         </div>
+         <input id = "botonEvaluar" type = "button" value = "Calcular Puntos">
+      </form>
+
+      <div id = "resultado"></div>
+
+   </body>
+</html>

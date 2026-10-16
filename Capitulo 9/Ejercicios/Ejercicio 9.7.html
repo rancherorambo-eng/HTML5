@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.7: ejercicio9_7.html -->
+<!-- Cálculo del área de un círculo mediante una función definida por el usuario. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Cálculo del Área de un Círculo</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            margin-bottom: 15px;
+         }
+         label, input {
+            margin-bottom: 10px;
+         }
+      </style>
+      <script>
+
+         // función para calcular el área de un círculo
+         function areaCirculo( radio )
+         {
+            return Math.PI * Math.pow( radio, 2 );
+         } // fin de la función areaCirculo
+
+         // procesar la entrada del usuario
+         function procesarArea()
+         {
+            var campoRadio = document.getElementById( "campoRadio" );
+            var radio = parseFloat( campoRadio.value );
+
+            if ( !isNaN( radio ) && radio >= 0 )
+            {
+               var area = areaCirculo( radio );
+               document.getElementById( "resultado" ).innerHTML = 
+                  "El área del círculo con radio " + radio + " es: <strong>" + 
+                  area.toFixed(2) + "</strong> unidades cuadradas.";
+            }
+            else
+            {
+               document.getElementById( "resultado" ).innerHTML = 
+                  "<span style='color: red;'>Por favor, introduzca un número válido y no negativo.</span>";
+            }
+         } // fin de la función procesarArea
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonCalcular = document.getElementById( "botonCalcular" );
+            botonCalcular.addEventListener( "click", procesarArea, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+      <h1>Cálculo del Área de un Círculo</h1>
+
+      <form action = "#">
+         <label for = "campoRadio">Introduzca el radio del círculo:</label><br>
+         <input id = "campoRadio" type = "number" step = "any" placeholder = "Ej. 5">
+         <input id = "botonCalcular" type = "button" value = "Calcular Área">
+      </form>
+
+      <p id = "resultado"></p>
+   </body>
+</html>

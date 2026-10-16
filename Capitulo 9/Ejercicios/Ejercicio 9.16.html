@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.16: ejercicio9_16.html -->
+<!-- Separación de dígitos de un entero entre 1 y 99999 mediante división entera y módulo. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.16 - Mostrar Dígitos</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         .resultado {
+            font-family: monospace;
+            font-size: 1.3em;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #2c3e50;
+            margin-top: 15px;
+            white-space: pre; /* Mantiene los dos espacios consecutivos de separación */
+         }
+      </style>
+      <script>
+
+         // a) Calcula la parte entera del cociente cuando a se divide entre b
+         function cocienteEntero( a, b )
+         {
+            return Math.floor( a / b );
+         } // fin de la función cocienteEntero
+
+         // b) Calcula el residuo entero cuando a se divide entre b
+         function residuoEntero( a, b )
+         {
+            return a % b;
+         } // fin de la función residuoEntero
+
+         // c) Función que recibe un entero entre 1 y 99999 e imprime sus dígitos separados por dos espacios
+         function mostrarDigitos( valor )
+         {
+            var divisor = 10000; // divisor inicial para números de hasta 5 dígitos
+            var digito;
+            var resultado = "";
+            var comenzoNumero = false;
+
+            // procesar el número dígito por dígito utilizando las funciones de los incisos a y b
+            while ( divisor >= 1 )
+            {
+               digito = cocienteEntero( valor, divisor );
+
+               // omitir ceros a la izquierda excepto cuando el valor sea 0
+               if ( digito !== 0 || comenzoNumero || divisor === 1 )
+               {
+                  resultado += digito + "  "; // dos espacios de separación
+                  comenzoNumero = true;
+               }
+
+               valor = residuoEntero( valor, divisor );
+               divisor = cocienteEntero( divisor, 10 );
+            }
+
+            return resultado;
+         } // fin de la función mostrarDigitos
+
+         // d) Secuencia de comandos que recibe el entero de un diálogo prompt e invoca mostrarDigitos
+         function iniciar()
+         {
+            var entrada = window.prompt( "Escriba un entero entre 1 y 99999:", "4562" );
+            var numero = parseInt( entrada );
+            var divResultado = document.getElementById( "salida" );
+
+            if ( !isNaN( numero ) && numero >= 1 && numero <= 99999 )
+            {
+               divResultado.innerHTML = "Dígitos separados:<br><div class='resultado'>" + 
+                  mostrarDigitos( numero ) + "</div>";
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, introduzca un número entero válido en el rango de 1 a 99999.</span>";
+            }
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Separación de Dígitos de un Entero</h1>
+      <div id = "salida"></div>
+
+   </body>
+</html>

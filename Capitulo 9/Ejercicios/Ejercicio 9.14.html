@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.14: ejercicio9_14.html -->
+<!-- Determinación de si un segundo número es múltiplo del primero mediante una función. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 9.14 - Función Múltiplo</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            border: 1px solid #ddd;
+         }
+         .campo {
+            margin-bottom: 12px;
+         }
+         label {
+            display: inline-block;
+            width: 150px;
+         }
+         input[type="number"] {
+            width: 120px;
+            padding: 4px;
+         }
+         input[type="button"] {
+            padding: 6px 12px;
+            margin-top: 10px;
+         }
+         #resultado {
+            margin-top: 15px;
+            font-size: 1.1em;
+         }
+      </style>
+      <script>
+
+         // función que determina si el segundo entero es múltiplo del primero
+         function multiplo( primero, segundo )
+         {
+            // evita la división entre cero y verifica si el residuo es cero
+            return primero !== 0 && segundo % primero === 0;
+         } // fin de la función multiplo
+
+         // procesar la entrada de enteros del formulario
+         function evaluarMultiplo()
+         {
+            var campoPrimero = document.getElementById( "primerNumero" );
+            var campoSegundo = document.getElementById( "segundoNumero" );
+
+            var primero = parseInt( campoPrimero.value );
+            var segundo = parseInt( campoSegundo.value );
+
+            var divResultado = document.getElementById( "resultado" );
+
+            if ( !isNaN( primero ) && !isNaN( segundo ) )
+            {
+               if ( primero === 0 )
+               {
+                  divResultado.innerHTML = "<span style='color: orange;'>" +
+                     "El primer número no puede ser 0 para calcular múltiplos.</span>";
+               }
+               else if ( multiplo( primero, segundo ) )
+               {
+                  divResultado.innerHTML = "El número <strong>" + segundo + 
+                     "</strong> es múltiplo de <strong>" + primero + "</strong> (devuelve <code>true</code>).";
+               }
+               else
+               {
+                  divResultado.innerHTML = "El número <strong>" + segundo + 
+                     "</strong> NO es múltiplo de <strong>" + primero + "</strong> (devuelve <code>false</code>).";
+               }
+            }
+            else
+            {
+               divResultado.innerHTML = "<span style='color: red;'>" +
+                  "Por favor, ingrese dos números enteros válidos.</span>";
+            }
+         } // fin de la función evaluarMultiplo
+
+         // registrar escuchas de eventos
+         function iniciar()
+         {
+            var botonEvaluar = document.getElementById( "botonEvaluar" );
+            botonEvaluar.addEventListener( "click", evaluarMultiplo, false );
+         } // fin de la función iniciar
+
+         window.addEventListener( "load", iniciar, false );
+
+      </script>
+   </head>
+   <body>
+
+      <h1>Evaluación de Números Múltiplos</h1>
+
+      <form action = "#">
+         <div class = "campo">
+            <label for = "primerNumero">Primer entero:</label>
+            <input id = "primerNumero" type = "number" placeholder = "Ej. 5">
+         </div>
+         <div class = "campo">
+            <label for = "segundoNumero">Segundo entero:</label>
+            <input id = "segundoNumero" type = "number" placeholder = "Ej. 25">
+         </div>
+         <input id = "botonEvaluar" type = "button" value = "Comprobar Múltiplo">
+      </form>
+
+      <div id = "resultado"></div>
+
+   </body>
+</html>
