@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- Fig. 9.9: alcance.html -->
+<!-- Ejemplo de alcance de variables. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejemplo de Alcance</title>
+      <style type = "text/css">
+         p       { margin: 0px; }
+         p.espacio { margin-top: 10px; }
+      </style>
+      <script>
+         var salida; // almacena la cadena que se va a mostrar
+         var x = 1;  // variable global
+
+         function iniciar()
+         {
+            var x = 5; // variable local para la función iniciar
+
+            salida = "<p>x local en iniciar es " + x + "</p>";
+
+            funcionA(); // funcionA tiene x local
+            funcionB(); // funcionB usa la variable global x
+            funcionA(); // funcionA reinicializa la x local
+            funcionB(); // la variable global x conserva su valor
+
+            salida += "<p class='espacio'>x local en iniciar es " + x + 
+               "</p>";
+            document.getElementById( "resultados" ).innerHTML = salida;
+         } // fin de la función iniciar
+
+         function funcionA()
+         {
+            var x = 25; // se inicializa cada vez que se llama a funcionA
+
+            salida += "<p class='espacio'>x local en funcionA es " + x +
+               " al entrar a funcionA</p>";
+            ++x;
+            salida += "<p>x local en funcionA es " + x +
+               " antes de salir de funcionA</p>";
+         } // fin de funcionA
+
+         function funcionB()
+         {
+            salida += "<p class='espacio'>la variable global x es " + x +
+               " al entrar a funcionB</p>";
+            x *= 10;
+            salida += "<p>la variable global x es " + x + 
+               " al salir de funcionB</p>";
+         } // fin de funcionB
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <div id = "resultados"></div>
+   </body>
+</html>

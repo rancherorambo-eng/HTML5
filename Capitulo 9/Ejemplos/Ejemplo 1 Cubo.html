@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 9.2: cubo.html -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Alcance de las variables</title> 
+      <script>
+         var x;
+
+         function mostrar()
+         {
+            for ( x = 1; x <= 10; x++ ) 
+               document.writeln( "<p>" + cubo( x ) + "</p>" );
+         } // fin de la función mostrar
+   
+         function cubo( y )
+         {
+            return y * y * y;
+         } // fin de la función cubo
+
+         window.addEventListener( "load", mostrar, false );
+      </script>
+   </head><body></body>
+</html>
