@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.23</title>
+</head>
+<body>
+    <h1>Conteo de Positivos, Negativos y Ceros</h1>
+    <script>
+        let num1 = parseFloat(window.prompt("Ingrese el primer número:"));
+        let num2 = parseFloat(window.prompt("Ingrese el segundo número:"));
+        let num3 = parseFloat(window.prompt("Ingrese el tercer número:"));
+
+        let positivos = 0;
+        let negativos = 0;
+        let ceros = 0;
+
+        // Evaluación del primer número
+        if (num1 > 0) positivos++;
+        else if (num1 < 0) negativos++;
+        else ceros++;
+
+        // Evaluación del segundo número
+        if (num2 > 0) positivos++;
+        else if (num2 < 0) negativos++;
+        else ceros++;
+
+        // Evaluación del tercer número
+        if (num3 > 0) positivos++;
+        else if (num3 < 0) negativos++;
+        else ceros++;
+
+        document.writeln("<p>Números ingresados: " + num1 + ", " + num2 + ", " + num3 + "</p>");
+        document.writeln("<p><strong>Cantidad de números positivos:</strong> " + positivos + "</p>");
+        document.writeln("<p><strong>Cantidad de números negativos:</strong> " + negativos + "</p>");
+        document.writeln("<p><strong>Cantidad de ceros:</strong> " + ceros + "</p>");
+    </script>
+</body>
+</html>

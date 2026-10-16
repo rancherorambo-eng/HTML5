@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.20</title>
+</head>
+<body>
+    <h1>Menor y Mayor de 5 Números</h1>
+    <script>
+        let n1 = parseInt(window.prompt("Ingrese el primer entero:"), 10);
+        let n2 = parseInt(window.prompt("Ingrese el segundo entero:"), 10);
+        let n3 = parseInt(window.prompt("Ingrese el tercer entero:"), 10);
+        let n4 = parseInt(window.prompt("Ingrese el cuarto entero:"), 10);
+        let n5 = parseInt(window.prompt("Ingrese el quinto entero:"), 10);
+
+        let menor = n1;
+        let mayor = n1;
+
+        if (n2 < menor) menor = n2;
+        if (n2 > mayor) mayor = n2;
+
+        if (n3 < menor) menor = n3;
+        if (n3 > mayor) mayor = n3;
+
+        if (n4 < menor) menor = n4;
+        if (n4 > mayor) mayor = n4;
+
+        if (n5 < menor) menor = n5;
+        if (n5 > mayor) mayor = n5;
+
+        document.writeln("<p>Los enteros ingresados fueron: " + n1 + ", " + n2 + ", " + n3 + ", " + n4 + ", " + n5 + "</p>");
+        document.writeln("<p><strong>El número menor es:</strong> " + menor + "</p>");
+        document.writeln("<p><strong>El número mayor es:</strong> " + mayor + "</p>");
+    </script>
+</body>
+</html>

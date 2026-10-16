@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.22</title>
+</head>
+<body>
+    <h1>Múltiplos</h1>
+    <script>
+        let entrada1 = window.prompt("Escriba el primer entero:");
+        let entrada2 = window.prompt("Escriba el segundo entero:");
+
+        let num1 = parseInt(entrada1, 10);
+        let num2 = parseInt(entrada2, 10);
+
+        if (num2 !== 0 && num1 % num2 === 0) {
+            document.writeln("<p>El número <strong>" + num1 + "</strong> ES múltiplo de <strong>" + num2 + "</strong>.</p>");
+        } else {
+            document.writeln("<p>El número <strong>" + num1 + "</strong> NO es múltiplo de <strong>" + num2 + "</strong>.</p>");
+        }
+    </script>
+</body>
+</html>

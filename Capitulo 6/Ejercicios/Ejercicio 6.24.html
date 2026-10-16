@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.24</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabla de Cuadrados y Cubos</h1>
+    <script>
+        document.writeln("<table>");
+        document.writeln("  <thead>");
+        document.writeln("    <tr>");
+        document.writeln("      <th>número</th>");
+        document.writeln("      <th>cuadrado</th>");
+        document.writeln("      <th>cubo</th>");
+        document.writeln("    </tr>");
+        document.writeln("  </thead>");
+        document.writeln("  <tbody>");
+
+        for (let i = 0; i <= 5; i++) {
+            let cuadrado = i * i;
+            let cubo = i * i * i;
+            document.writeln("    <tr>");
+            document.writeln("      <td>" + i + "</td>");
+            document.writeln("      <td>" + cuadrado + "</td>");
+            document.writeln("      <td>" + cubo + "</td>");
+            document.writeln("    </tr>");
+        }
+
+        document.writeln("  </tbody>");
+        document.writeln("</table>");
+    </script>
+</body>
+</html>

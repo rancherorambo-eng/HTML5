@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.19</title>
+</head>
+<body>
+    <h1>Cálculos del Círculo</h1>
+    <script>
+        let entradaRadio = window.prompt("Escriba el radio del círculo:");
+        let r = parseFloat(entradaRadio);
+
+        let diametro = 2 * r;
+        let circunferencia = 2 * Math.PI * r;
+        let area = Math.PI * Math.pow(r, 2);
+
+        document.writeln("<p><strong>Diámetro:</strong> " + diametro + "</p>");
+        document.writeln("<p><strong>Circunferencia:</strong> " + circunferencia + "</p>");
+        document.writeln("<p><strong>Área:</strong> " + area + "</p>");
+    </script>
+</body>
+</html>

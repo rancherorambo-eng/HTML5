@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.18</title>
+</head>
+<body>
+    <h1>Ejercicio 6.18</h1>
+    <script>
+        let entrada1 = window.prompt("Escriba el primer entero:");
+        let entrada2 = window.prompt("Escriba el segundo entero:");
+        let entrada3 = window.prompt("Escriba el tercer entero:");
+
+        let n1 = parseInt(entrada1, 10);
+        let n2 = parseInt(entrada2, 10);
+        let n3 = parseInt(entrada3, 10);
+
+        let suma = n1 + n2 + n3;
+        let promedio = suma / 3;
+        let producto = n1 * n2 * n3;
+        let menor = Math.min(n1, n2, n3);
+        let mayor = Math.max(n1, n2, n3);
+
+        let mensaje = "Suma: " + suma + "\n" +
+                      "Promedio: " + promedio + "\n" +
+                      "Producto: " + producto + "\n" +
+                      "Menor: " + menor + "\n" +
+                      "Mayor: " + mayor;
+
+        window.alert(mensaje);
+    </script>
+</body>
+</html>

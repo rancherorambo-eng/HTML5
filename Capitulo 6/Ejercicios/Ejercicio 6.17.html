@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6.17</title>
+</head>
+<body>
+    <h1>Comparación de Números</h1>
+    <script>
+        let entrada1 = window.prompt("Introduzca el primer número entero:");
+        let entrada2 = window.prompt("Introduzca el segundo número entero:");
+
+        let n1 = parseInt(entrada1, 10);
+        let n2 = parseInt(entrada2, 10);
+
+        if (n1 > n2) {
+            window.alert(n1 + " es mayor que " + n2);
+        } else if (n2 > n1) {
+            window.alert(n2 + " es mayor que " + n1);
+        } else {
+            document.writeln("<p>Estos números son iguales</p>");
+        }
+    </script>
+</body>
+</html>
