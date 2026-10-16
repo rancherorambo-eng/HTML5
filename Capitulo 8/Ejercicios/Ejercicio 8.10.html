@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.10: ejercicio8_10.html -->
+<!-- Impresión de la canción 'Los Doce Días de Navidad' usando switch y ciclos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Los Doce Días de Navidad</title>
+      <script>
+
+         document.writeln( "<h1>Los Doce Días de Navidad</h1>" );
+
+         for ( var dia = 1; dia <= 12; ++dia )
+         {
+            document.writeln( "<p>En el " );
+
+            // Determinar el día ordinal con un switch
+            switch ( dia )
+            {
+               case 1:  document.write( "primer" ); break;
+               case 2:  document.write( "segundo" ); break;
+               case 3:  document.write( "tercer" ); break;
+               case 4:  document.write( "cuarto" ); break;
+               case 5:  document.write( "quinto" ); break;
+               case 6:  document.write( "sexto" ); break;
+               case 7:  document.write( "séptimo" ); break;
+               case 8:  document.write( "octavo" ); break;
+               case 9:  document.write( "noveno" ); break;
+               case 10: document.write( "décimo" ); break;
+               case 11: document.write( "undécimo" ); break;
+               case 12: document.write( "duodécimo" ); break;
+            }
+
+            document.writeln( " día de Navidad mi amor me mandó:<br>" );
+
+            // Acumular los regalos usando fall-through en el switch
+            switch ( dia )
+            {
+               case 12: document.writeln( "Doce tamborileros tamborileando,<br>" );
+               case 11: document.writeln( "Once gaiteros tocando,<br>" );
+               case 10: document.writeln( "Diez señores saltando,<br>" );
+               case 9:  document.writeln( "Nueve damas bailando,<br>" );
+               case 8:  document.writeln( "Ocho sirvientas ordeñando,<br>" );
+               case 7:  document.writeln( "Siete cisnes nadando,<br>" );
+               case 6:  document.writeln( "Seis seis ocas empollando,<br>" );
+               case 5:  document.writeln( "Cinco anillos de oro,<br>" );
+               case 4:  document.writeln( "Cuatro pájaros cantando,<br>" );
+               case 3:  document.writeln( "Tres gallinas francesas,<br>" );
+               case 2:  document.writeln( "Dos tórtolas y<br>" );
+               case 1:
+                  if ( dia === 1 )
+                     document.writeln( "Una perdiz en un peral." );
+                  else
+                     document.writeln( "Una perdiz en un peral." );
+                  break;
+            }
+
+            document.writeln( "</p><hr>" );
+         } // fin de for
+
+      </script>
+   </head><body></body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.12: ejercicio8_12.html -->
+<!-- Evaluación de expresiones lógicas con i = 1, j = 2, k = 3, m = 2. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Evaluación de Expresiones Lógicas</title>
+      <style type = "text/css">
+         body { font-family: monospace; font-size: 1.1em; line-height: 1.6; }
+         .explicacion { font-family: sans-serif; color: #555; margin-bottom: 10px; }
+      </style>
+      <script>
+
+         var i = 1;
+         var j = 2;
+         var k = 3;
+         var m = 2;
+
+         document.writeln( "<h1>Resultados del Ejercicio 8.12</h1>" );
+         document.writeln( "<p><strong>Valores iniciales:</strong> i = 1, j = 2, k = 3, m = 2</p><hr>" );
+
+         document.writeln( "<p>a) document.writeln( i == 1 ); <br><strong>Resultado:</strong> " + ( i == 1 ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? No.</p>" );
+
+         document.writeln( "<p>b) document.writeln( j == 3 ); <br><strong>Resultado:</strong> " + ( j == 3 ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? No.</p>" );
+
+         document.writeln( "<p>c) document.writeln( i >= 1 && j < 4 ); <br><strong>Resultado:</strong> " + ( i >= 1 && j < 4 ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? No.</p>" );
+
+         document.writeln( "<p>d) document.writeln( m <= 99 && k < m ); <br><strong>Resultado:</strong> " + ( m <= 99 && k < m ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? No.</p>" );
+
+         document.writeln( "<p>e) document.writeln( j >= i || k == m ); <br><strong>Resultado:</strong> " + ( j >= i || k == m ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? No.</p>" );
+
+         document.writeln( "<p>f) document.writeln( k + m < j || 3 - j >= k ); <br><strong>Resultado:</strong> " + ( k + m < j || 3 - j >= k ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? No.</p>" );
+
+         document.writeln( "<p>g) document.writeln( !( k > m ) ); <br><strong>Resultado:</strong> " + ( !( k > m ) ) + "</p>" );
+         document.writeln( "<p class='explicacion'>¿Paréntesis necesarios? Sí, para evaluar la comparación antes de la negación.</p>" );
+
+      </script>
+   </head><body></body>
+</html>

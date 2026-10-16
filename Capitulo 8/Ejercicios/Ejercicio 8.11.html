@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.11: ejercicio8_11.html -->
+<!-- Cálculo del valor total de ventas de un minorista en línea. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Calculadora de Ventas Minoristas</title>
+      <style type = "text/css">
+         table         { border-collapse: collapse; width: 400px; font-family: sans-serif; }
+         table, th, td { border: 1px solid black; padding: 8px; }
+         th            { background-color: #2c3e50; color: white; text-align: center; }
+         td            { text-align: right; }
+         td.producto   { text-align: center; }
+      </style>
+      <script>
+
+         var producto; // número de producto (1-5)
+         var cantidad; // cantidad vendida
+         var precio; // precio unitario del producto
+         var totalProducto1 = 0, totalProducto2 = 0, totalProducto3 = 0, totalProducto4 = 0, totalProducto5 = 0;
+         var totalVentas = 0;
+
+         // Solicitar el primer número de producto (centinela = -1 para salir)
+         producto = parseInt( window.prompt( "Introduzca el número de producto (1-5) [-1 para salir]:", "1" ) );
+
+         while ( producto !== -1 )
+         {
+            if ( producto >= 1 && producto <= 5 )
+            {
+               cantidad = parseInt( window.prompt( "Introduzca la cantidad vendida durante el día:", "1" ) );
+
+               if ( !isNaN( cantidad ) && cantidad > 0 )
+               {
+                  // Determinar precio usando la instrucción switch
+                  switch ( producto )
+                  {
+                     case 1:
+                        precio = 2.98;
+                        totalProducto1 += precio * cantidad;
+                        break;
+                     case 2:
+                        precio = 4.50;
+                        totalProducto2 += precio * cantidad;
+                        break;
+                     case 3:
+                        precio = 9.98;
+                        totalProducto3 += precio * cantidad;
+                        break;
+                     case 4:
+                        precio = 4.49;
+                        totalProducto4 += precio * cantidad;
+                        break;
+                     case 5:
+                        precio = 6.87;
+                        totalProducto5 += precio * cantidad;
+                        break;
+                  }
+               }
+               else
+               {
+                  alert( "Cantidad no válida. Intente nuevamente." );
+               }
+            }
+            else
+            {
+               alert( "Número de producto no válido. Debe ser del 1 al 5." );
+            }
+
+            // Solicitar el siguiente número de producto
+            producto = parseInt( window.prompt( "Introduzca el número de producto (1-5) [-1 para salir]:", "1" ) );
+         } // fin de while
+
+         totalVentas = totalProducto1 + totalProducto2 + totalProducto3 + totalProducto4 + totalProducto5;
+
+         // Producir tabla HTML5 con los resultados
+         document.writeln( "<h1>Resumen de Ventas de la Semana</h1>" );
+         document.writeln( "<table>" );
+         document.writeln( "<thead><tr><th>Producto</th><th>Precio Unitario</th><th>Total Vendido</th></tr></thead>" );
+         document.writeln( "<tbody>" );
+         document.writeln( "<tr><td class='producto'>Producto 1</td><td>$2.98</td><td>$" + totalProducto1.toFixed(2) + "</td></tr>" );
+         document.writeln( "<tr><td class='producto'>Producto 2</td><td>$4.50</td><td>$" + totalProducto2.toFixed(2) + "</td></tr>" );
+         document.writeln( "<tr><td class='producto'>Producto 3</td><td>$9.98</td><td>$" + totalProducto3.toFixed(2) + "</td></tr>" );
+         document.writeln( "<tr><td class='producto'>Producto 4</td><td>$4.49</td><td>$" + totalProducto4.toFixed(2) + "</td></tr>" );
+         document.writeln( "<tr><td class='producto'>Producto 5</td><td>$6.87</td><td>$" + totalProducto5.toFixed(2) + "</td></tr>" );
+         document.writeln( "<tr><th colspan='2'>TOTAL GENERAL</th><th>$" + totalVentas.toFixed(2) + "</th></tr>" );
+         document.writeln( "</tbody></table>" );
+
+      </script>
+   </head><body></body>
+</html>

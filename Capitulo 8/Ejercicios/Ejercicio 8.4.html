@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<!-- Ejercicio 8.4: ejercicio8_4.html -->
+<!-- Corrección de errores en varios segmentos de código. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Ejercicio 8.4 - Soluciones</title>
+      <style type = "text/css">
+         body {
+            font-family: sans-serif;
+            margin: 20px;
+         }
+         section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+         }
+         h2 {
+            margin-top: 0;
+            color: #2c3e50;
+         }
+      </style>
+   </head>
+   <body>
+
+      <section>
+         <h2>Inciso a) Cuenta regresiva del 100 al 1</h2>
+         <script>
+            // Corrección: 'for' en minúscula, ';' en lugar de ',', y '--x' para decrementar
+            for ( var x = 100; x >= 1; --x )
+               document.write( x + " " );
+         </script>
+      </section>
+
+      <section>
+         <h2>Inciso b) Evaluación Par / Impar con switch</h2>
+         <script>
+            var valor = 4; // Variable de prueba
+
+            document.writeln( "<p>Valor de prueba: " + valor + "</p>" );
+
+            // Corrección: Adición de la instrucción 'break' en cada 'case'
+            switch ( valor % 2 )
+            {
+               case 0:
+                  document.writeln( "<p>Entero par</p>" );
+                  break;
+               case 1:
+                  document.writeln( "<p>Entero impar</p>" );
+                  break;
+            }
+         </script>
+      </section>
+
+      <section>
+         <h2>Inciso c) Impresión de impares del 19 al 1</h2>
+         <script>
+            // Corrección: 'x -= 2' para decrementar de 2 en 2 en cada iteración
+            for ( var x = 19; x >= 1; x -= 2 )
+               document.write( x + " " );
+         </script>
+      </section>
+
+      <section>
+         <h2>Inciso d) Impresión de pares del 2 al 100 con do...while</h2>
+         <script>
+            var contador = 2;
+
+            // Corrección: 'while' en minúscula, condición '<=' y declaración de variable
+            do {
+               document.write( contador + " " );
+               contador += 2;
+            } while ( contador <= 100 );
+         </script>
+      </section>
+
+   </body>
+</html>

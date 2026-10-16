@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.9: ejercicio8_9.html -->
+<!-- Dibujo de histogramas usando asteriscos. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Gráficos de Barras</title>
+      <style type = "text/css">
+         body { font-family: monospace; }
+      </style>
+      <script>
+
+         var numero;
+
+         document.writeln( "<h1>Histogramas de Asteriscos</h1>" );
+
+         for ( var i = 1; i <= 5; ++i )
+         {
+            numero = parseInt( window.prompt( "Introduzca el número " + i + " de 5 (entre 1 y 30):", "1" ) );
+
+            // Validar que el número esté en el rango [1, 30]
+            while ( isNaN( numero ) || numero < 1 || numero > 30 )
+            {
+               numero = parseInt( window.prompt( "Número inválido. Introduzca un entero entre 1 y 30:", "1" ) );
+            }
+
+            document.writeln( "<p>" + numero + ": " );
+
+            // Imprimir la cantidad correspondiente de asteriscos
+            for ( var j = 1; j <= numero; ++j )
+            {
+               document.write( "*" );
+            }
+
+            document.writeln( "</p>" );
+         } // fin de for
+
+      </script>
+   </head><body></body>
+</html>

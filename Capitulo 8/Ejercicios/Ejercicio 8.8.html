@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<!-- Fig. 8.8: ejercicio8_8.html -->
+<!-- Cálculo del interés compuesto variando las tasas del 5% al 10%. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Cálculo de Interés Compuesto para Múltiples Tasas</title>
+      <style type = "text/css">
+         table         { width: 300px;
+                         border-collapse: collapse; 
+                         background-color: lightblue;
+                         margin-bottom: 20px; }
+         table, td, th { border: 1px solid black; 
+                         padding: 4px; }
+         th            { text-align: left; 
+                         color: white;
+                         background-color: darkblue; }
+         tr.oddrow     { background-color: white; }
+      </style>
+      <script>
+
+         var monto; // monto actual de dinero
+         var principal = 1000.00; // monto principal
+
+         // Ciclo externo para variar la tasa de interés de 5% (0.05) a 10% (0.10)
+         for ( var tasaEntera = 5; tasaEntera <= 10; ++tasaEntera )
+         {
+            var tasa = tasaEntera / 100.0;
+
+            document.writeln( "<table>" );
+            document.writeln( "<caption>Cálculo de Interés Compuesto al " + tasaEntera + "%</caption>" );
+            document.writeln( "<thead><tr><th>Año</th><th>Monto en depósito</th></tr></thead><tbody>" );
+
+            for ( var anio = 1; anio <= 10; ++anio )
+            {
+               monto = principal * Math.pow( 1.0 + tasa, anio );
+
+               if ( anio % 2 !== 0 )
+                  document.writeln( "<tr class='oddrow'><td>" + anio + "</td><td>" + monto.toFixed(2) + "</td></tr>" );
+               else
+                  document.writeln( "<tr><td>" + anio + "</td><td>" + monto.toFixed(2) + "</td></tr>" );
+            } // fin de for interno
+
+            document.writeln( "</tbody></table>" );
+         } // fin de for externo
+
+      </script>
+   </head><body></body>
+</html>
