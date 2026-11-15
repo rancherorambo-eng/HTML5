@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.13 - Conteo de Carácter (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 500px; height: 100px; }
+        input { padding: 5px; width: 50px; text-align: center; }
+        button { padding: 8px 15px; cursor: pointer; margin-top: 10px; display: block; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.13: Buscar Ocurrencias con indexOf</h1>
+    
+    <label for="txtTexto">Texto:</label><br>
+    <textarea id="txtTexto" placeholder="Ingrese texto de varias líneas..."></textarea><br><br>
+
+    <label for="inputCar">Carácter a buscar:</label>
+    <input type="text" id="inputCar" maxlength="1" value="a">
+    
+    <button id="btnBuscar">Calcular Ocurrencias</button>
+
+    <h3 id="resultado"></h3>
+
+    <script>
+        document.getElementById('btnBuscar').addEventListener('click', function() {
+            let texto = document.getElementById('txtTexto').value;
+            let caracter = document.getElementById('inputCar').value;
+
+            if (caracter === "") {
+                alert("Ingrese un carácter válido.");
+                return;
+            }
+
+            let contador = 0;
+            let posicion = texto.indexOf(caracter);
+
+            // Usar indexOf de forma repetida para encontrar todas las ocurrencias
+            while (posicion !== -1) {
+                contador++;
+                posicion = texto.indexOf(caracter, posicion + 1);
+            }
+
+            document.getElementById('resultado').textContent = 
+                `El carácter "${caracter}" aparece ${contador} vez/veces en el texto.`;
+        });
+    </script>
+</body>
+</html>

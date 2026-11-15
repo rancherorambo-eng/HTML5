@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.25 - Monto de Cheque | Práctica</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #fafafa;
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eaeaea;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #111;
+        }
+        p.subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 16px;
+        }
+        input[type="number"]:focus {
+            border-color: #111;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f4f4f5;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #111;
+            display: none;
+            word-break: break-word;
+        }
+        .result.error {
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+
+<div class="card">
+    <h2>Conversión de Cheque</h2>
+    <p class="subtitle">Ejercicio 11.25 - Monto a palabras</p>
+    
+    <label for="monto">Monto numérico:</label>
+    <input type="number" id="monto" step="0.01" min="0" placeholder="Ej. 112.43">
+    
+    <button onclick="convertirMonto()">Convertir</button>
+
+    <div id="resultado" class="result"></div>
+</div>
+
+<script>
+    const UNIDADES = ['', 'UN', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+    const DECENAS_ESPECIALES = ['DIEZ', 'ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISEIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
+    const DECENAS = ['', '', 'VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+    const CENTENAS = ['', 'CIENTO', 'DOSCIENTOS', 'TRESCIENTOS', 'CUATROCIENTOS', 'QUINIENTOS', 'SEISCIENTOS', 'SETECIENTOS', 'OCHO CIENTOS', 'NOVECIENTOS'];
+
+    function numeroALetras(n) {
+        if (n === 0) return 'CERO';
+        if (n === 100) return 'CIEN';
+        let letras = '';
+        if (Math.floor(n / 100) > 0) {
+            letras += CENTENAS[Math.floor(n / 100)] + ' ';
+            n %= 100;
+        }
+        if (n >= 10 && n <= 19) {
+            letras += DECENAS_ESPECIALES[n - 10] + ' ';
+            n = 0;
+        } else if (n >= 20 && n <= 29) {
+            letras += (n === 20 ? 'VEINTE ' : 'VEINTI' + UNIDADES[n % 10] + ' ');
+            n = 0;
+        } else if (n >= 30) {
+            letras += DECENAS[Math.floor(n / 10)];
+            if (n % 10 > 0) letras += ' Y ' + UNIDADES[n % 10];
+            letras += ' ';
+            n = 0;
+        }
+        if (n > 0) letras += UNIDADES[n] + ' ';
+        return letras.trim();
+    }
+
+    function procesarSeccion(num) {
+        return num === 0 ? '' : numeroALetras(num);
+    }
+
+    function convertirMonto() {
+        const val = parseFloat(document.getElementById('monto').value);
+        const divResultado = document.getElementById('resultado');
+        divResultado.style.display = 'block';
+        divResultado.className = 'result';
+
+        if (isNaN(val) || val < 0) {
+            divResultado.classList.add('error');
+            divResultado.innerText = 'Por favor, ingrese un monto válido.';
+            return;
+        }
+
+        let entero = Math.floor(val);
+        let centavos = Math.round((val - entero) * 100);
+        if (centavos < 10) centavos = '0' + centavos;
+
+        let textoEntero = '';
+        if (entero === 0) {
+            textoEntero = 'CERO';
+        } else {
+            let millones = Math.floor(entero / 1000000);
+            let miles = Math.floor((entero % 1000000) / 1000);
+            let cientos = entero % 1000;
+
+            if (millones > 0) {
+                textoEntero += (millones === 1 ? 'UN MILLON ' : procesarSeccion(millones) + ' MILLONES ');
+            }
+            if (miles > 0) {
+                textoEntero += (miles === 1 ? 'UN MIL ' : procesarSeccion(miles) + ' MIL ');
+            }
+            if (cientos > 0) {
+                textoEntero += procesarSeccion(cientos);
+            }
+        }
+
+        divResultado.innerText = `${textoEntero.trim()} CON ${centavos}/100`;
+    }
+</script>
+
+</body>
+</html>

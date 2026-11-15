@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.16 - Cadenas que terminan con 'ed' (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 500px; height: 120px; }
+        button { padding: 8px 15px; cursor: pointer; margin-top: 10px; display: block; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.16: Filtrar por terminación "ed"</h1>
+    <p>Ingrese varias palabras o líneas (separadas por salto de línea):</p>
+    
+    <textarea id="txtEntrada" placeholder="finished\nwalking\nplayed\njumped\nrunning"></textarea>
+    <button id="btnFiltrar">Filtrar Cadenas</button>
+
+    <h3>Resultado:</h3>
+    <textarea id="txtSalida" readonly></textarea>
+
+    <script>
+        document.getElementById('btnFiltrar').addEventListener('click', function() {
+            let texto = document.getElementById('txtEntrada').value;
+            let lineas = texto.split('\n');
+            let filtradas = [];
+
+            for (let i = 0; i < lineas.length; i++) {
+                let linea = lineas[i].trim();
+                // Verificar si termina con 'ed' o 'ED'
+                if (linea.toLowerCase().endsWith('ed')) {
+                    filtradas.push(linea);
+                }
+            }
+
+            document.getElementById('txtSalida').value = filtradas.join('\n');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.3 - Funciones de Math (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 700px; height: 350px; font-family: monospace; font-size: 13px; }
+        button { padding: 10px 15px; margin-top: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.3: Evaluación de la biblioteca Math</h1>
+    <p>Haz clic en el botón para generar las tablas de valores de retorno de las funciones de la Figura 11.1[cite: 10, 11].</p>
+    
+    <button id="btnEvaluar">Generar Tablas Math</button><br><br>
+    
+    <textarea id="txtResultados" placeholder="Los resultados aparecerán aquí..."></textarea>
+
+    <script>
+        document.getElementById('btnEvaluar').addEventListener('click', function() {
+            let salida = "";
+
+            // Función auxiliar para formatear la salida en tabla de texto
+            function probarFuncion(nombre, fn, valores) {
+                salida += `--- Método: Math.${nombre} ---\n`;
+                valores.forEach(v => {
+                    let res = Array.isArray(v) ? fn(...v) : fn(v);
+                    let argStr = Array.isArray(v) ? v.join(', ') : v;
+                    salida += `  Math.${nombre}(${argStr}) = ${typeof res === 'number' && !Number.isInteger(res) ? res.toFixed(4) : res}\n`;
+                });
+                salida += "\n";
+            }
+
+            probarFuncion("abs", Math.abs, [-7.2, 0, 5.6]);
+            probarFuncion("ceil", Math.ceil, [9.2, -9.8, 5.1]);
+            probarFuncion("cos", Math.cos, [0, Math.PI / 2, Math.PI]);
+            probarFuncion("exp", Math.exp, [1, 2]);
+            probarFuncion("floor", Math.floor, [9.2, -9.8, 5.7]);
+            probarFuncion("log", Math.log, [1, 2.718282, 7.389056]);
+            probarFuncion("max", Math.max, [[2.3, 12.7], [-2.3, -12.7]]);
+            probarFuncion("min", Math.min, [[2.3, 12.7], [-2.3, -12.7]]);
+            probarFuncion("pow", Math.pow, [[2, 7], [9, 0.5]]);
+            probarFuncion("round", Math.round, [9.75, 9.25, -4.6]);
+            probarFuncion("sin", Math.sin, [0, Math.PI / 2]);
+            probarFuncion("sqrt", Math.sqrt, [900, 9, 2]);
+            probarFuncion("tan", Math.tan, [0, 1]);
+
+            document.getElementById('txtResultados').value = salida;
+        });
+    </script>
+</body>
+</html>

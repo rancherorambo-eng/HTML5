@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.7 - Generador de Historias (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 700px; height: 300px; font-family: monospace; font-size: 14px; }
+        button { padding: 10px 15px; cursor: pointer; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.7: Generador de Historias Aleatorias</h1>
+    <p>Haz clic en el botón para generar una historia corta de 20 oraciones.</p>
+    
+    <button id="btnGenerar">Generar Historia</button><br>
+    <textarea id="txtHistoria" placeholder="La historia aparecerá aquí..."></textarea>
+
+    <script>
+        const articulo = ["el", "un", "algún", "ningún"][cite: 16];
+        const sustantivo = ["niño", "niña", "perro", "ciudad", "auto"][cite: 16];
+        const verbo = ["manejó", "saltó", "corrió", "caminó", "omitió"][cite: 16];
+        const preposicion = ["a", "desde", "encima de", "debajo de", "sobre"][cite: 16];
+
+        function obtenerAleatorio(arr) {
+            let indice = Math.floor(Math.random() * arr.length);
+            return arr[indice];
+        }
+
+        document.getElementById('btnGenerar').addEventListener('click', function() {
+            let historia = "Había una vez...\n\n";[cite: 16]
+
+            for (let i = 0; i < 20; i++) {[cite: 16]
+                let art1 = obtenerAleatorio(articulo);
+                let sus1 = obtenerAleatorio(sustantivo);
+                let verb = obtenerAleatorio(verbo);
+                let prep = obtenerAleatorio(preposicion);
+                let art2 = obtenerAleatorio(articulo);
+                let sus2 = obtenerAleatorio(sustantivo);
+
+                // Construir la oración: artículo, sustantivo, verbo, preposición, artículo, sustantivo
+                let oracion = `${art1} ${sus1} ${verb} ${prep} ${art2} ${sus2}`;[cite: 16]
+                
+                // Empezar con letra mayúscula y terminar con punto[cite: 16]
+                oracion = oracion.charAt(0).toUpperCase() + oracion.slice(1) + ".";[cite: 16]
+
+                historia += oracion + "\n";
+            }
+
+            historia += "\nFIN";[cite: 16]
+
+            document.getElementById('txtHistoria').value = historia;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.10 - Teléfono (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .campo { margin-bottom: 10px; }
+        label { display: inline-block; width: 180px; }
+        input { padding: 5px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.10: Formato de Teléfono</h1>
+    <p>Ingrese un número telefónico con el formato <code>(555)555-5555</code>:</p>
+    
+    <div class="campo">
+        <label for="telefonoInput">Número completo:</label>
+        <input type="text" id="telefonoInput" placeholder="(555)555-5555" value="(123)456-7890">
+        <button id="btnProcesar">Procesar</button>
+    </div>
+    
+    <div class="campo">
+        <label for="txtArea">Código de área:</label>
+        <input type="text" id="txtArea" readonly>
+    </div>
+    
+    <div class="campo">
+        <label for="txtSieteDigitos">Número de 7 dígitos:</label>
+        <input type="text" id="txtSieteDigitos" readonly>
+    </div>
+
+    <script>
+        document.getElementById('btnProcesar').addEventListener('click', function() {
+            let tel = document.getElementById('telefonoInput').value;
+
+            // Utilizar el método split para separar usando paréntesis y guion como delimitadores
+            // Entrada típica: "(555)555-5555" -> tokens tras split(/[\(\)\-]/): ["", "555", "555", "5555"]
+            let tokens = tel.split(/[\(\)\-]/);
+
+            if (tokens.length >= 4) {
+                let codigoArea = tokens[1];
+                let primerosTres = tokens[2];
+                let ultimosCuatro = tokens[3];
+
+                document.getElementById('txtArea').value = codigoArea;
+                document.getElementById('txtSieteDigitos').value = primerosTres + "-" + ultimosCuatro;
+            } else {
+                alert("Formato incorrecto. Use (555)555-5555");
+            }
+        });
+    </script>
+</body>
+</html>

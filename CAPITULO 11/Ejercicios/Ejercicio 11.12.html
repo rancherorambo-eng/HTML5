@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.12 - Mayúsculas y Minúsculas (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        input { padding: 5px; width: 300px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .resultado { margin-top: 15px; background: #f4f4f4; padding: 15px; border-radius: 5px; width: 400px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.12: Convertir Mayúsculas y Minúsculas</h1>
+    
+    <form id="formTexto">
+        <input type="text" id="inputTexto" placeholder="Escriba algo aquí..." required>
+        <button type="submit">Convertir</button>
+    </form>
+
+    <div class="resultado" id="divResultado">
+        El resultado aparecerá aquí.
+    </div>
+
+    <script>
+        document.getElementById('formTexto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let texto = document.getElementById('inputTexto').value;
+
+            document.getElementById('divResultado').innerHTML = `
+                <p><strong>Original:</strong> ${texto}</p>
+                <p><strong>Mayúsculas:</strong> ${texto.toUpperCase()}</p>
+                <p><strong>Minúsculas:</strong> ${texto.toLowerCase()}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

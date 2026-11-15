@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.6 - Comparación de Cadenas (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .campo { margin-bottom: 10px; }
+        label { display: inline-block; width: 140px; }
+        input[type="text"] { padding: 5px; width: 200px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .resultado { margin-top: 15px; background: #eef; padding: 15px; border-radius: 5px; width: 400px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.6: Comparación de Objetos String</h1>
+    <p>Ingrese dos cadenas para compararlas alfabéticamente (orden léxicográfico):</p>
+    
+    <form id="formComparar">
+        <div class="campo">
+            <label for="cadena1">Primera cadena:</label>
+            <input type="text" id="cadena1" required>
+        </div>
+        <div class="campo">
+            <label for="cadena2">Segunda cadena:</label>
+            <input type="text" id="cadena2" required>
+        </div>
+        <button type="submit">Comparar Cadenas</button>
+    </form>
+
+    <div class="resultado" id="divResultado">
+        Ingrese las cadenas y presione Comparar.
+    </div>
+
+    <script>
+        document.getElementById('formComparar').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let str1 = document.getElementById('cadena1').value;
+            let str2 = document.getElementById('cadena2').value;
+            let mensaje = "";
+
+            if (str1 < str2) {
+                mensaje = `"${str1}" es <strong>MENOR que</strong> "${str2}"`;
+            } else if (str1 > str2) {
+                mensaje = `"${str1}" es <strong>MAYOR que</strong> "${str2}"`;
+            } else {
+                mensaje = `"${str1}" es <strong>IGUAL a</strong> "${str2}"`;
+            }
+
+            document.getElementById('divResultado').innerHTML = `
+                <p><strong>Resultado:</strong> ${mensaje}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

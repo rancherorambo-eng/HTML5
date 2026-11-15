@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.19 - Propio indexOf (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .campo { margin-bottom: 10px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { padding: 6px; width: 350px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .resultado { margin-top: 15px; background: #f4f4f4; padding: 15px; border-radius: 5px; width: 400px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.19: Implementación personalizada de indexOf</h1>
+    
+    <form id="formIndex">
+        <div class="campo">
+            <label for="cadenaPrincipal">Cadena principal:</label>
+            <input type="text" id="cadenaPrincipal" value="programacion web avanzada" required>
+        </div>
+        <div class="campo">
+            <label for="subcadena">Subcadena a buscar:</label>
+            <input type="text" id="subcadena" value="web" required>
+        </div>
+        <button type="submit">Buscar Índice</button>
+    </form>
+
+    <div class="resultado" id="divResultado">
+        Ingrese los datos y presione Buscar.
+    </div>
+
+    <script>
+        // Versión propia del método indexOf
+        function miIndexOf(str, busqueda) {
+            let n = str.length;
+            let m = busqueda.length;
+
+            if (m === 0) return 0;
+            if (m > n) return -1;
+
+            for (let i = 0; i <= n - m; i++) {
+                let coincide = true;
+                for (let j = 0; j < m; j++) {
+                    if (str.charAt(i + j) !== busqueda.charAt(j)) {
+                        coincide = false;
+                        break;
+                    }
+                }
+                if (coincide) {
+                    return i; // Retorna el índice de la primera coincidencia
+                }
+            }
+            return -1; // Si no se encuentra
+        }
+
+        document.getElementById('formIndex').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let principal = document.getElementById('cadenaPrincipal').value;
+            let busqueda = document.getElementById('subcadena').value;
+
+            let indicePersonalizado = miIndexOf(principal, busqueda);
+            let indiceNativo = principal.indexOf(busqueda);
+
+            document.getElementById('divResultado').innerHTML = `
+                <p><strong>Resultado con miIndexOf:</strong> ${indicePersonalizado}</p>
+                <p><strong>Resultado con String.indexOf nativo:</strong> ${indiceNativo}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

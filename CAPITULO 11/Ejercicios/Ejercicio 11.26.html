@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11.26 - Conversión Métrica | Práctica</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #fafafa;
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eaeaea;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #111;
+        }
+        p.subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 16px;
+        }
+        input[type="text"]:focus {
+            border-color: #111;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .hints {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #666;
+            background: #f9f9fb;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .hints ul {
+            margin-left: 18px;
+            margin-top: 4px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f4f4f5;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #111;
+            display: none;
+        }
+        .result.error {
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+
+<div class="card">
+    <h2>Conversión Métrica</h2>
+    <p class="subtitle">Ejercicio 11.26 - Asistente de preguntas</p>
+    
+    <label for="pregunta">Escribe tu pregunta:</label>
+    <input type="text" id="pregunta" placeholder="Ej. ¿Cuántas pulgadas hay en 2 metros?">
+    
+    <button onclick="procesarPregunta()">Consultar</button>
+
+    <div class="hints">
+        <strong>Ejemplos útiles:</strong>
+        <ul>
+            <li>¿Cuántas pulgadas hay en 2 metros?</li>
+            <li>¿Cuántos litros hay en 10 cuartos?</li>
+            <li>¿Cuántos pies hay en 5 kilogramos? (Inválido)</li>
+        </ul>
+    </div>
+
+    <div id="resultado" class="result"></div>
+</div>
+
+<script>
+    const UNIDADES = {
+        'metro': { tipo: 'longitud', factor: 1 },
+        'metros': { tipo: 'longitud', factor: 1 },
+        'centimetro': { tipo: 'longitud', factor: 0.01 },
+        'centimetros': { tipo: 'longitud', factor: 0.01 },
+        'kilometro': { tipo: 'longitud', factor: 1000 },
+        'kilometros': { tipo: 'longitud', factor: 1000 },
+        'pulgada': { tipo: 'longitud', factor: 0.0254 },
+        'pulgadas': { tipo: 'longitud', factor: 0.0254 },
+        'pie': { tipo: 'longitud', factor: 0.3048 },
+        'pies': { tipo: 'longitud', factor: 0.3048 },
+        'milla': { tipo: 'longitud', factor: 1609.34 },
+        'millas': { tipo: 'longitud', factor: 1609.34 },
+
+        'gramo': { tipo: 'masa', factor: 1 },
+        'gramos': { tipo: 'masa', factor: 1 },
+        'kilogramo': { tipo: 'masa', factor: 1000 },
+        'kilogramos': { tipo: 'masa', factor: 1000 },
+        'libra': { tipo: 'masa', factor: 453.592 },
+        'libras': { tipo: 'masa', factor: 453.592 },
+        'onza': { tipo: 'masa', factor: 28.3495 },
+        'onzas': { tipo: 'masa', factor: 28.3495 },
+
+        'litro': { tipo: 'volumen', factor: 1 },
+        'litros': { tipo: 'volumen', factor: 1 },
+        'mililitro': { tipo: 'volumen', factor: 0.001 },
+        'mililitros': { tipo: 'volumen', factor: 0.001 },
+        'cuarto': { tipo: 'volumen', factor: 0.946353 },
+        'cuartos': { tipo: 'volumen', factor: 0.946353 },
+        'galon': { tipo: 'volumen', factor: 3.78541 },
+        'galones': { tipo: 'volumen', factor: 3.78541 }
+    };
+
+    function procesarPregunta() {
+        const texto = document.getElementById('pregunta').value.toLowerCase().trim();
+        const divResultado = document.getElementById('resultado');
+        divResultado.style.display = 'block';
+        divResultado.className = 'result';
+
+        const regex = /cuántos?a?s?\s+([a-z]+)\s+hay\s+en\s+([\d.]+)\s+([a-z]+)/i;
+        const coincidencia = texto.match(regex);
+
+        if (!coincidencia) {
+            divResultado.classList.add('error');
+            divResultado.innerHTML = '<strong>Formato no reconocido.</strong> Usa una estructura como: <em>"¿Cuántas pulgadas hay en 2 metros?"</em>';
+            return;
+        }
+
+        const unidadDestinoStr = coincidencia[1];
+        const cantidad = parseFloat(coincidencia[2]);
+        const unidadOrigenStr = coincidencia[3];
+
+        const uOrigen = UNIDADES[unidadOrigenStr];
+        const uDestino = UNIDADES[unidadDestinoStr];
+
+        if (!uOrigen || !uDestino) {
+            divResultado.classList.add('error');
+            divResultado.innerHTML = `<strong>Unidad no encontrada:</strong> Una de las unidades ingresadas no es válida.`;
+            return;
+        }
+
+        if (uOrigen.tipo !== uDestino.tipo) {
+            divResultado.classList.add('error');
+            divResultado.innerHTML = `<strong>Conversión Inválida:</strong> No se puede convertir ${unidadOrigenStr} (${uOrigen.tipo}) a ${unidadDestinoStr} (${uDestino.tipo}).`;
+            return;
+        }
+
+        const valorEnBase = cantidad * uOrigen.factor;
+        const resultadoFinal = valorEnBase / uDestino.factor;
+
+        divResultado.innerHTML = `<strong>Resultado:</strong> Hay <strong>${resultadoFinal.toFixed(4)}</strong> ${unidadDestinoStr} en ${cantidad} ${unidadOrigenStr}.`;
+    }
+</script>
+
+</body>
+</html>

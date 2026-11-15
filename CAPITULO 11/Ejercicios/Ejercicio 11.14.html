@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.14 - Conteo del Alfabeto (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 600px; height: 200px; font-family: monospace; }
+        button { padding: 8px 15px; cursor: pointer; margin-top: 10px; display: block; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.14: Conteo de Letras del Alfabeto</h1>
+    
+    <label for="txtTexto">Ingrese texto:</label><br>
+    <textarea id="txtTexto" placeholder="Ingrese texto aquí..."></textarea>
+    
+    <button id="btnAnalizar">Analizar Frecuencias</button>
+
+    <h3>Resultados en formato tabular:</h3>
+    <textarea id="txtResultados" readonly></textarea>
+
+    <script>
+        document.getElementById('btnAnalizar').addEventListener('click', function() {
+            let texto = document.getElementById('txtTexto').value.toLowerCase();
+            
+            // Arreglo de 26 elementos para contar de la 'a' a la 'z'
+            let conteos = Array(26).fill(0);
+
+            for (let i = 0; i < texto.length; i++) {
+                let codigo = texto.charCodeAt(i);
+                // Verificar si es una letra minúscula entre 'a' (97) y 'z' (122)
+                if (codigo >= 97 && codigo <= 122) {
+                    let indice = codigo - 97;
+                    conteos[indice]++;
+                }
+            }
+
+            let salida = "Letra\t|\tFrecuencia\n----------------------------------\n";
+            for (let i = 0; i < 26; i++) {
+                let letra = String.fromCharCode(97 + i).toUpperCase();
+                salida += `  ${letra}  \t|\t   ${conteos[i]}\n`;
+            }
+
+            document.getElementById('txtResultados').value = salida;
+        });
+    </script>
+</body>
+</html>

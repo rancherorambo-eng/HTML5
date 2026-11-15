@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.9 - Latín Cerdo (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .campo { margin-bottom: 10px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { padding: 8px; width: 400px; }
+        button { padding: 8px 15px; cursor: pointer; }
+        textarea { width: 100%; max-width: 600px; height: 150px; font-family: monospace; font-size: 14px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.9: Traductor a Latín Cerdo</h1>
+    <p>Ingrese un enunciado en español para traducirlo a latín cerdo[cite: 16].</p>
+    
+    <form id="formLatinCerdo">
+        <div class="campo">
+            <label for="fraseInput">Frase en español:</label>
+            <input type="text" id="fraseInput" placeholder="Ej. el niño salta con el auto" required>
+        </div>
+        <button type="submit">Traducir a Latín Cerdo</button>
+    </form>
+
+    <h3>Resultado en Latín Cerdo:</h3>
+    <textarea id="txtResultado" placeholder="El resultado aparecerá aquí..."></textarea>
+
+    <script>
+        // Función que procesa cada palabra individualmente
+        function imprimirPalabraEnLatin(palabra) {
+            if (!palabra || palabra.length === 0) return "";
+            if (palabra.length === 1) return palabra + "ae";
+
+            let primera = palabra.charAt(0);
+            let resto = palabra.slice(1);
+            return resto + primera + "ae"; // Coloca la primera letra al final y agrega "ae"[cite: 16]
+        }
+
+        document.getElementById('formLatinCerdo').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let frase = document.getElementById('fraseInput').value.trim();
+            if (frase === "") return;
+
+            // Divide la frase en palabras usando split de String[cite: 16]
+            let palabras = frase.split(/\s+/);
+            let palabrasLatin = [];
+
+            for (let i = 0; i < palabras.length; i++) {
+                // Pasa cada token a la función de conversión
+                palabrasLatin.push(imprimirPalabraEnLatin(palabras[i].toLowerCase()));
+            }
+
+            let resultadoFinal = palabrasLatin.join(" "); // Los espacios en blanco permanecen[cite: 16]
+            document.getElementById('txtResultado').value = resultadoFinal;
+        });
+    </script>
+</body>
+</html>

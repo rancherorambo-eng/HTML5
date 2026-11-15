@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.18 - Códigos 000 a 255 (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 600px; height: 250px; font-family: monospace; }
+        button { padding: 8px 15px; cursor: pointer; margin-bottom: 10px; display: block; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.18: Generar Códigos del 000 al 255</h1>
+    <p>Haz clic en el botón para generar la lista completa de caracteres en formato tabular.</p>
+    
+    <button id="btnGenerar">Generar Tabla de Caracteres</button>
+    <textarea id="txtResultados" readonly placeholder="Los resultados aparecerán aquí..."></textarea>
+
+    <script>
+        document.getElementById('btnGenerar').addEventListener('click', function() {
+            let salida = "Código\t|\tCarácter\n-----------------------------\n";
+
+            for (let i = 0; i <= 255; i++) {
+                // Formatear el número con ceros a la izquierda para que tenga 3 dígitos (000 a 255)
+                let codigoStr = String(i).padStart(3, '0');
+                let caracter = String.fromCharCode(i);
+                
+                // Manejar caracteres de control invisibles o saltos de línea para que no rompan la visualización
+                let charDisplay = (i < 32 || i === 127) ? "[control]" : caracter;
+
+                salida += `  ${codigoStr}\t|\t   ${charDisplay}\n`;
+            }
+
+            document.getElementById('txtResultados').value = salida;
+        });
+    </script>
+</body>
+</html>

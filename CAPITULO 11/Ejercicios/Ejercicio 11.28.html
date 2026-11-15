@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.28 - Generador de Crucigramas | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+
+    <h2>Generador de Crucigramas</h2>
+    
+    <p>Haz clic en el botón para generar una cuadrícula de crucigrama básica con palabras cruzadas de ejemplo.</p>
+    
+    <button onclick="generarCrucigrama()">Generar Crucigrama</button>
+
+    <h3>Tablero:</h3>
+    <div id="tablero"></div>
+
+    <script>
+        function generarCrucigrama() {
+            // 1. Representación de la cuadrícula con un arreglo con doble subíndice (10x10)
+            let filas = 10;
+            let columnas = 10;
+            let cuadricula = [];
+
+            // Inicializar la matriz con espacios vacíos
+            for (let i = 0; i < filas; i++) {
+                cuadricula[i] = [];
+                for (let j = 0; j < columnas; j++) {
+                    cuadricula[i][j] = "";
+                }
+            }
+
+            // 2. Fuente de palabras y colocación en la cuadrícula (ejemplo sencillo)
+            // Palabra 1: "PROGRAMA" horizontal en la fila 2, columna 1
+            let palabra1 = "PROGRAMA";
+            let f1 = 2, c1 = 1;
+            for (let i = 0; i < palabra1.length; i++) {
+                cuadricula[f1][c1 + i] = palabra1[i];
+            }
+
+            // Palabra 2: "GRAFICO" vertical cruzando con la 'G' de programa (columna 4)
+            let palabra2 = "GRAFICO";
+            let f2 = 0, c2 = 4;
+            for (let i = 0; i < palabra2.length; i++) {
+                cuadricula[f2 + i][c2] = palabra2[i];
+            }
+
+            // 3. Mostrar la cuadrícula en HTML usando una tabla simple
+            let html = "<table border='1' cellspacing='0' cellpadding='5' style='text-align:center; font-family:monospace;'>";
+            for (let i = 0; i < filas; i++) {
+                html += "<tr>";
+                for (let j = 0; j < columnas; j++) {
+                    let letra = cuadricula[i][j];
+                    // Si está vacío mostramos un espacio en blanco o guion bajo para celda vacía
+                    let contenido = letra !== "" ? letra : "&nbsp;&nbsp;";
+                    let fondo = letra !== "" ? "#f0f0f0" : "#ffffff";
+                    html += `<td style="width:30px; height:30px; background-color:${fondo};">${contenido}</td>`;
+                }
+                html += "</tr>";
+            }
+            html += "</table>";
+
+            document.getElementById("tablero").innerHTML = html;
+        }
+    </script>
+
+</body>
+</html>

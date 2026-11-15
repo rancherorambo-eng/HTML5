@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.11 - Tokens Inversos (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        input { padding: 5px; width: 350px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .resultado { margin-top: 15px; background: #f4f4f4; padding: 15px; border-radius: 5px; width: 400px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.11: Tokens en Orden Inverso</h1>
+    <p>Ingrese una línea de texto para dividirla y mostrarla en orden inverso:</p>
+    
+    <input type="text" id="textoInput" placeholder="Ej. Uno dos tres cuatro">
+    <button id="btnInvertir">Invertir Tokens</button>
+
+    <div class="resultado" id="divResultado">
+        El resultado aparecerá aquí.
+    </div>
+
+    <script>
+        document.getElementById('btnInvertir').addEventListener('click', function() {
+            let texto = document.getElementById('textoInput').value.trim();
+            if (texto === "") return;
+
+            // Dividir la línea en tokens por espacios usando split
+            let tokens = texto.split(/\s+/);
+            
+            // Invertir el orden de los tokens
+            let tokensInversos = tokens.reverse();
+
+            document.getElementById('divResultado').innerHTML = `
+                <strong>Tokens en orden inverso:</strong><br>
+                ${tokensInversos.join(' ')}
+            `;
+        });
+    </script>
+</body>
+</html>

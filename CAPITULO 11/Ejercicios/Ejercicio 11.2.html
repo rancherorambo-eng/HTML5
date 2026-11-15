@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.2 - Fechas y Horas (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.2: Alertas de Fecha y Hora</h1>
+    <p>Haz clic en cada botón para ver la fecha y hora correspondiente[cite: 10]:</p>
+
+    <button id="btnAhora">Ahora</button>
+    <button id="btnAyer">Ayer</button>
+    <button id="btnDiezAnios">Hace 10 años</button>
+    <button id="btnUnaSemana">Hace una semana</button>
+
+    <script>
+        // Botón Ahora: Hora y fecha actuales[cite: 10]
+        document.getElementById('btnAhora').addEventListener('click', function() {
+            let ahora = new Date();
+            alert("Fecha y hora actuales:\n" + ahora.toLocaleString());
+        });
+
+        // Botón Ayer: Fecha y hora hace 24 horas[cite: 10]
+        document.getElementById('btnAyer').addEventListener('click', function() {
+            let ayer = new Date();
+            ayer.setTime(ayer.getTime() - (24 * 60 * 60 * 1000)); // Restar 24 horas en milisegundos
+            alert("Fecha y hora hace 24 horas (Ayer):\n" + ayer.toLocaleString());
+        });
+
+        // Botón Hace 10 años[cite: 10]
+        document.getElementById('btnDiezAnios').addEventListener('click', function() {
+            let fecha = new Date();
+            fecha.setFullYear(fecha.getFullYear() - 10);
+            alert("Fecha y hora hace 10 años:\n" + fecha.toLocaleString());
+        });
+
+        // Botón Hace una semana[cite: 10]
+        document.getElementById('btnUnaSemana').addEventListener('click', function() {
+            let fecha = new Date();
+            fecha.setDate(fecha.getDate() - 7);
+            alert("Fecha y hora hace una semana:\n" + fecha.toLocaleString());
+        });
+    </script>
+</body>
+</html>

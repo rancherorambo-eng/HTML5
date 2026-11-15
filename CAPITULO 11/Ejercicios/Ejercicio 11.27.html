@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.27 - Corrector Ortografico | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+
+    <h2>Corrector Ortográfico</h2>
+    
+    <p>Introduce una palabra para verificar:</p>
+    
+    <input type="text" id="palabraUsuario">
+    <button onclick="verificarPalabra()">Verificar</button>
+
+    <h3>Resultado:</h3>
+    <div id="resultado"></div>
+
+    <script>
+        // Arreglo listaDePalabras requerido por el ejercicio
+        const listaDePalabras = ["predeterminado", "util", "cumpleaños", "casa", "perro", "gato", "programa"];
+
+        function verificarPalabra() {
+            let palabra = document.getElementById("palabraUsuario").value.toLowerCase().trim();
+            let divResultado = document.getElementById("resultado");
+            
+            if (palabra === "") {
+                divResultado.innerHTML = "Por favor, introduce una palabra.";
+                return;
+            }
+
+            // 1. Comprobar si la palabra está directamente en el arreglo
+            if (listaDePalabras.includes(palabra)) {
+                divResultado.innerHTML = "La palabra está escrita correctamente.";
+                return;
+            } else {
+                divResultado.innerHTML = "La palabra no está escrita correctamente.<br>";
+            }
+
+            // 2. Buscar sugerencias (transposiciones de letras adyacentes)
+            let sugerencias = [];
+            
+            for (let i = 0; i < palabra.length - 1; i++) {
+                // Crear una copia de la palabra como arreglo de caracteres
+                let letras = palabra.split("");
+                
+                // Intercambiar letras adyacentes (transposición)
+                let temp = letras[i];
+                letras[i] = letras[i + 1];
+                letras[i + 1] = temp;
+                
+                let palabraModificada = letras.join("");
+                
+                // Si la palabra modificada existe en la lista y no está ya en sugerencias
+                if (listaDePalabras.includes(palabraModificada) && !sugerencias.includes(palabraModificada)) {
+                    sugerencias.push(palabraModificada);
+                }
+            }
+
+            // Mostrar sugerencias si las hay
+            if (sugerencias.length > 0) {
+                divResultado.innerHTML += "¿Quiso decir: " + sugerencias.join(", ") + "?";
+            } else {
+                divResultado.innerHTML += "No se encontraron sugerencias cercanas.";
+            }
+        }
+    </script>
+
+</body>
+</html>

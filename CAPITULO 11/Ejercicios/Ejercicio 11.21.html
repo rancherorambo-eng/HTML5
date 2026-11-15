@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.21 - Combinaciones de 3 Letras (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        input { padding: 6px; width: 150px; text-transform: lowercase; }
+        button { padding: 6px 12px; cursor: pointer; }
+        textarea { width: 100%; max-width: 500px; height: 200px; font-family: monospace; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.21: Derivaciones de 3 Letras</h1>
+    <p>Ingrese una palabra exactamente de 5 letras (ej. <code>trigo</code>):</p>
+    
+    <input type="text" id="palabraInput" maxlength="5" value="trigo">
+    <button id="btnGenerar">Generar Combinaciones</button>
+
+    <h3>Palabras de 3 letras generadas:</h3>
+    <textarea id="txtResultados" readonly placeholder="Los resultados aparecerán aquí..."></textarea>
+
+    <script>
+        document.getElementById('btnGenerar').addEventListener('click', function() {
+            let palabra = document.getElementById('palabraInput').value.toLowerCase().trim();
+
+            if (palabra.length !== 5) {
+                alert("La palabra debe tener exactamente 5 letras.");
+                return;
+            }
+
+            let combinacionesSet = new Set();
+            let letras = palabra.split('');
+
+            // Generar permutaciones/combinaciones de 3 letras distintas tomadas de las 5
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    if (i === j) continue;
+                    for (let k = 0; k < 5; k++) {
+                        if (k === i || k === j) continue;
+
+                        let comb = letras[i] + letras[j] + letras[k];
+                        combinacionesSet.add(comb);
+                    }
+                }
+            }
+
+            let lista = Array.from(combinacionesSet);
+            document.getElementById('txtResultados').value = 
+                `Total encontradas: ${lista.length}\n\n` + lista.join(', ');
+        });
+    </script>
+</body>
+</html>

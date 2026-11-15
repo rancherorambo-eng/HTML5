@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.22 - Formatos de Fecha (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .campo { margin-bottom: 10px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="date"] { padding: 6px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .resultado { margin-top: 15px; background: #f4f4f4; padding: 15px; border-radius: 5px; width: 500px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.22: Formatos de Fecha con Objeto Date</h1>
+    
+    <form id="formFecha">
+        <div class="campo">
+            <label for="inputFecha">Seleccione una fecha:</label>
+            <input type="date" id="inputFecha" required>
+        </div>
+        <button type="submit">Mostrar Formatos</button>
+    </form>
+
+    <div class="resultado" id="divResultados">
+        Seleccione una fecha y presione el botón.
+    </div>
+
+    <script>
+        // Establecer fecha por defecto hoy
+        document.getElementById('inputFecha').valueAsDate = new Date();
+
+        document.getElementById('formFecha').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valorFecha = document.getElementById('inputFecha').value;
+
+            if (!valorFecha) return;
+
+            // Crear objeto Date (asegurando zona horaria local correcta separando año, mes, día)
+            let partes = valorFecha.split('-');
+            let fechaObj = new Date(partes[0], partes[1] - 1, partes[2]);
+
+            let html = `
+                <p><strong>toString():</strong> ${fechaObj.toString()}</p>
+                <p><strong>toDateString():</strong> ${fechaObj.toDateString()}</p>
+                <p><strong>toLocaleDateString():</strong> ${fechaObj.toLocaleDateString()}</p>
+                <p><strong>toISOString():</strong> ${fechaObj.toISOString()}</p>
+                <p><strong>toUTCString():</strong> ${fechaObj.toUTCString()}</p>
+            `;
+
+            document.getElementById('divResultados').innerHTML = html;
+        });
+    </script>
+</body>
+</html>

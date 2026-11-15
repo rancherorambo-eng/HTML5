@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.17 - Código a Carácter (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        input { padding: 5px; width: 100px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .resultado { margin-top: 15px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.17: Entero a Carácter</h1>
+    <p>Ingrese un código entero (por ejemplo, 65 para 'A'):</p>
+    
+    <input type="number" id="codigoInput" placeholder="65" value="65">
+    <button id="btnConvertir">Mostrar Carácter</button>
+
+    <div class="resultado" id="divResultado"></div>
+
+    <script>
+        document.getElementById('btnConvertir').addEventListener('click', function() {
+            let codigo = parseInt(document.getElementById('codigoInput').value);
+
+            if (isNaN(codigo)) {
+                alert("Por favor ingrese un número entero válido.");
+                return;
+            }
+
+            let caracter = String.fromCharCode(codigo);
+
+            document.getElementById('divResultado').innerHTML = 
+                `El carácter correspondiente al código <strong>${codigo}</strong> es: <strong style="color: blue;">${caracter}</strong>`;
+        });
+    </script>
+</body>
+</html>

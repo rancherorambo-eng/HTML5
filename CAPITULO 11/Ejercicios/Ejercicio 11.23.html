@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.23 (c) - Ocurrencias de Palabras Distintas (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 600px; height: 100px; }
+        button { padding: 8px 15px; cursor: pointer; margin-top: 10px; display: block; }
+        table { border-collapse: collapse; margin-top: 15px; width: 400px; }
+        th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.23 (c): Ocurrencias de Palabras Distintas</h1>
+    <p>Ingrese texto para contar las ocurrencias de cada palabra distinta[cite: 20]:</p>
+    
+    <textarea id="txtTexto" placeholder="Ej. Ser o no ser: ese es el dilema..."></textarea>
+    <button id="btnAnalizar">Analizar Palabras Distintas</button>
+
+    <div id="resultadoTabla"></div>
+
+    <script>
+        document.getElementById('btnAnalizar').addEventListener('click', function() {
+            let texto = document.getElementById('txtTexto').value.toLowerCase();
+            let palabrasLimpias = texto.replace(/[^\wáéíóúÁÉÍÓÚñÑ]/g, ' ').trim();
+            
+            if (palabrasLimpias === "") {
+                document.getElementById('resultadoTabla').innerHTML = "<p>No se encontraron palabras.</p>";
+                return;
+            }
+
+            let palabras = palabrasLimpias.split(/\s+/);
+            
+            // Almacenar conteos manteniendo orden de aparición
+            let mapaPalabras = new Map();
+            for (let p of palabras) {
+                if (p.length > 0) {
+                    mapaPalabras.set(p, (mapaPalabras.get(p) || 0) + 1);
+                }
+            }
+
+            let html = "<h3>Orden en el que aparecen:</h3>";
+            html += "<table><tr><th>Palabra</th><th>Ocurrencias</th></tr>";
+            for (let [palabra, freq] of mapaPalabras) {
+                html += `<tr><td><strong>${palabra}</strong></td><td>${freq}</td></tr>`;
+            }
+            html += "</table>";
+
+            // Mostrar también en orden alfabético
+            let palabrasOrdenadas = Array.from(mapaPalabras.keys()).sort();
+            html += "<h3>Orden alfabético:</h3>";
+            html += "<table><tr><th>Palabra</th><th>Ocurrencias</th></tr>";
+            for (let palabra of palabrasOrdenadas) {
+                html += `<tr><td><strong>${palabra}</strong></td><td>${mapaPalabras.get(palabra)}</td></tr>`;
+            }
+            html += "</table>";
+
+            document.getElementById('resultadoTabla').innerHTML = html;
+        });
+    </script>
+</body>
+</html>

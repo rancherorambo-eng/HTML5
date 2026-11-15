@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 11.8 - Generador de Quintillas (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        textarea { width: 100%; max-width: 600px; height: 150px; font-family: monospace; font-size: 14px; }
+        button { padding: 10px 15px; cursor: pointer; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 11.8: Generador de Quintillas Humorísticas</h1>
+    <p>Una quintilla es un verso humorístico de cinco líneas estructurado al azar[cite: 16].</p>
+    
+    <button id="btnQuintilla">Generar Quintilla</button><br>
+    <textarea id="txtQuintilla" placeholder="La quintilla aparecerá aquí..."></textarea>
+
+    <script>
+        const rimaA1 = [
+            "Un gato travieso en el tejato",
+            "El perro marrón miraba un plato",
+            "Caminaba el niño sin zapato",
+            "Saltaba la niña con su trato"
+        ];
+        const rimaA2 = [
+            "comía galletas de buen rato",
+            "buscaba en la calle un arrebato",
+            "corría veloz como un novato",
+            "cantaba alegre en el retrato"
+        ];
+        const rimaA5 = [
+            "y al final se durmió en el trato",
+            "lo encontró de un salto muy ingrato",
+            "terminando por romper el plato",
+            "sin que le importara un buen barato"
+        ];
+        const rimaB3 = [
+            "La linda vecina",
+            "Cruzando la esquina",
+            "Compró medicina"
+        ];
+        const rimaB4 = [
+            "miraba la rina",
+            "perdió su letrina",
+            "comió mandarina"
+        ];
+
+        function obtenerAleatorio(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        document.getElementById('btnQuintilla').addEventListener('click', function() {
+            let linea1 = obtenerAleatorio(rimaA1);
+            let linea2 = obtenerAleatorio(rimaA2);
+            let linea3 = obtenerAleatorio(rimaB3);
+            let linea4 = obtenerAleatorio(rimaB4);
+            let linea5 = obtenerAleatorio(rimaA5);
+
+            let quintilla = `${linea1},\n${linea2},\n${linea3},\n${linea4},\n${linea5}.`;
+
+            document.getElementById('txtQuintilla').value = quintilla;
+        });
+    </script>
+</body>
+</html>
