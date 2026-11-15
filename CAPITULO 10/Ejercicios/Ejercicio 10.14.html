@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.14 - Deitel | Práctica</title>
+    <style>
+        table { border-collapse: collapse; margin-top: 10px; margin-bottom: 20px; }
+        th, td { border: 1px solid #bbb; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.14: Simulación de tiro de dos dados (36,000 veces)</h1>
+    <button id="btnSimular">Ejecutar Simulación de Dados</button>
+    <div id="resultadoSimulacion"></div>
+
+    <script>
+        document.getElementById('btnSimular').addEventListener('click', function() {
+            // Arreglo bidimensional para registrar las combinaciones [dado1][dado2] (tamaño 7x7)
+            let combinaciones = Array.from({ length: 7 }, () => Array(7).fill(0));
+            // Arreglo para calcular la frecuencia de cada suma posible (de 2 a 12)
+            let frecuenciasSuma = Array(13).fill(0);
+
+            const totalTiros = 36000;
+
+            for (let i = 0; i < totalTiros; i++) {
+                let dado1 = Math.floor(Math.random() * 6) + 1;
+                let dado2 = Math.floor(Math.random() * 6) + 1;
+                
+                combinaciones[dado1][dado2]++;
+                let suma = dado1 + dado2;
+                frecuenciasSuma[suma]++;
+            }
+
+            // Formas teóricas para comparar razonabilidad
+            let formasTeoricas = [0, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1];
+
+            // Mostrar resultados en tabla HTML5
+            let html = "<h3>Frecuencia de las Sumas (2 al 12) en 36,000 tiros:</h3>";
+            html += "<table><tr><th>Suma</th><th>Frecuencia Observada</th><th>Porcentaje Aprox.</th><th>Formas Teóricas</th></tr>";
+            
+            for (let s = 2; s <= 12; s++) {
+                let porcentaje = ((frecuenciasSuma[s] / totalTiros) * 100).toFixed(2);
+                html += `<tr><td><strong>${s}</strong></td><td>${frecuenciasSuma[s]}</td><td>${porcentaje}%</td><td>${formasTeoricas[s]} / 36</td></tr>`;
+            }
+            html += "</table>";
+
+            html += "<h3>Arreglo Bidimensional de Combinaciones (Dado 1 x Dado 2):</h3>";
+            html += "<table><tr><th>D1 \\ D2</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>";
+            for (let r = 1; r <= 6; r++) {
+                html += `<tr><th>${r}</th>`;
+                for (let c = 1; c <= 6; c++) {
+                    html += `<td>${combinaciones[r][c]}</td>`;
+                }
+                html += "</tr>";
+            }
+            html += "</table>";
+
+            document.getElementById('resultadoSimulacion').innerHTML = html;
+        });
+    </script>
+</body>
+</html>

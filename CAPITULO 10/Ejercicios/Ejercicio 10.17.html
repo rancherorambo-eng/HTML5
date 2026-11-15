@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.17 - La tortuga y la liebre (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        pre { background: #1e1e1e; color: #00ff00; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 16px; }
+        button { padding: 10px 15px; cursor: pointer; margin-right: 10px; }
+        #panelControles { margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.17: Simulación de La Tortuga y la Liebre</h1>
+    <p>La carrera consta de 70 posiciones. Presione iniciar para ver el avance paso a paso[cite: 8, 9].</p>
+    
+    <div id="panelControles">
+        <button id="btnIniciar">Iniciar Carrera Automática</button>
+        <button id="btnPaso">Siguiente Tic (Paso a paso)</button>
+        <button id="btnReiniciar">Reiniciar</button>
+    </div>
+
+    <h3>Pista de Carrera (70 posiciones):</h3>
+    <pre id="pistaCarrera">PUM!!!\nY ARRANCAN!!!</pre>
+    <h3 id="mensajeGanador" style="color: #d9534f;"></h3>
+
+    <script>
+        let posTortuga = 1;
+        let posLiebre = 1;
+        let temporizador = null;
+        let carreraIniciada = false;
+
+        const btnIniciar = document.getElementById('btnIniciar');
+        const btnPaso = document.getElementById('btnPaso');
+        const btnReiniciar = document.getElementById('btnReiniciar');
+        const pistaPre = document.getElementById('pistaCarrera');
+        const ganadorH3 = document.getElementById('mensajeGanador');
+
+        function reiniciarCarrera() {
+            clearInterval(temporizador);
+            posTortuga = 1;
+            posLiebre = 1;
+            carreraIniciada = false;
+            ganadorH3.textContent = "";
+            pistaPre.textContent = "PUM!!!\nY ARRANCAN!!!";
+            btnIniciar.disabled = false;
+            btnPaso.disabled = false;
+        }
+
+        function ejecutarTic() {
+            if (!carreraIniciada) {
+                carreraIniciada = true;
+                ganadorH3.textContent = "";
+            }
+
+            // --- MOVIMIENTO DE LA TORTUGA ---
+            let iTortuga = Math.floor(Math.random() * 10) + 1; // 1 al 10
+            if (iTortuga >= 1 && iTortuga <= 5) {
+                posTortuga += 3; // Paso pesado rápido (50%)[cite: 8]
+            } else if (iTortuga >= 6 && iTortuga <= 7) {
+                posTortuga -= 6; // Resbalón (20%)[cite: 8]
+            } else {
+                posTortuga += 1; // Paso pesado lento (30%)[cite: 8]
+            }
+
+            // --- MOVIMIENTO DE LA LIEBRE ---
+            let iLiebre = Math.floor(Math.random() * 10) + 1; // 1 al 10
+            if (iLiebre >= 1 && iLiebre <= 2) {
+                // Dormir (20%) - Ningún movimiento[cite: 9]
+            } else if (iLiebre >= 3 && iLiebre <= 4) {
+                posLiebre += 9; // Gran salto (20%)[cite: 9]
+            } else if (iLiebre === 5) {
+                posLiebre -= 12; // Gran resbalón (10%)[cite: 9]
+            } else if (iLiebre >= 6 && iLiebre <= 8) {
+                posLiebre += 1; // Pequeño salto (30%)[cite: 9]
+            } else {
+                posLiebre -= 2; // Pequeño resbalón (20%)[cite: 9]
+            }
+
+            // Restricciones de límites (no menor a la posición 1)[cite: 9]
+            if (posTortuga < 1) posTortuga = 1;
+            if (posLiebre < 1) posLiebre = 1;
+
+            // Construir la pista de 70 posiciones
+            let pista = Array(70).fill(' ');
+            let mensajeExtra = "";
+
+            if (posTortuga === posLiebre) {
+                if (posTortuga < 70) {
+                    pista[posTortuga - 1] = 'OUCH!!!'; // Ocupa espacio extra visualmente o se marca
+                    mensajeExtra = "\nOUCH!!! La tortuga muerde a la liebre en la posición " + posTortuga;
+                }
+            } else {
+                if (posTortuga <= 70) pista[posTortuga - 1] = 'T';
+                if (posLiebre <= 70) pista[posLiebre - 1] = 'H';
+            }
+
+            // Si ambos rebasan la meta visualmente
+            let textoPista = pista.join('');
+            pistaPre.textContent = textoPista + mensajeExtra;
+
+            // Comprobar condiciones de victoria (llegar a 70 o más)[cite: 9]
+            if (posTortuga >= 70 && posLiebre >= 70) {
+                ganadorH3.textContent = "¡Es un empate!";
+                finalizarCarrera();
+            } else if (posTortuga >= 70) {
+                ganadorH3.textContent = "LA TORTUGA GANA!!! YAY!!!";
+                finalizarCarrera();
+            } else if (posLiebre >= 70) {
+                ganadorH3.textContent = "La liebre gana. Que mal.";
+                finalizarCarrera();
+            }
+        }
+
+        function finalizarCarrera() {
+            clearInterval(temporizador);
+            btnIniciar.disabled = true;
+            btnPaso.disabled = true;
+        }
+
+        btnIniciar.addEventListener('click', function() {
+            if (!temporizador) {
+                temporizador = setInterval(ejecutarTic, 1000); // Un tic por segundo[cite: 8]
+            }
+        });
+
+        btnPaso.addEventListener('click', function() {
+            ejecutarTic();
+        });
+
+        btnReiniciar.addEventListener('click', function() {
+            reiniciarCarrera();
+        });
+    </script>
+</body>
+</html>

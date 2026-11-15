@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.13 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.13: Orden de elementos en el arreglo ventas (3x5)</h1>
+    <p>Segmento de programa analizado[cite: 3]:</p>
+    <pre>
+for ( var fila in ventas )
+{
+    for ( var col in ventas[ fila ] )
+    {
+        ventas[ fila ][ col ] = 0;
+    }
+}
+    </pre>
+
+    <h2>Orden en el que se establecen en cero:</h2>
+    <p>Debido a los ciclos anidados <code>for...in</code>, el ciclo externo recorre cada una de las filas (<code>0</code>, <code>1</code> y <code>2</code>) y el ciclo interno recorre cada una de las columnas (<code>0</code> a <code>4</code>) secuencialmente:</p>
+    
+    <ol>
+        <li><code>ventas[0][0]</code></li>
+        <li><code>ventas[0][1]</code></li>
+        <li><code>ventas[0][2]</code></li>
+        <li><code>ventas[0][3]</code></li>
+        <li><code>ventas[0][4]</code></li>
+        <li><code>ventas[1][0]</code></li>
+        <li><code>ventas[1][1]</code></li>
+        <li><code>ventas[1][2]</code></li>
+        <li><code>ventas[1][3]</code></li>
+        <li><code>ventas[1][4]</code></li>
+        <li><code>ventas[2][0]</code></li>
+        <li><code>ventas[2][1]</code></li>
+        <li><code>ventas[2][2]</code></li>
+        <li><code>ventas[2][3]</code></li>
+        <li><code>ventas[2][4]</code></li>
+    </ol>
+</body>
+</html>

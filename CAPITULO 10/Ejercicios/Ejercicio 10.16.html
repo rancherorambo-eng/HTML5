@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.16 - La criba de Eratóstenes (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 15px; cursor: pointer; margin-bottom: 15px; }
+        #resultados { background: #f4f4f4; padding: 15px; border-radius: 5px; max-height: 300px; overflow-y: auto; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.16: La criba de Eratóstenes</h1>
+    <p>Encuentra y muestra todos los números primos entre 1 y 999 usando un arreglo de 1000 elementos[cite: 7].</p>
+    
+    <button id="btnEjecutar">Ejecutar Criba de Eratóstenes</button>
+
+    <h3>Números Primos Encontrados:</h3>
+    <div id="resultados">Presione el botón para ejecutar el algoritmo.</div>
+
+    <script>
+        document.getElementById('btnEjecutar').addEventListener('click', function() {
+            const n = 1000;
+            // a) Cree un arreglo con todos los elementos inicializados en 1 (true)[cite: 7]
+            let arreglo = new Array(n).fill(1);
+
+            // b) Establezca los primeros dos elementos en cero, ya que 0 y 1 no son primos[cite: 7]
+            arreglo[0] = 0;
+            arreglo[1] = 0;
+
+            // Empezando con el índice 2 del arreglo, iterar y tachar múltiplos asignando 0[cite: 7]
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (arreglo[i] === 1) {
+                    // Asignar cero a todo elemento cuyo índice sea múltiplo del índice actual
+                    for (let j = i * i; j < n; j += i) {
+                        arreglo[j] = 0;
+                    }
+                }
+            }
+
+            // Recolectar índices que aún conservan el valor 1 (números primos)[cite: 7]
+            let primosEncontrados = [];
+            for (let i = 0; i < n; i++) {
+                if (arreglo[i] === 1) {
+                    primosEncontrados.push(i);
+                }
+            }
+
+            // Mostrar resultados en la página
+            document.getElementById('resultados').innerHTML = 
+                `<strong>Total de primos encontrados entre 1 y 999:</strong> ${primosEncontrados.length}<br><br>` +
+                `<strong>Primos:</strong> ${primosEncontrados.join(', ')}`;
+        });
+    </script>
+</body>
+</html>

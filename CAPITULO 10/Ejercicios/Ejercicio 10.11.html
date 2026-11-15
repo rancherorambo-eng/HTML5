@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.11 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.11: Operaciones con Arreglos Unidimensionales</h1>
+    <div id="salida"></div>
+
+    <script>
+        const salida = document.getElementById('salida');
+
+        // a) Establecer los 10 elementos del arreglo cuentas en ceros.
+        let cuentas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        for (let i = 0; i < cuentas.length; i++) {
+            cuentas[i] = 0;
+        }
+        salida.innerHTML += `<p><strong>a)</strong> Arreglo <code>cuentas</code> con ceros: [${cuentas.join(', ')}]</p>`;
+
+        // b) Sumar 1 a cada uno de los 15 elementos del arreglo bono.
+        let bono = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75];
+        for (let i = 0; i < bono.length; i++) {
+            bono[i] += 1;
+        }
+        salida.innerHTML += `<p><strong>b)</strong> Arreglo <code>bono</code> incrementado en 1: [${bono.join(', ')}]</p>`;
+
+        // c) Mostrar los cinco valores del arreglo mejoresPuntuaciones, separado por espacios.
+        let mejoresPuntuaciones = [98, 95, 92, 88, 85];
+        let textoPuntuaciones = "";
+        for (let i = 0; i < mejoresPuntuaciones.length; i++) {
+            textoPuntuaciones += mejoresPuntuaciones[i] + " ";
+        }
+        salida.innerHTML += `<p><strong>c)</strong> Arreglo <code>mejoresPuntuaciones</code>: ${textoPuntuaciones}</p>`;
+    </script>
+</body>
+</html>

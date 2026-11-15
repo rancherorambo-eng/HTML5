@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.12 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.12: Filtrado de Duplicados</h1>
+    <p>Ingrese 10 números (cada uno entre 10 y 100). Solo se imprimirán si no son duplicados[cite: 3].</p>
+    
+    <form id="formNumero">
+        <label for="numero">Número (10 - 100):</label>
+        <input type="number" id="numero" min="10" max="100" required>
+        <button type="submit" id="btnEnviar">Enviar Número</button>
+    </form>
+
+    <h3>Números únicos ingresados:</h3>
+    <ul id="listaUnicos"></ul>
+    <p id="mensajeEstado"></p>
+
+    <script>
+        let arregloUnicos = [];
+        let contadorEntradas = 0;
+        const totalEntradas = 10;
+
+        document.getElementById('formNumero').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (contadorEntradas >= totalEntradas) return;
+
+            const inputElem = document.getElementById('numero');
+            const val = parseInt(inputElem.value);
+
+            if (val < 10 || val > 100) {
+                alert("El número debe estar estrictamente entre 10 y 100.");
+                return;
+            }
+
+            // Verificar duplicados en el arreglo unidimensional
+            let esDuplicado = false;
+            for (let i = 0; i < arregloUnicos.length; i++) {
+                if (arregloUnicos[i] === val) {
+                    esDuplicado = true;
+                    break;
+                }
+            }
+
+            if (!esDuplicado) {
+                arregloUnicos.push(val);
+                const li = document.createElement('li');
+                li.textContent = val;
+                document.getElementById('listaUnicos').appendChild(li);
+            }
+
+            contadorEntradas++;
+            inputElem.value = '';
+            inputElem.focus();
+
+            if (contadorEntradas === totalEntradas) {
+                document.getElementById('mensajeEstado').textContent = "Se han ingresado los 10 números requeridos.";
+                document.getElementById('btnEnviar').disabled = true;
+                inputElem.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>

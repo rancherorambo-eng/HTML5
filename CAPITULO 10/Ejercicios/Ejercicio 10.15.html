@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.15 - Gráficos de Tortuga (Deitel) | Práctica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; max-width: 400px; height: 120px; font-family: monospace; }
+        pre { background: #1e1e1e; color: #dcdcdc; padding: 15px; border-radius: 5px; font-family: monospace; line-height: 1.2; }
+        button { padding: 10px 15px; margin-top: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.15: Gráficos de Tortuga</h1>
+    <p>Ingrese la secuencia de comandos separados por comas o saltos de línea (ej. <code>2, 5,12, 3, 5,12, 3, 5,12, 3, 5,12, 1, 6, 9</code>)[cite: 5, 6]:</p>
+
+    <textarea id="txtComandos">2
+5,12
+3
+5,12
+3
+5,12
+3
+5,12
+1
+6
+9</textarea>
+    <br>
+    <button id="btnEjecutar">Ejecutar Comandos</button>
+
+    <h3>Resultado del Piso (Dibujo):</h3>
+    <pre id="salidaPiso">Presione "Ejecutar Comandos" para ver el resultado.</pre>
+
+    <script>
+        document.getElementById('btnEjecutar').addEventListener('click', function() {
+            // 1. Inicializar piso de 20x20 en ceros[cite: 5]
+            let piso = Array.from({ length: 20 }, () => Array(20).fill(0));
+            
+            // Posición inicial y dirección (0: derecha, 1: abajo, 2: izquierda, 3: arriba)
+            let x = 0;
+            let y = 0;
+            let plumaAbajo = false; // Empieza con la pluma arriba[cite: 5]
+            let direccion = 0; // 0 = Este/Derecha
+
+            // Leer y limpiar comandos del textarea
+            let texto = document.getElementById('txtComandos').value;
+            // Reemplazar saltos de línea por comas para procesar uniformemente
+            let lineas = texto.replace(/\r\n/g, '\n').split('\n');
+            let comandos = [];
+            
+            for (let linea of lineas) {
+                let partes = linea.split(',');
+                for (let p of partes) {
+                    if (p.trim() !== "") {
+                        comandos.push(parseInt(p.trim()));
+                    }
+                }
+            }
+
+            let i = 0;
+            let dibujoSalida = "";
+
+            while (i < comandos.length) {
+                let cmd = comandos[i];
+
+                if (cmd === 1) { // Pluma arriba[cite: 5]
+                    plumaAbajo = false;
+                    i++;
+                } else if (cmd === 2) { // Pluma abajo[cite: 5]
+                    plumaAbajo = true;
+                    i++;
+                } else if (cmd === 3) { // Girar a la derecha[cite: 5]
+                    direccion = (direccion + 1) % 4;
+                    i++;
+                } else if (cmd === 4) { // Girar a la izquierda[cite: 5]
+                    direccion = (direccion + 3) % 4; // Equivalente a restar 1 módulo 4
+                    i++;
+                } else if (cmd === 5) { // Avanzar n espacios[cite: 5]
+                    if (i + 1 < comandos.length) {
+                        let pasos = comandos[i + 1];
+                        for (let paso = 0; paso < pasos; paso++) {
+                            // Marcar posición actual si la pluma está abajo[cite: 6]
+                            if (plumaAbajo) {
+                                if (x >= 0 && x < 20 && y >= 0 && y < 20) {
+                                    piso[y][x] = 1;
+                                }
+                            }
+
+                            // Mover según dirección (0:Der, 1:Abajo, 2:Izq, 3:Arriba)
+                            if (direccion === 0) x++;
+                            else if (direccion === 1) y++;
+                            else if (direccion === 2) x--;
+                            else if (direccion === 3) y--;
+
+                            // Mantener dentro de los límites de 20x20
+                            x = Math.max(0, Math.min(19, x));
+                            y = Math.max(0, Math.min(19, y));
+
+                            // Marcar también el punto final del paso si la pluma está abajo
+                            if (plumaAbajo) {
+                                if (x >= 0 && x < 20 && y >= 0 && y < 20) {
+                                    piso[y][x] = 1;
+                                }
+                            }
+                        }
+                        i += 2; // Saltar comando y parámetro de pasos
+                    } else {
+                        i++;
+                    }
+                } else if (cmd === 6) { // Imprimir el arreglo de 20 por 20[cite: 5]
+                    dibujoSalida = "";
+                    for (let r = 0; r < 20; r++) {
+                        let filaStr = "";
+                        for (let c = 0; c < 20; c++) {
+                            // Mostrar asterisco si hay 1, espacio en blanco si hay 0[cite: 6]
+                            filaStr += (piso[r][c] === 1) ? "* " : ". "; 
+                        }
+                        dibujoSalida += filaStr + "\n";
+                    }
+                    i++;
+                } else if (cmd === 9) { // Fin de datos (centinela)[cite: 5]
+                    break;
+                } else {
+                    i++; // Ignorar comandos no reconocidos
+                }
+            }
+
+            if (dibujoSalida === "") {
+                dibujoSalida = "El programa finalizó pero no se ejecutó el comando 6 (imprimir).";
+            }
+
+            document.getElementById('salidaPiso').textContent = dibujoSalida;
+        });
+    </script>
+</body>
+</html>

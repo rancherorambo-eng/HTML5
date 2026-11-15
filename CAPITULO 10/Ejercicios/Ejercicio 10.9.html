@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.9 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.9: Arreglo de 2 por 3</h1>
+    <div id="salida"></div>
+
+    <script>
+        const salida = document.getElementById('salida');
+
+        // a) Declarar y crear el arreglo t de 2x3 (2 filas, 3 columnas)
+        let t = [
+            [0, 0, 0],
+            [0, 0, 0]
+        ];
+
+        // Respuestas teóricas (b - f)
+        salida.innerHTML += `<p><strong>a)</strong> Declaración: <code>let t = [[0, 0, 0], [0, 0, 0]];</code></p>`;
+        salida.innerHTML += `<p><strong>b)</strong> ¿Cuántas filas tiene t?: <strong>2</strong></p>`;
+        salida.innerHTML += `<p><strong>c)</strong> ¿Cuántas columnas tiene t?: <strong>3</strong></p>`;
+        salida.innerHTML += `<p><strong>d)</strong> ¿Cuántos elementos tiene t?: <strong>6</strong></p>`;
+        salida.innerHTML += `<p><strong>e)</strong> Elementos en la fila 1 (índice 1): <strong>t[1][0], t[1][1], t[1][2]</strong></p>`;
+        salida.innerHTML += `<p><strong>f)</strong> Elementos en la tercera columna (índice 2): <strong>t[0][2], t[1][2]</strong></p>`;
+
+        // g) Establecer el elemento en la fila 1 y columna 2 en cero
+        t[1][2] = 0;
+        salida.innerHTML += `<p><strong>g)</strong> Asignación: <code>t[1][2] = 0;</code></p>`;
+
+        // h) Inicializar cada elemento de t en cero (serie de instrucciones explícitas)
+        t[0][0] = 0; t[0][1] = 0; t[0][2] = 0;
+        t[1][0] = 0; t[1][1] = 0; t[1][2] = 0;
+        salida.innerHTML += `<p><strong>h)</strong> Inicializado explícitamente elemento por elemento.</p>`;
+
+        // i) Instrucción for anidada para inicializar cada elemento de t en cero
+        for (let i = 0; i < t.length; i++) {
+            for (let j = 0; j < t[i].length; j++) {
+                t[i][j] = 0;
+            }
+        }
+        salida.innerHTML += `<p><strong>i)</strong> Inicialización con for anidado ejecutada correctamente.</p>`;
+
+        // j) Determinar e imprimir el valor más pequeño en el arreglo t
+        // Supongamos algunos datos de prueba en t
+        t = [[15, 4, 8], [23, 2, 11]];
+        let menor = t[0][0];
+        for (let i = 0; i < t.length; i++) {
+            for (let j = 0; j < t[i].length; j++) {
+                if (t[i][j] < menor) {
+                    menor = t[i][j];
+                }
+            }
+        }
+        salida.innerHTML += `<p><strong>j)</strong> Valor más pequeño en el arreglo t (con valores de prueba [15,4,8],[23,2,11]): <strong>${menor}</strong></p>`;
+
+        // k) Instrucción sin repetición para mostrar los elementos de la primera fila de t (índice 0)
+        salida.innerHTML += `<p><strong>k)</strong> Primera fila de t: ${t[0][0]}, ${t[0][1]}, ${t[0][2]}</p>`;
+
+        // l) Imprimir el arreglo t en formato tabular ordenado con encabezados
+        let tablaHtml = "<h3>l) Formato Tabular Ordenado:</h3><table border='1' cellpadding='5'><tr><th></th><th>Columna 0</th><th>Columna 1</th><th>Columna 2</th></tr>";
+        for (let i = 0; i < t.length; i++) {
+            tablaHtml += `<tr><strong><td>Fila ${i}</td></strong>`;
+            for (let j = 0; j < t[i].length; j++) {
+                tablaHtml += `<td>${t[i][j]}</td>`;
+            }
+            tablaHtml += "</tr>";
+        }
+        tablaHtml += "</table>";
+        salida.innerHTML += tablaHtml;
+    </script>
+</body>
+</html>

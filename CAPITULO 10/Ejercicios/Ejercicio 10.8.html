@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.8 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.8: Instrucciones de JavaScript</h1>
+    <p>Revisa la consola del navegador o la sección inferior para ver los resultados de la ejecución.</p>
+    
+    <div id="resultados"></div>
+
+    <script>
+        const output = document.getElementById('resultados');
+
+        // a) Mostrar el valor del séptimo elemento del arreglo f (índice 6)
+        let f = [10, 20, 30, 40, 50, 60, 70, 80];
+        output.innerHTML += `<p><strong>a)</strong> Séptimo elemento de f: ${f[6]}</p>`;
+
+        // b) Inicializar cada uno de los cinco elementos del arreglo unidimensional g en 8
+        let g = new Array(5);
+        for (let i = 0; i < g.length; i++) {
+            g[i] = 8;
+        }
+        output.innerHTML += `<p><strong>b)</strong> Arreglo g inicializado: [${g.join(', ')}]</p>`;
+
+        // c) Calcular el total de los elementos del arreglo c, que contiene 100 elementos numéricos
+        let c = new Array(100).fill(5); // Arreglo de ejemplo con 100 elementos (valor 5 cada uno)
+        let total = 0;
+        for (let i = 0; i < c.length; i++) {
+            total += c[i];
+        }
+        output.innerHTML += `<p><strong>c)</strong> Suma de los 100 elementos del arreglo c: ${total}</p>`;
+
+        // d) Copiar el arreglo a de 11 elementos en la primera porción del arreglo b, que contiene 34 elementos
+        let a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+        let b = new Array(34).fill(0);
+        for (let i = 0; i < a.length; i++) {
+            b[i] = a[i];
+        }
+        output.innerHTML += `<p><strong>d)</strong> Arreglo b después de copiar a en la primera porción: [${b.join(', ')}]</p>`;
+
+        // e) Determinar e imprimir el valor más pequeño y el más grande contenido en el arreglo w de 99 elementos de punto flotante
+        let w = Array.from({ length: 99 }, () => Math.random() * 100); // Arreglo de prueba con 99 flotantes
+        let minimo = w[0];
+        let maximo = w[0];
+
+        for (let i = 1; i < w.length; i++) {
+            if (w[i] < minimo) {
+                minimo = w[i];
+            }
+            if (w[i] > maximo) {
+                maximo = w[i];
+            }
+        }
+        output.innerHTML += `<p><strong>e)</strong> Mínimo en w: ${minimo.toFixed(2)} | Máximo en w: ${maximo.toFixed(2)}</p>`;
+    </script>
+</body>
+</html>

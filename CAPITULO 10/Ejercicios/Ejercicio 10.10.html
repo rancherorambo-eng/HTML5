@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.10 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.10: Rangos de Salarios de Vendedores</h1>
+    
+    <form id="formularioVentas">
+        <label for="ventas">Ingrese ventas brutas del vendedor ($):</label>
+        <input type="number" id="ventas" min="0" step="0.01" required>
+        <button type="submit">Agregar Vendedor</button>
+    </form>
+
+    <h2>Contadores de Rangos Salariales</h2>
+    <div id="resultados"></div>
+
+    <script>
+        // Arreglo unidimensional de contadores para los 9 rangos (índices 0 a 8)
+        // [0] $200-299, [1] $300-399, ..., [8] $1000 y más
+        const contadores = new Array(9).fill(0);
+
+        const etiquetasRangos = [
+            "$200 a $299",
+            "$300 a $399",
+            "$400 a $499",
+            "$500 a $599",
+            "$600 a $699",
+            "$700 a $799",
+            "$800 a $899",
+            "$900 a $999",
+            "$1000 y más"
+        ];
+
+        document.getElementById('formularioVentas').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ventasBrutas = parseFloat(document.getElementById('ventas').value);
+
+            // Calcular salario: $200 + 9% de ventas brutas (truncado a entero)
+            const salario = Math.floor(200 + (0.09 * ventasBrutas));
+
+            // Determinar la posición del contador según el salario
+            let indice = Math.floor(salario / 100) - 2;
+
+            // Si el salario es de $1000 o más, entra en la última posición (índice 8)
+            if (indice > 8) {
+                indice = 8;
+            }
+
+            if (indice >= 0) {
+                contadores[indice]++;
+            }
+
+            actualizarResultados();
+            document.getElementById('ventas').value = '';
+        });
+
+        function actualizarResultados() {
+            let html = "<ul style='list-style-type: none; padding-left: 0;'>";
+            for (let i = 0; i < contadores.length; i++) {
+                html += `<li><strong>${etiquetasRangos[i]}:</strong> ${contadores[i]} vendedor(es)</li>`;
+            }
+            html += "</ul>";
+            document.getElementById('resultados').innerHTML = html;
+        }
+
+        // Mostrar tabla vacía al inicio
+        actualizarResultados();
+    </script>
+</body>
+</html>

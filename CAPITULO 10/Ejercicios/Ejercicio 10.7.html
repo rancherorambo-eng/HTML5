@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 10.7 - Deitel | Práctica</title>
+</head>
+<body>
+    <!-- Versión con ajustes ligeros de presentación. -->
+    <h1>Ejercicio 10.7: Verdadero o Falso</h1>
+    
+    <ol type="a">
+        <li>
+            <strong>Falso.</strong> Para hacer referencia a un elemento específico en un arreglo, especificamos el nombre del arreglo y el <em>número de índice</em> (o posición) del elemento, no su valor.
+        </li>
+        <li>
+            <strong>Falso.</strong> La declaración de una variable (como <code>let x;</code>) solo reserva espacio para esa variable escalar. Para reservar espacio para un arreglo se debe instanciar explícitamente (por ejemplo, <code>let p = new Array(100);</code> o usando un literal de arreglo <code>let p = [];</code>).
+        </li>
+        <li>
+            <strong>Falso.</strong> En JavaScript la sintaxis <code>p[100];</code> no declara un arreglo de 100 elementos; se debe usar <code>let p = new Array(100);</code> o asignar valores dinámicamente.
+        </li>
+        <li>
+            <strong>Falso.</strong> Se pueden inicializar los elementos de un arreglo sin usar un bucle <code>for</code>, por ejemplo mediante el método <code>fill()</code> (<code>let arr = new Array(15).fill(0);</code>) o usando literales de arreglo (<code>let arr = [0,0,0,...];</code>).
+        </li>
+        <li>
+            <strong>Falso.</strong> Aunque tradicionalmente se usan dos ciclos <code>for</code> anidados para iterar matrices, también es posible calcular el total utilizando métodos de arreglo modernos como <code>flat()</code> y <code>reduce()</code> (por ejemplo, <code>matriz.flat().reduce((a, b) => a + b, 0)</code>).
+        </li>
+    </ol>
+</body>
+</html>
